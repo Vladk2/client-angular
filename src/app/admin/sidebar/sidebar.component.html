@@ -1,0 +1,43 @@
+
+<div class="sidebar-wrapper">
+    <div class="logo">
+        <a href="http://www.creative-tim.com" class="simple-text">
+            <div class="logo-img">
+                <img src="/assets/img/angular2-logo-white.png"/>
+            </div>
+            Admin panel
+        </a>
+    </div>
+    
+    <!-- Lista svih funkcija za admina kada je on prijavljen -->
+    <ul class="nav responsive-nav">
+        <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+            <a  [routerLink]="[menuItem.path]">
+                <i class="{{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+        <li class="active-pro">
+            <a role="button" (click)="onLogout()">
+                <i class="pe-7s-left-arrow"></i>
+                <p>Odjavi se</p>
+            </a>
+        </li>
+        
+    </ul>
+
+    <!-- Lista svih funkcija za firmu ukoliko je radnik firme prijavljen -->
+    <ul class="nav responsive-nav" *ngIf="!provera">
+        <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems1" class="{{menuItem.class}}">
+            <a  [routerLink]="[menuItem.path]">
+                <i class="{{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+        
+    </ul>
+
+
+</div>
