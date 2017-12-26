@@ -21,8 +21,8 @@ export class AuthService {
 
       	const tokenPayload = {'role':'ADMIN'};
       	if (tokenPayload.role === 'ADMIN') {
-      		//TODOO: Add guard for admin	
-      		localStorage.setItem('adminToken', res.jwt);
+      		//TODOO: Add guard for admin
+          localStorage.setItem('role', 'ADMIN');
       		this.router.navigate(['/admin']);
       	}
       	if (tokenPayload.role === 'EMPLOYEE') {
@@ -34,16 +34,20 @@ export class AuthService {
       	if (tokenPayload.role === 'TENANT') {
       		//TODOO: Add guard for tenant
       	}
+        localStorage.setItem('token', res.jwt);
       	return res;
   	});
   };
   
   logout_service() {
-  	if (localStorage.getItem('adminToken')) {
-  		localStorage.removeItem('adminToken');
+  	if (localStorage.getItem('token')) {
+  		localStorage.removeItem('token');
+      localStorage.removeItem('role');
   		this.router.navigate(['/login']);
   	}
-
-
   };
+
+  getAllUser(): Observable<any>{
+    return this.http.get('http://localhost:8080/api/admins/users/')
+  }
 }

@@ -7,7 +7,7 @@ export class AdminGuard implements CanActivate {
   constructor(private router: Router) { }
 
   canActivate() {
-    if (localStorage.getItem('adminToken') != null) {
+    if (localStorage.getItem('role') === 'ADMIN') {
     	return true;
     }
     return false;

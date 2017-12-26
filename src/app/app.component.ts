@@ -14,21 +14,11 @@ export class AppComponent  implements OnInit{
 
   ngOnInit() { console.log(this.adminGuard.canActivate()) }
 
-  isLogin() {
-  	if (this.adminGuard.canActivate()){
-  		return 'ADMIN';	
-  	}
-  	/*
-  	if (!this.emloyeeGuard.canActivate()){
-  		return 'ADMIN';	
-  	}
-  	if (this.tenantGuard.canActivate()){
-  		return 'TENANT';	
-  	}
-  	if (this.supervisorGuard.canActivate()){
-  		return 'TENANT';	
-  	}
-  	*/
-  	return '';
+  isLoginAdmin() {
+  	return this.adminGuard.canActivate();
+  }
+
+  isLoginTenant() {
+    return false;
   }
 }

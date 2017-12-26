@@ -1,4 +1,4 @@
-<div *ngIf="isLogin() === 'ADMIN'">
+<div *ngIf="isLoginAdmin()">
   <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="">
       <app-sidebar></app-sidebar>
@@ -12,13 +12,18 @@
 </div>
 
 
-<div *ngIf="isLogin() === 'TENANT'">
+<div *ngIf="isLoginTenant()">
   <p>ovde ide sve vezano za supervizora i tenanta kao sto je </p>
   <p>header i slicno a ostale rute se pozivaju preko router-outlet</p>  
   <router-outlet></router-outlet>
 </div>
 
+<!-- Ovo treba okomentarisati kada se uradi login za tenant i supervizor
+<div *ngIf="!isLoginTenant()">
+  <router-outlet></router-outlet>
+</div>
+-->
 
-<div *ngIf="isLogin() === ''">
+<div *ngIf="!isLoginAdmin()">
   <router-outlet></router-outlet>
 </div>
