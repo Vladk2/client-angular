@@ -7,15 +7,16 @@ import { AdminGuard } from './guards/admin.guard';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent  implements OnInit{
+export class AppComponent  implements OnInit {
   title = 'app';
 
   constructor(private adminGuard: AdminGuard) { }
 
-  ngOnInit() { console.log(this.adminGuard.canActivate()) }
+  ngOnInit() { console.log(this.adminGuard.canActivate());
+  }
 
   isLoginAdmin() {
-  	return this.adminGuard.canActivate();
+    return this.adminGuard.canActivate();
   }
 
   isLoginTenant() {

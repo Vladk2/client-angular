@@ -7,8 +7,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './guards/token.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
-import { SidebarModule } from './admin/sidebar/sidebar.module';
-import { NavbarModule } from './admin/shared/navbar/navbar.module';
+import { SidebarModule } from './sidebar/sidebar.module';
+import { NavbarModule } from './navbar/navbar.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';

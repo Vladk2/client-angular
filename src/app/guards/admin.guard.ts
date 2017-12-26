@@ -8,7 +8,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate() {
     if (localStorage.getItem('role') === 'ADMIN') {
-    	return true;
+      return true;
     }
     return false;
   }

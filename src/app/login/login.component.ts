@@ -15,12 +15,12 @@ export class LoginComponent implements OnInit {
     this.message = true;
   }
 
-  login(){
-  	this.auth.login_service(this.user).subscribe(resp => {
-      this.message = resp;   
+  login() {
+    this.auth.login_service(this.user).subscribe(resp => {
+      this.message = resp;
     }, err => {
       console.log(err);
       this.message = false;
-    })
+    });
   }
 }
