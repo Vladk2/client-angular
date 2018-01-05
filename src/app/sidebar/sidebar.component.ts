@@ -31,15 +31,6 @@ export const ROUTES_EMPLOYEE: RouteInfo[] = [
     { path: 'employee/news', title: 'Dodavanje',  icon: 'pe-7s-plus', class: '' }
 ];
 
-
-const token = JSON.parse(localStorage.getItem('token'));
-export const ROLES: RolesInfo[] = [
-    { role: token.roles.admin, button: '', id: '', elementID: '' },
-    { role: token.roles.employee, button: '', id: '', elementID: '' },
-    { role: token.roles.supervisor, button: 'supervisor', id: token.supervisors_id, elementID: 'mySupervisor' },
-    { role: token.roles.tenant, button: 'tenant', id: token.tenants_id, elementID: 'myTenant' }
-];
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html'
@@ -53,6 +44,7 @@ export class SidebarComponent implements OnInit {
   idSupervisor;
   ROUTES_TENANT: any[];
   ROUTES_SUPERVISOR: any[];
+  ROLES: any[];
 
   constructor(private authService: AuthService) { }
 
@@ -101,7 +93,14 @@ export class SidebarComponent implements OnInit {
 
   role() {
     document.getElementById('myRole').style.display = 'block';
-    this.menuRoles = ROLES.filter(menuItem => menuItem);
+    const token = JSON.parse(localStorage.getItem('token'));
+    this.ROLES = [
+        { role: token.roles.admin, button: '', id: '', elementID: '' },
+        { role: token.roles.employee, button: '', id: '', elementID: '' },
+        { role: token.roles.supervisor, button: 'supervisor', id: token.supervisors_id, elementID: 'mySupervisor' },
+        { role: token.roles.tenant, button: 'tenant', id: token.tenants_id, elementID: 'myTenant' }
+    ];
+    this.menuRoles = this.ROLES.filter(menuItem => menuItem);
 
   }
   onShow(role, event) {

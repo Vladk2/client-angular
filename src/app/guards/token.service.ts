@@ -5,7 +5,10 @@ export class TokenService {
 
   public getToken(): string {
   	const token = JSON.parse(localStorage.getItem('token'));
-    return token.jwt;
+  	if(token !== null) {
+  		return token.jwt;
+  	}
+    return null;
   }
 
 

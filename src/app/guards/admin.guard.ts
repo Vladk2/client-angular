@@ -17,22 +17,26 @@ export class AdminGuard implements CanActivate {
   canActivateChild(route: ActivatedRouteSnapshot) {
   	const expectedRole = route.data.expectedRole;
   	const token = JSON.parse(localStorage.getItem('token'));
-  	if (expectedRole === token.roles.admin ) {
-  		console.log('ADMIN je');
-  		return true;
-  	}
-  	if (expectedRole === token.roles.employee ) {
-  		console.log('EMPLOYEE je');
-  		return true;
-  	}
-  	if (expectedRole === token.roles.tenant ) {
-  		console.log('TENANT je');
-  		return true;
-  	}
-  	if (expectedRole === token.roles.supervisor ) {
-  		console.log('SUPERVISOR je');
-  		return true;
-  	}
+    if(token != null) {
+      if (expectedRole === token.roles.admin ) {
+        console.log('ADMIN je');
+        return true;
+      }
+      if (expectedRole === token.roles.employee ) {
+        console.log('EMPLOYEE je');
+        return true;
+      }
+      if (expectedRole === token.roles.tenant ) {
+        console.log('TENANT je');
+        return true;
+      }
+      if (expectedRole === token.roles.supervisor ) {
+        console.log('SUPERVISOR je');
+        return true;
+      }
+      return false;
+    }
+  	
   	return false;
   }
 }

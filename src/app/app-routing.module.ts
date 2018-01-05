@@ -11,7 +11,6 @@ import { SupervisroHomeComponent } from './supervisor/supervisro-home/supervisro
 
 const routes: Routes = [
 { path: '', component: HomeComponent, canActivate: [AdminGuard]},
-{ path: 'login', component: LoginComponent, canActivate: [!AdminGuard]},
 { path: '', canActivateChild: [AdminGuard], data: { expectedRole: 'ADMIN'},
   children: [
     { path: '', redirectTo: 'admin', pathMatch: 'full' },
