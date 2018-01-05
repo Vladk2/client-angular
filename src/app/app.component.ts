@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
-import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +10,13 @@ import { AdminGuard } from './guards/admin.guard';
 export class AppComponent  implements OnInit {
   title = 'app';
 
-  constructor(private adminGuard: AdminGuard) { }
+  constructor(private authGuard: AuthGuard) { }
 
-  ngOnInit() { console.log(this.adminGuard.canActivate());
+  ngOnInit() { console.log(this.authGuard.canActivate());
   }
 
   isLoginAdmin() {
-    return this.adminGuard.canActivate();
+    return this.authGuard.canActivate();
   }
 
   isLoginTenant() {

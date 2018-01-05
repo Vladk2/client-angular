@@ -46,7 +46,7 @@ export class AuthService {
         this.supervisor = 'SUPERVISOR';
       }
 
-
+      console.log(tokenPayload.userRoles.tenants);
       const token = {
         'username': credentials.username,
         'roles': {

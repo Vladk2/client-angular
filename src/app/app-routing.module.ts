@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/home/admin.component';
@@ -10,8 +10,8 @@ import { TenantHomeComponent } from './tenant/tenant-home/tenant-home.component'
 import { SupervisroHomeComponent } from './supervisor/supervisro-home/supervisro-home.component';
 
 const routes: Routes = [
-{ path: '', component: HomeComponent, canActivate: [AdminGuard]},
-{ path: '', canActivateChild: [AdminGuard], data: { expectedRole: 'ADMIN'},
+{ path: '', component: HomeComponent, canActivate: [AuthGuard]},
+{ path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
   children: [
     { path: '', redirectTo: 'admin', pathMatch: 'full' },
     { path: 'admin', component: AdminComponent },
@@ -20,21 +20,21 @@ const routes: Routes = [
   ]
 },
 
-{ path: '', canActivateChild: [AdminGuard], data: { expectedRole: 'EMPLOYEE'},
+{ path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'EMPLOYEE'},
   children: [
     { path: '', redirectTo: 'employee', pathMatch: 'full' },
     { path: 'employee', component: AdminComponent }
   ]
 },
 
-{ path: '', canActivateChild: [AdminGuard], data: { expectedRole: 'TENANT'},
+{ path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'TENANT'},
   children: [
     { path: '', redirectTo: 'tenant', pathMatch: 'full' },
     { path: 'tenant', component: TenantHomeComponent }
   ]
 },
 
-{ path: '', canActivateChild: [AdminGuard], data: { expectedRole: 'SUPERVISOR'},
+{ path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'SUPERVISOR'},
   children: [
     { path: '', redirectTo: 'supervisor', pathMatch: 'full' },
     { path: 'supervisor/:id', component: SupervisroHomeComponent },

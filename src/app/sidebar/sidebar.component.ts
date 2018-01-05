@@ -8,15 +8,6 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
-declare interface IdInfo {
-    role: string;
-}
-declare interface RolesInfo {
-    role: string;
-    button: string;
-    id: IdInfo;
-    elementID: string;
-}
 
 export const ROUTES: RouteInfo[] = [
     { path: '', title: 'Profil',  icon: '', class: '' },
@@ -39,70 +30,53 @@ export class SidebarComponent implements OnInit {
   menuItems: any[];
   menuRoles: any[];
   title = '';
-  admin;
-  employee;
-  idSupervisor;
   ROUTES_TENANT: any[];
   ROUTES_SUPERVISOR: any[];
   ROLES: any[];
 
   constructor(private authService: AuthService) { }
 
-
-
   ngOnInit() {
   }
 
-  onSupervisor(role, event) {
+  onSupervisor(event) {
+    this.ROUTES_SUPERVISOR = [
+      { path: '', title: 'Profil',  icon: 'pe-7s-graph', class: '' },
+      { path: 'supervisor/' + event, title: 'Početna',  icon: 'pe-7s-graph', class: '' },
+      { path: 'supervisor/nesto/' + event, title: 'novi supervisor',  icon: 'pe-7s-user', class: '' },
+    ];
 
-    if (role === 'TENANT') {
-      this.ROUTES_TENANT = [
-        { path: '', title: 'Profil',  icon: 'pe-7s-graph', class: '' },
-        { path: 'tenant', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
-        { path: 'tenant/' + event, title: 'novi tenant',  icon: 'pe-7s-user', class: '' },
-      ];
-
-      this.menuItems = this.ROUTES_TENANT.filter(menuItem => menuItem);
-      document.getElementById('myRole').style.display = 'none';
-      this.title = 'TENANT ' + event;
-    } else if (role === 'SUPERVISOR') {
-
-      this.ROUTES_SUPERVISOR = [
-        { path: '', title: 'Profil',  icon: 'pe-7s-graph', class: '' },
-        { path: 'supervisor/' + event, title: 'Početna',  icon: 'pe-7s-graph', class: '' },
-        { path: 'supervisor/nesto/' + event, title: 'novi supervisor',  icon: 'pe-7s-user', class: '' },
-      ];
-
-      this.menuItems = this.ROUTES_SUPERVISOR.filter(menuItem => menuItem);
-      document.getElementById('myRole').style.display = 'none';
-      this.title = 'SUPERVISOR ' + event;
-    }
+    this.menuItems = this.ROUTES_SUPERVISOR.filter(menuItem => menuItem);
+    document.getElementById('myRole').style.display = 'none';
+    this.title = 'SUPERVISOR ' + event;
+    
 
   }
 
-  isMobileMenu() {
-      if ($(window).width() > 991) {
-          return false;
-      }
-      return true;
+  onTenant(event) {
+    this.ROUTES_TENANT = [
+      { path: '', title: 'Profil',  icon: 'pe-7s-graph', class: '' },
+      { path: 'tenant', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
+      { path: 'tenant/' + event, title: 'novi tenant',  icon: 'pe-7s-user', class: '' },
+    ];
+
+    this.menuItems = this.ROUTES_TENANT.filter(menuItem => menuItem);
+    document.getElementById('myRole').style.display = 'none';
+    this.title = 'TENANT ' + event;
   }
 
-  onLogout() {
-    this.authService.logout_service();
-  }
-
-  role() {
+  onRole() {
     document.getElementById('myRole').style.display = 'block';
     const token = JSON.parse(localStorage.getItem('token'));
     this.ROLES = [
         { role: token.roles.admin, button: '', id: '', elementID: '' },
         { role: token.roles.employee, button: '', id: '', elementID: '' },
-        { role: token.roles.supervisor, button: 'supervisor', id: token.supervisors_id, elementID: 'mySupervisor' },
-        { role: token.roles.tenant, button: 'tenant', id: token.tenants_id, elementID: 'myTenant' }
+        { role: token.roles.supervisor, button: 'supervisor', idSupervisors: token.supervisors_id, elementID: 'mySupervisor' },
+        { role: token.roles.tenant, button: 'tenant', idTenants: token.tenants_id, elementID: 'myTenant' }
     ];
     this.menuRoles = this.ROLES.filter(menuItem => menuItem);
-
   }
+
   onShow(role, event) {
     if (role === 'ADMIN') {
       this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -119,7 +93,17 @@ export class SidebarComponent implements OnInit {
     }
     if (event === 'supervisor') {
       document.getElementById('mySupervisor').style.display = 'block';
-      console.log('supervisor show');
     }
+  }
+  
+  onLogout() {
+    this.authService.logout_service();
+  }
+
+  isMobileMenu() {
+      if ($(window).width() > 991) {
+          return false;
+      }
+      return true;
   }
 }

@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './services/auth.service';
-import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { AdminComponent } from './admin/home/admin.component';
 import { TokenService } from './guards/token.service';
 import { HomeComponent } from './home/home.component';
@@ -42,7 +42,7 @@ import { EmployeeHomeComponent } from './employee/employee-home/employee-home.co
     NavbarModule
   ],
   providers: [
-    AdminGuard,
+    AuthGuard,
     TokenService,
     AuthService,
     {
