@@ -8,19 +8,36 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
+declare interface IdInfo {
+    role: string;
+}
+declare interface RolesInfo {
+    role: string;
+    button: string;
+    id: IdInfo;
+    elementID: string;
+}
+
 export const ROUTES: RouteInfo[] = [
-    { path: 'dashboard', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
-    { path: 'profile', title: 'Vaš profil',  icon: 'pe-7s-user', class: '' },
-    { path: 'lists', title: 'Lista',  icon: 'pe-7s-note2', class: '' },
-    { path: 'news/building', title: 'Dodavanje',  icon: 'pe-7s-plus', class: '' },
-    { path: 'message', title: 'Poruke',  icon: 'pe-7s-global', class: '' }
+    { path: '', title: 'Profil',  icon: '', class: '' },
+    { path: 'admin', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
+    { path: 'admin/lists', title: 'Lista',  icon: 'pe-7s-note2', class: '' },
+    { path: 'admin/news', title: 'Dodavanje',  icon: 'pe-7s-plus', class: '' }
 ];
 
-export const ROUTES_FIRM: RouteInfo[] = [
-    { path: 'dashboard', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
-    { path: 'firm', title: 'Lista zaposlenih',  icon: 'pe-7s-user', class: '' },
-    { path: 'employee', title: 'Dodati zaposlenog',  icon: 'pe-7s-note2', class: '' },
-    { path: 'message', title: 'Kvarovi',  icon: 'pe-7s-edit', class: '' }
+export const ROUTES_EMPLOYEE: RouteInfo[] = [
+    { path: 'employee', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
+    { path: 'employee/lists', title: 'Lista',  icon: 'pe-7s-note2', class: '' },
+    { path: 'employee/news', title: 'Dodavanje',  icon: 'pe-7s-plus', class: '' }
+];
+
+
+const token = JSON.parse(localStorage.getItem('token'));
+export const ROLES: RolesInfo[] = [
+    { role: token.roles.admin, button: '', id: '', elementID: '' },
+    { role: token.roles.employee, button: '', id: '', elementID: '' },
+    { role: token.roles.supervisor, button: 'supervisor', id: token.supervisors_id, elementID: 'mySupervisor' },
+    { role: token.roles.tenant, button: 'tenant', id: token.tenants_id, elementID: 'myTenant' }
 ];
 
 @Component({
@@ -29,13 +46,46 @@ export const ROUTES_FIRM: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+  menuRoles: any[];
+  title = '';
+  admin;
+  employee;
+  idSupervisor;
+  ROUTES_TENANT: any[];
+  ROUTES_SUPERVISOR: any[];
 
   constructor(private authService: AuthService) { }
 
+
+
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
-    // this.menuItems1 = ROUTES_FIRM.filter(menuItems1 => menuItems1);
-    // this.provera = true;
+  }
+
+  onSupervisor(role, event) {
+
+    if (role === 'TENANT') {
+      this.ROUTES_TENANT = [
+        { path: '', title: 'Profil',  icon: 'pe-7s-graph', class: '' },
+        { path: 'tenant', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
+        { path: 'tenant/' + event, title: 'novi tenant',  icon: 'pe-7s-user', class: '' },
+      ];
+
+      this.menuItems = this.ROUTES_TENANT.filter(menuItem => menuItem);
+      document.getElementById('myRole').style.display = 'none';
+      this.title = 'TENANT ' + event;
+    } else if (role === 'SUPERVISOR') {
+
+      this.ROUTES_SUPERVISOR = [
+        { path: '', title: 'Profil',  icon: 'pe-7s-graph', class: '' },
+        { path: 'supervisor/' + event, title: 'Početna',  icon: 'pe-7s-graph', class: '' },
+        { path: 'supervisor/nesto/' + event, title: 'novi supervisor',  icon: 'pe-7s-user', class: '' },
+      ];
+
+      this.menuItems = this.ROUTES_SUPERVISOR.filter(menuItem => menuItem);
+      document.getElementById('myRole').style.display = 'none';
+      this.title = 'SUPERVISOR ' + event;
+    }
+
   }
 
   isMobileMenu() {
@@ -45,8 +95,32 @@ export class SidebarComponent implements OnInit {
       return true;
   }
 
-
   onLogout() {
     this.authService.logout_service();
+  }
+
+  role() {
+    document.getElementById('myRole').style.display = 'block';
+    this.menuRoles = ROLES.filter(menuItem => menuItem);
+
+  }
+  onShow(role, event) {
+    if (role === 'ADMIN') {
+      this.menuItems = ROUTES.filter(menuItem => menuItem);
+      document.getElementById('myRole').style.display = 'none';
+      this.title = 'ADMIN';
+    }
+    if (role === 'EMPLOYEE') {
+      this.menuItems = ROUTES_EMPLOYEE.filter(menuItem => menuItem);
+      document.getElementById('myRole').style.display = 'none';
+      this.title = 'EMPLOYE';
+    }
+    if (event === 'tenant') {
+      document.getElementById('myTenant').style.display = 'block';
+    }
+    if (event === 'supervisor') {
+      document.getElementById('mySupervisor').style.display = 'block';
+      console.log('supervisor show');
+    }
   }
 }

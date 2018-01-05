@@ -1,13 +1,56 @@
 
 <div class="sidebar-wrapper">
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text">
+        <a role="button" class="simple-text" (click)="role()">
             <div class="logo-img">
                 <img src="/assets/img/angular2-logo-white.png"/>
             </div>
-            Admin panel
+            Uloga: {{title}}
         </a>
+
+        <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="myRole">
+            <ul class="nav responsive-nav">
+                <span *ngFor="let menuItem of menuRoles">
+                    <li >
+
+                        <a role="button" *ngIf="menuItem.role !== ''" (click)="onShow(menuItem.role,menuItem.button)">
+                            {{menuItem.role}} 
+                        </a>
+
+
+                    </li>
+                    <div *ngFor="let menu of menuItem.id">
+                        <div style="display:none" id="mySupervisor">
+                            <ul class="">
+                                <li>
+                                    <a role="button" (click)="onSupervisor(menuItem.role,menu.supervisor)">
+                                        Supervisor {{menu.supervisor}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div *ngFor="let menu of menuItem.id">
+                        
+                        <div style="display:none" id="myTenant">
+                            <ul class="">
+                                <li>
+                                    <a role="button">
+                                        Tenat {{menu.tenant}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </span>
+                
+            </ul>
+            
+        </div>
+
     </div>
+
     
     <!-- Lista svih funkcija za admina kada je on prijavljen -->
     <ul class="nav responsive-nav">

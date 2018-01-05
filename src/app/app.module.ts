@@ -17,12 +17,20 @@ import { AuthService } from './services/auth.service';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminComponent } from './admin/home/admin.component';
 import { TokenService } from './guards/token.service';
+import { HomeComponent } from './home/home.component';
+import { TenantHomeComponent } from './tenant/tenant-home/tenant-home.component';
+import { SupervisroHomeComponent } from './supervisor/supervisro-home/supervisro-home.component';
+import { EmployeeHomeComponent } from './employee/employee-home/employee-home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    HomeComponent,
+    TenantHomeComponent,
+    SupervisroHomeComponent,
+    EmployeeHomeComponent
   ],
   imports: [
     BrowserModule,

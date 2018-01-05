@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 export class TokenService {
 
   public getToken(): string {
-    return localStorage.getItem('token');
+  	const token = JSON.parse(localStorage.getItem('token'));
+    return token.jwt;
   }
 
 

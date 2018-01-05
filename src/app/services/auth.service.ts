@@ -10,39 +10,67 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthService {
 
+  admin;
+  employee;
+  tenant;
+  supervisor;
+
   constructor(private http: HttpClient,
-       private router: Router) { }
+       private router: Router) {
+  }
 
   login_service(credentials): Observable<any> {
   return this.http.post('http://localhost:8080/api/users/sign_in', credentials)
   .map((res: any)  => {
       // Method for decod JWT Token
-      // const tokenPayload = decode(res.jwt);
+      const tokenPayload = decode(res.jwt);
+      this.admin = '';
+      this.employee = '';
+      this.tenant = '';
+      this.supervisor = '';
 
-      const tokenPayload = {'role': 'ADMIN'};
-      if (tokenPayload.role === 'ADMIN') {
-      // TODOO: Add guard for admin
-          localStorage.setItem('role', 'ADMIN');
-        this.router.navigate(['/admin']);
+      for (let i = 0; i < tokenPayload.userRoles.roles.length; i++) {
+        if (tokenPayload.userRoles.roles[i] === 'ADMIN') {
+          this.admin = 'ADMIN';
         }
-        if (tokenPayload.role === 'EMPLOYEE') {
-        // TODOO: Add guard for employee
+        if (tokenPayload.userRoles.roles[i] === 'EMLOYEE') {
+          this.employee = 'EMPLOYEE';
         }
-        if (tokenPayload.role === 'SUPERVISOR') {
-        // TODOO: Add guard for supervisor
-        }
-        if (tokenPayload.role === 'TENANT') {
-        // TODOO: Add guard for tenant
-        }
-        localStorage.setItem('token', res.jwt);
-        return res;
+      }
+
+      if (tokenPayload.userRoles.tenants.length !== 0) {
+        this.tenant = 'TENANT';
+      }
+
+      if (tokenPayload.userRoles.supervisors.length !== 0) {
+        this.supervisor = 'SUPERVISOR';
+      }
+
+
+      const token = {
+        'username': credentials.username,
+        'roles': {
+          'admin': this.admin,
+          'employee': this.employee,
+          'tenant': this.tenant,
+          'supervisor': this.supervisor
+        },
+        tenants_id: tokenPayload.userRoles.tenants,
+        supervisors_id: tokenPayload.userRoles.supervisors,
+        'jwt': res.jwt
+      };
+
+      localStorage.setItem('token', JSON.stringify(token));
+
+      this.router.navigate(['/']);
+      return res;
       });
   }
+
 
   logout_service() {
      if (localStorage.getItem('token')) {
       localStorage.removeItem('token');
-      localStorage.removeItem('role');
       this.router.navigate(['/login']);
     }
   }
