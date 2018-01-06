@@ -62,7 +62,7 @@ export class AuthService {
 
       localStorage.setItem('token', JSON.stringify(token));
 
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
       return res;
       });
   }
