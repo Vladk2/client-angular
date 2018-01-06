@@ -37,6 +37,26 @@ export class SidebarComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    if(localStorage.getItem('sidebar')){
+      const token = localStorage.getItem('sidebar');
+      if(token === 'admin') {
+        this.menuItems = ROUTES.filter(menuItem => menuItem);
+      } else if(token === 'employee') {
+        this.menuItems = ROUTES_EMPLOYEE.filter(menuItem => menuItem);
+      } else if(token === 'tenant') {
+        this.onTenant(localStorage.getItem('tenantSide'));
+      } else {
+
+        this.onSupervisor(localStorage.getItem('supervisorSide'));
+        /*
+        this.ROUTES_SUPERVISOR = [
+          { path: '', title: 'Profil',  icon: 'pe-7s-graph', class: '' },
+          { path: 'supervisor/' + localStorage.getItem('supervisorSide'), title: 'Početna',  icon: 'pe-7s-graph', class: '' },
+          { path: 'supervisor/nesto/' + localStorage.getItem('supervisorSide'), title: 'novi supervisor',  icon: 'pe-7s-user', class: '' },
+        ];
+        this.menuItems = this.ROUTES_SUPERVISOR.filter(menuItem => menuItem);*/
+      }
+    }
   }
 
   onSupervisor(event) {
@@ -50,7 +70,8 @@ export class SidebarComponent implements OnInit {
     document.getElementById('myRole').style.display = 'none';
     this.title = 'SUPERVISOR ' + event;
     
-
+    localStorage.setItem("sidebar", "supervisor");
+    localStorage.setItem("supervisorSide", event);
   }
 
   onTenant(event) {
@@ -63,6 +84,9 @@ export class SidebarComponent implements OnInit {
     this.menuItems = this.ROUTES_TENANT.filter(menuItem => menuItem);
     document.getElementById('myRole').style.display = 'none';
     this.title = 'TENANT ' + event;
+
+    localStorage.setItem("sidebar", "tenant");
+    localStorage.setItem("tenantSide", event);
   }
 
   onRole() {
@@ -82,11 +106,13 @@ export class SidebarComponent implements OnInit {
       this.menuItems = ROUTES.filter(menuItem => menuItem);
       document.getElementById('myRole').style.display = 'none';
       this.title = 'ADMIN';
+      localStorage.setItem("sidebar", "admin");
     }
     if (role === 'EMPLOYEE') {
       this.menuItems = ROUTES_EMPLOYEE.filter(menuItem => menuItem);
       document.getElementById('myRole').style.display = 'none';
       this.title = 'EMPLOYE';
+      localStorage.setItem("sidebar", "emloyee");
     }
     if (event === 'tenant') {
       document.getElementById('myTenant').style.display = 'block';
