@@ -1,0 +1,69 @@
+
+<nav class="navbar navbar-default" style="margin:0">
+  
+  <div class="container"> 
+      <div class = "navbar navbar-header" style="margin:0;padding:0"> 
+          <a class="navbar-brand" href="#" >{{username}}</a>
+      </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a role="button" (click)="logout()">
+                <p> Odjavi se</p>
+            </a>
+        </li>
+        <li class="separator hidden-lg hidden-md"></li>
+    </ul>
+  </div>
+</nav>
+<div >
+  
+  <div *ngIf="otherRoles.admin !== ''" class="container"> <br>
+      <div class="col-md-12">
+        <div class="modal-dialog" [routerLink]="['admin']">
+          <div class="modal-content">
+            
+            <div class="panel-heading">
+              <h3 class="panel-title" style="text-align:center">ADMINISTRATOR</h3>
+            </div>
+            <div class="panel-body">
+                <p style="text-align: center"> <i>Pritisnite ovde da biste ušli u admin panel </i> </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div *ngIf="otherRoles.employee !== ''" class="container" >
+      <br>
+      <div class="col-md-12">
+        <div class="modal-dialog" [routerLink]="['employee']">
+          <div class="modal-content">
+            
+            <div class="panel-heading">
+              <h3 class="panel-title" style="text-align:center">FIRMA / ZAPOSLENI</h3>
+            </div>
+            <div class="panel-body">
+                <p style="text-align: center"> <i>Pritisnite ovde da biste ušli u panel zaposlenog </i> </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div *ngFor="let tenant of loggedTenants" class="container" >
+      <br>
+      <div class="col-md-12">
+        <div class="modal-dialog" [routerLink]="['tenant/' + tenant.tenant]">
+          <div class="modal-content">
+            
+            <div class="panel-heading">
+              <h3 class="panel-title" style="text-align:center">STANAR</h3>
+            </div>
+            <div class="panel-body">
+                <p style="text-align: center"> {{tenant.address}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

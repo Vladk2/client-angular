@@ -7,30 +7,30 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './guards/token.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
-import { SidebarModule } from './sidebar/sidebar.module';
-import { NavbarModule } from './navbar/navbar.module';
+import { SidebarModule } from './components/sidebar/sidebar.module';
+import { NavbarModule } from './components/navbar/navbar.module';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 
-import { AuthService } from './services/auth.service';
+import { AuthService } from './services/auth-service/auth.service';
 import { AuthGuard } from './guards/auth.guard';
-import { AdminComponent } from './admin/home/admin.component';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { TokenService } from './guards/token.service';
-import { HomeComponent } from './home/home.component';
-import { TenantHomeComponent } from './tenant/tenant-home/tenant-home.component';
-import { SupervisroHomeComponent } from './supervisor/supervisro-home/supervisro-home.component';
-import { EmployeeHomeComponent } from './employee/employee-home/employee-home.component';
+import { HomeComponent } from './components/home/home.component';
+import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home.component';
+import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
+import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminComponent,
+    AdminHomeComponent,
     HomeComponent,
     TenantHomeComponent,
-    SupervisroHomeComponent,
-    EmployeeHomeComponent
+    EmployeeHomeComponent,
+    TenantProblemComponent
   ],
   imports: [
     BrowserModule,

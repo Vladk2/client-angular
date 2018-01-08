@@ -15,11 +15,8 @@ export class AppComponent  implements OnInit {
   ngOnInit() { console.log(this.authGuard.canActivate());
   }
 
-  isLoginAdmin() {
+  isUserLogged() {
     return this.authGuard.canActivate();
   }
 
-  isLoginTenant() {
-    return false;
-  }
 }

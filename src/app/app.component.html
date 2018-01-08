@@ -1,29 +1,13 @@
-<div *ngIf="isLoginAdmin()">
+<div *ngIf="isUserLogged()">
   <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="">
-      <app-sidebar></app-sidebar>
-    </div>
-
-    <div class="main-panel">
-      <app-navbar-cmp></app-navbar-cmp>
-      <router-outlet></router-outlet> <!--Ugradjena funkacija koja poziva sve sto vidimo -->
-    </div>
+    
+      <router-outlet></router-outlet> 
+    
   </div>
 </div>
 
 
-<div *ngIf="isLoginTenant()">
-  <p>ovde ide sve vezano za supervizora i tenanta kao sto je </p>
-  <p>header i slicno a ostale rute se pozivaju preko router-outlet</p>  
-  <router-outlet></router-outlet>
-</div>
 
-<!-- Ovo treba okomentarisati kada se uradi login za tenant i supervizor
-<div *ngIf="!isLoginTenant()">
-  <router-outlet></router-outlet>
-</div>
--->
-
-<div *ngIf="!isLoginAdmin()">
+<div *ngIf="!isUserLogged()">
   <app-login></app-login>
 </div>
