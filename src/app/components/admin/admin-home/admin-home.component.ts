@@ -11,6 +11,7 @@ export class AdminHomeComponent implements OnInit {
 
   ngOnInit() {
     localStorage.setItem("sidebar", "admin");
+    localStorage.setItem("navbarTitle", "Početna");
   }
 
 }

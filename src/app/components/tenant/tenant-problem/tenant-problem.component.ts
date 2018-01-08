@@ -11,6 +11,7 @@ export class TenantProblemComponent implements OnInit {
 
   ngOnInit() {
     localStorage.setItem("sidebar", "tenant");
+    localStorage.setItem("navbarTitle", "Kvarovi");
 
   }
 

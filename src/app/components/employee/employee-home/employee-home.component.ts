@@ -11,6 +11,7 @@ export class EmployeeHomeComponent implements OnInit {
 
   ngOnInit() {
     localStorage.setItem("sidebar", "employee");
+    localStorage.setItem("navbarTitle", "Početna");
   }
 
 }
