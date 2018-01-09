@@ -5,12 +5,11 @@
 			<div class="modal-content">
 
 				<div class="alert alert-warning" *ngIf="!message">
-				    <button type="button" aria-hidden="true" class="close">×</button>
-				    <span><b> Upozorenje - </b> Molimo vas proverite korisničko ime i sifru </span>
+				    <span><b> Greška - </b> Molimo vas proverite korisničko ime i sifru </span>
 				</div>
 				
 				<div class="panel-heading">
-					<h3 class="panel-title">Ulogijte se</h3>
+					<h3 class="panel-title">Prijava</h3>
 				</div>
 				<div class="panel-body">
 					<form role="form">
@@ -22,7 +21,8 @@
 								<input class="form-control" placeholder="Šifra" name="password" type="password" value="" [(ngModel)]="user.password">
 							</div>
 							<!-- Change this to a button or input when using this as a form -->
-							<input type="submit" class="btn btn-info fill pull-right" value="Ulogijte se" (click)="login()">
+							<input type="submit" class="btn btn-info fill pull-right" value="Prijavite se" (click)="login()"> <br><br><br>
+							 <p>Nemate nalog? Napravite jedan <a [routerLink] = "['/registration']">ovde</a>.</p> 
 						</fieldset>
 					</form>
 				</div>

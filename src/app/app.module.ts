@@ -21,6 +21,8 @@ import { HomeComponent } from './components/home/home.component';
 import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home.component';
 import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
 import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { TenantProblemComponent } from './components/tenant/tenant-problem/tenan
     HomeComponent,
     TenantHomeComponent,
     EmployeeHomeComponent,
-    TenantProblemComponent
+    TenantProblemComponent,
+    NotFoundComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

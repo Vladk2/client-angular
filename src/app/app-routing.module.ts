@@ -8,9 +8,14 @@ import { HomeComponent } from './components/home/home.component';
 import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
 import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home.component';
 import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 const routes: Routes = [
 { path: '', component: HomeComponent, canActivate: [AuthGuard]},
+
+{ path: 'login', component: LoginComponent, canActivate: [!AuthGuard]},
+{ path: 'registration', component: RegistrationComponent, canActivate: [!AuthGuard]},
 { path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
   children: [
     { path: '', redirectTo: 'admin', pathMatch: 'full' },
@@ -34,6 +39,7 @@ const routes: Routes = [
     { path: 'tenant/:id/kvarovi', component: TenantProblemComponent }
   ]
 },
+{ path: '**', component: NotFoundComponent }
 
 
 ];
