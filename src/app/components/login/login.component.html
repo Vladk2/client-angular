@@ -1,6 +1,6 @@
 <div class="container" style="margin-top:30px">
 	<br>
-	<div class="col-md-12">
+	<div class="col-md-12" *ngIf="isLogin">
 		<div class="modal-dialog" style="margin-bottom:0">
 			<div class="modal-content">
 
@@ -11,7 +11,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Prijava</h3>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body" >
 					<form role="form">
 						<fieldset>
 							<div class="form-group">
@@ -22,10 +22,57 @@
 							</div>
 							<!-- Change this to a button or input when using this as a form -->
 							<input type="submit" class="btn btn-info fill pull-right" value="Prijavite se" (click)="login()"> <br><br><br>
-							 <p>Nemate nalog? Napravite jedan <a [routerLink] = "['/registration']">ovde</a>.</p> 
+							 <p>Nemate nalog? Napravite jedan <a role="button" (click)="onShowRegistration('register')">ovde</a>.</p> 
 						</fieldset>
 					</form>
 				</div>
+
+				
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12" *ngIf="!isLogin">
+		<div class="modal-dialog" style="margin-bottom:0">
+			<div class="modal-content">
+
+				<div class="panel-heading">
+					<h3 class="panel-title">Registracija</h3>
+				</div>
+				<div class="panel-body" >
+					<form role="form">
+						<fieldset>
+							<div class="form-group">
+								<input class="form-control" placeholder="Korisničko ime" name="username" type="text" autofocus="" [(ngModel)]="user.username">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="Šifra" name="password" type="password" value="" [(ngModel)]="user.password">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="Ime" name="name" type="text" value="" [(ngModel)]="user.name">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="Prezime" name="last_name" type="text" value="" [(ngModel)]="user.last_name">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="Email" name="email" type="email" value="" [(ngModel)]="user.email">
+							</div>
+							----
+
+							<div class="form-group">
+								<select class="form-control" name="buildingId" [(ngModel)]="user.buildingId">
+								  <option *ngFor="let item of building"  value="{{item.id}}">{{item.address.street}} {{item.address.number}}</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="Broj stana" name="apartmentNo" type="text" value="" [(ngModel)]="user.apartmentNo">
+							</div>
+							<!-- Change this to a button or input when using this as a form -->
+							<input type="submit" class="btn btn-info fill pull-right" value="Registtujte se" (click)="onRegistration()"> <br><br><br>
+							 <p>Imate li nalog? Ako imate nalog samo se <a role="button" (click)="onShowRegistration('login')">ulogujte</a>.</p> 
+						</fieldset>
+					</form>
+				</div>
+				
 			</div>
 		</div>
 	</div>

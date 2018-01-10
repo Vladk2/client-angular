@@ -13,9 +13,6 @@ import { RegistrationComponent } from './components/registration/registration.co
 
 const routes: Routes = [
 { path: '', component: HomeComponent, canActivate: [AuthGuard]},
-
-{ path: 'login', component: LoginComponent, canActivate: [!AuthGuard]},
-{ path: 'registration', component: RegistrationComponent, canActivate: [!AuthGuard]},
 { path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
   children: [
     { path: '', redirectTo: 'admin', pathMatch: 'full' },
@@ -39,7 +36,8 @@ const routes: Routes = [
     { path: 'tenant/:id/kvarovi', component: TenantProblemComponent }
   ]
 },
-{ path: '**', component: NotFoundComponent }
+{path: '?', component: NotFoundComponent},
+{path: '**', redirectTo: '/%3F'}
 
 
 ];

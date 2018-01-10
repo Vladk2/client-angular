@@ -19,6 +19,15 @@ export class AuthService {
        private router: Router) {
   }
 
+
+  registration_service(credentials) {
+    return this.http.post('http://localhost:8080/api/users/sign_up', credentials)
+      .map((res: any)  => {
+      console.log(res);
+      return true;
+    }
+  }
+
   login_service(credentials): Observable<any> {
   return this.http.post('http://localhost:8080/api/users/sign_in', credentials)
   .map((res: any)  => {
@@ -80,4 +89,6 @@ export class AuthService {
   getAllUsers(): Observable<any> {
     return this.http.get('http://localhost:8080/api/admins/users/');
   }
+
+
 }

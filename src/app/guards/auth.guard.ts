@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
         console.log('SUPERVISOR je');
         return true;
       }
-      this.router.navigate(['/']);
+      this.router.navigate(['/?']);
       return false;
     }
   	this.router.navigate(['/']);
