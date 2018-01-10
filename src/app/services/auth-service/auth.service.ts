@@ -25,7 +25,7 @@ export class AuthService {
       .map((res: any)  => {
       console.log(res);
       return true;
-    }
+    });
   }
 
   login_service(credentials): Observable<any> {

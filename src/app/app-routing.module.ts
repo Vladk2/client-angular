@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { AnonymusGuard } from './guards/anonymus.guard';
 
 import { LoginComponent } from './components/login/login.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
@@ -13,6 +14,8 @@ import { RegistrationComponent } from './components/registration/registration.co
 
 const routes: Routes = [
 { path: '', component: HomeComponent, canActivate: [AuthGuard]},
+{ path: 'login', component: LoginComponent, canActivate: [AnonymusGuard]},
+{ path: 'registration', component: RegistrationComponent, canActivate: [AnonymusGuard]},
 { path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
   children: [
     { path: '', redirectTo: 'admin', pathMatch: 'full' },
