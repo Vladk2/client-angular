@@ -8,6 +8,7 @@
             {{title}}
         </a>    
     </div>
+    
     <ul class="nav responsive-nav">
         <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
         <li  *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
@@ -16,11 +17,13 @@
                 <p> {{menuItem.title}}</p>
             </a>
         </li>
-        <li class="active-pro">
+        <li class="">
             <a role="button" [routerLink]="['']">
                 <i class="pe-7s-users"></i>
                 <p> Promeni ulogu </p>
             </a>
+        </li>
+        <li class="active-pro">
             <a role="button" (click)="logout()">
                 <i class="pe-7s-left-arrow"></i>
                 <p> Odjavi se </p>

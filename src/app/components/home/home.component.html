@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-default" style="margin:0">
-  
+  <div *ngIf="progress"><div id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div></div>
   <div class="container"> 
       <div class = "navbar navbar-header" style="margin:0;padding:0"> 
           <a class="navbar-brand" href="#" >{{username}}</a>
@@ -34,16 +34,18 @@
   </div>
 
   <div *ngIf="otherRoles.employee !== ''" class="container" >
-      <br>
-      <div class="col-md-12">
-        <div class="modal-dialog" [routerLink]="['employee']">
-          <div class="modal-content">
-            
-            <div class="panel-heading">
-              <h3 class="panel-title" style="text-align:center">FIRMA / ZAPOSLENI</h3>
-            </div>
-            <div class="panel-body">
-                <p style="text-align: center"> <i>Pritisnite ovde da biste ušli u panel zaposlenog </i> </p>
+      <div *ngFor="let firm of firms">
+        <br>
+        <div class="col-md-12">
+          <div class="modal-dialog" [routerLink]="['employee/' + firm.id]">
+            <div class="modal-content">
+              
+              <div class="panel-heading">
+                <h3 class="panel-title" style="text-align:center">FIRMA / ZAPOSLENI</h3>
+              </div>
+              <div class="panel-body">
+                  <p style="text-align: center"> <i>Pritisnite ovde da biste ušli u panel zaposlenog za firmu "{{firm.firm_name}}" </i> </p>
+              </div>
             </div>
           </div>
         </div>

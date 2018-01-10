@@ -3,6 +3,12 @@
       <div class="modal-dialog" style="margin-bottom:0">
         <div class="modal-content">
 
+          <div class="alert alert-warning" *ngIf="message">
+            <span><b> Uspesno - </b> Uspesno ste se registrovali sada se ulogujte preko linka  <a [routerLink]="['/login']">ovde</a>.</span>
+          </div>
+          <div class="alert alert-warning" *ngIf="isNotSave">
+            <span><b> Greska - </b> Proverite vase podatke da li su ispravni, ili sacekajte koji minut mozda je problem na serveru.</span>
+          </div>
           <div class="panel-heading">
             <h3 class="panel-title">Registracija</h3>
           </div>
@@ -27,12 +33,12 @@
                 ----
 
                 <div class="form-group">
-                  <select class="form-control" name="buildingId" [(ngModel)]="user.buildingId">
-                    <option *ngFor="let item of building"  value="{{item.id}}">{{item.address.street}} {{item.address.number}}</option>
+                  <select class="form-control" name="buildingId" [(ngModel)]="abode.buildingId">
+                    <option *ngFor="let item of building"  value="{{item.id}}">{{item.addressDTO.street}} {{item.addressDTO.number}}</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Broj stana" name="apartmentNo" type="text" value="" [(ngModel)]="user.apartmentNo">
+                  <input class="form-control" placeholder="Broj stana" name="apartmentNo" type="text" value="" [(ngModel)]="abode.apartmentNo">
                 </div>
                 <!-- Change this to a button or input when using this as a form -->
                 <input type="submit" class="btn btn-info fill pull-right" value="Registtujte se" (click)="onRegistration()"> <br><br><br>

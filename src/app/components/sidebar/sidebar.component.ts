@@ -16,12 +16,6 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     { path: '/admin/news', title: 'Dodavanje',  icon: 'pe-7s-plus', class: '' }
 ];
 
-export const ROUTES_EMPLOYEE: RouteInfo[] = [
-    { path: '/employee', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
-    { path: 'employee/popravke', title: 'Popravke',  icon: 'pe-7s-note2', class: '' },
-];
-
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html'
@@ -31,9 +25,11 @@ export class SidebarComponent implements OnInit {
   menuRoles: any[];
   title = '';
   tenants_id;
+  employee_id;
   ROUTES_TENANT: any[];
   ROUTES_SUPERVISOR: any[];
   ROLES: any[];
+  ROUTES_EMPLOYEE: any[];
 
   constructor(private authService: AuthService, private activeRoute: ActivatedRoute) { }
 
@@ -44,8 +40,17 @@ export class SidebarComponent implements OnInit {
         this.menuItems = ROUTES_ADMIN;
         this.title = "ADMIN PANEL";
       } else if(token === 'employee') {
-        this.menuItems = ROUTES_EMPLOYEE;
+        let employee_id;
+        this.activeRoute.params.subscribe(params => {
+          this.employee_id = (params['id']);
+
+        });
         this.title = "ZAPOSLENI";
+        this.ROUTES_EMPLOYEE = [
+          { path: '/employee/'+this.employee_id, title: 'Početna',  icon: 'pe-7s-graph', class: '' },
+          { path: '/employee/'+this.employee_id, title: 'Popravke',  icon: 'pe-7s-note2', class: '' },
+        ]
+
       } else if(token === 'tenant') {
         this.title = "STANAR";
         let tenants_id;

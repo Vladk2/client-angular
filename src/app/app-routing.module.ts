@@ -29,7 +29,7 @@ const routes: Routes = [
 { path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'EMPLOYEE'},
   children: [
     { path: '', redirectTo: 'employee', pathMatch: 'full' },
-    { path: 'employee', component: EmployeeHomeComponent }
+    { path: 'employee/:id', component: EmployeeHomeComponent }
   ]
 },
 

@@ -9,27 +9,40 @@ import { AuthService } from '../../services/auth-service/auth.service';
 export class RegistrationComponent implements OnInit {
 
   private user: any = {};
+  private abode: any = {};
   private message: any;
+  private isNotSave: any;
   private building:any = [];
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService) { this.isNotSave = false }
 
   ngOnInit() {
 
-    this.building = [
-      {id: '1', address: {id:'1', street: 'dr. svetilava kasapinovica', number: '21', city: 'Novi Sad', zip: '21000'}},
-      {id: '2', address: {
-        id:'2', street: 'dr. svetilava kasapinovica', number: '22', city: 'Novi Sad', zip: '21000'
-      }}
-    ]
+    this.auth.getAllBuildings().subscribe(res => {
+      console.log(res);
+      this.building = res;
+    })
+
   }
 
   onRegistration() {
-    this.auth.registration_service(this.user).subscribe(res => {
+    let information = {
+      'username':this.user.username,
+      'password':this.user.password,
+      'name':this.user.name,
+      'last_name':this.user.last_name,
+      'email':this.user.email,
+      'abode':{
+        'buildingId':this.abode.buildingId,
+        'apartmentNo':this.abode.apartmentNo
+      }
+    }
+    this.auth.registration_service(information).subscribe(res => {
       this.message = res;
-    }, err => {
-      console.log(err);
-      this.message = false;
+      console.log(res);
+      if(!res) {
+        this.isNotSave = false;
+      }
     })
   }
 
