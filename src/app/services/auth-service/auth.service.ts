@@ -82,7 +82,7 @@ export class AuthService {
   logout_service() {
      if (localStorage.getItem('token')) {
       localStorage.removeItem('token');
-      this.router.navigate(['/']);
+      this.router.navigate(['login']);
     }
   }
 
