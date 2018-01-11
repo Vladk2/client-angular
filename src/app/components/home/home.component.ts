@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   firms: any[];
   progress;
 
-  constructor(private authService: AuthService) { this.progress = true; }
+  constructor(private authService: AuthService) {  }
 
   
   ngOnInit() {
@@ -24,11 +24,14 @@ export class HomeComponent implements OnInit {
     this.loggedTenants = this.token.tenants;
     this.otherRoles = this.token.roles;
     this.username = this.token.username;
-    this.authService.findFirm().subscribe(res =>{
-      console.log(res);
-      this.firms = res;
-      this.progress = false;
-    })
+    if(this.otherRoles.employee !== "") {
+      this.progress = true;
+      this.authService.findFirm().subscribe(res =>{
+        console.log(res);
+        this.firms = res;
+        this.progress = false;
+      });
+    }
     console.log(this.loggedTenants);
     console.log(this.otherRoles);
     console.log(this.username);

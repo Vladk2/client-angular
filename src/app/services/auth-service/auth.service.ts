@@ -91,7 +91,7 @@ export class AuthService {
   }
 
   getAllBuildings(): Observable<any> {
-    return this.http.get('http://localhost:8080/api/users/buildins');
+    return this.http.get('http://localhost:8080/api/users/buildings');
   }
 
   findFirm(): Observable<any> {

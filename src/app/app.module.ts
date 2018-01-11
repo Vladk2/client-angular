@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { AuthService } from './services/auth-service/auth.service';
 import { AdminService } from './services/admin-service/admin.service';
+import { AlertService } from './services/alert-service/alert.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AnonymusGuard } from './guards/anonymus.guard';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
@@ -25,6 +26,7 @@ import { EmployeeHomeComponent } from './components/employee/employee-home/emplo
 import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     EmployeeHomeComponent,
     TenantProblemComponent,
     NotFoundComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     AnonymusGuard,
     TokenService,
     AuthService,
+    AlertService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

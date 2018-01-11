@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { AlertService } from "../../services/alert-service/alert.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -10,11 +12,15 @@ export class RegistrationComponent implements OnInit {
 
   private user: any = {};
   private abode: any = {};
-  private message: any;
-  private isNotSave: any;
+  private isSuccess: any;
   private building:any = [];
+  private loading = false;
 
-  constructor(private auth: AuthService) { this.isNotSave = false }
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private alertService: AlertService) 
+    { this.isSuccess = true }
 
   ngOnInit() {
 
@@ -26,6 +32,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onRegistration() {
+    this.loading = true;
     let information = {
       'username':this.user.username,
       'password':this.user.password,
@@ -38,12 +45,13 @@ export class RegistrationComponent implements OnInit {
       }
     }
     this.auth.registration_service(information).subscribe(res => {
-      this.message = res;
-      console.log(res);
-      if(!res) {
-        this.isNotSave = false;
-      }
-    })
-  }
-
+      
+      this.alertService.success('Registracija novog korisnika uspešna! Poslat Vam je verifikacioni mejl. Da biste aktivirali profil, morate verifikovati e-mail.', true);
+      this.router.navigate(['/login']);
+    },
+      error => {
+          this.alertService.error('GREŠKA: Proverite unete podatke');
+          this.loading = false;
+      });
+    }
 }

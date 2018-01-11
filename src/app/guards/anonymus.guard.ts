@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../services/auth-service/auth.service';
 
 @Injectable()
 export class AnonymusGuard implements CanActivate {
   
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router) { }
 
   // Doing just opposite of AuthGuard
   canActivate() {

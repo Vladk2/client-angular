@@ -12,11 +12,8 @@ export class AppComponent  implements OnInit {
 
   constructor(private authGuard: AuthGuard) { }
 
-  ngOnInit() { console.log(this.authGuard.canActivate());
+  ngOnInit() { 
   }
 
-  isUserLogged() {
-    return this.authGuard.canActivate();
-  }
 
 }

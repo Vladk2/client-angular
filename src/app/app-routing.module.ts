@@ -13,8 +13,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
 const routes: Routes = [
+
 { path: '', component: HomeComponent, canActivate: [AuthGuard]},
-{ path: '', redirectTo: 'login', pathMatch: 'full' },
 { path: 'login', component: LoginComponent, canActivate: [AnonymusGuard]},
 { path: 'registration', component: RegistrationComponent, canActivate: [AnonymusGuard]},
 { path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
