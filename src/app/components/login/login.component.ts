@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth-service/auth.service';
-import { AdminService } from '../../services/admin-service/admin.service';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +10,7 @@ export class LoginComponent implements OnInit {
   private user: any = {};
   private message;
 
-  constructor(private auth: AuthService,
-    private admin: AdminService) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit() {
     this.message = true;
