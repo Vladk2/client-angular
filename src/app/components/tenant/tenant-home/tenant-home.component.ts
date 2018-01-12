@@ -14,4 +14,6 @@ export class TenantHomeComponent implements OnInit {
     localStorage.setItem("navbarTitle", "Početna");
   }
 
+  
+
 }
