@@ -1,13 +1,26 @@
 #wall {
-    height: 75vh;
-    overflow-y: auto;
+   height: 75vh;
+   padding-bottom: 50px; 
+   overflow-y: auto;
 }
 #announceDiv {
     margin-top:1px;
-    height: 18vh;
+    padding-top:10px;
+    height: 150px;
+    max-height: 25vh;
+    margin-left: 30px;
+    margin-right: 30px;
+    
 }
+
+#announceDivWrapper{
+    background-color: #e5e5e5;
+    position:absolute;
+   bottom:0;
+   width:100%;
+}
+
 .card {
-    width: 50%;
     margin: 0 auto;
 }
 .announcementHeader {
@@ -16,13 +29,20 @@
     text-align: center;
 }
 .announcementTitle {
-
+    border-radius: 10px;
     text-align: center;
 
 }
 .announcementDesc {
+    border-radius: 10px;
     margin: 30px;
 }
+
+.form-control{
+    -webkit-border-radius: 20px;
+       -moz-border-radius: 20px;
+            border-radius: 10px;
+  }
 
 .announcementAuthor {
 
@@ -32,5 +52,6 @@
 
 #announceButton{
     margin-right: 30px;
+    
 }
 

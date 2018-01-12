@@ -8,7 +8,7 @@
 
         <div *ngIf="loading"><div id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div></div>
         <div *ngFor="let ann of announcements">  <br>
-          <div  class="card ">
+          <div  class="card modal-dialog modal-lg">
             <div class="card-header ">
                 <p class="announcementHeader stats">OBAVEŠTENJE</p>
                 <h4 class="announcementTitle">{{ann.title}}</h4>
@@ -25,9 +25,10 @@
                 </div>
             </div>
           </div>
-      </div>
+      </div> <br> <br> <br>
 
     </div>
+    <div id="announceDivWrapper">
     <div id="announceDiv">
       <div class="form-group">
           <input type="text" class="form-control" placeholder="Unesite naslov obaveštenja..." [(ngModel)]="announcement.title">
@@ -36,9 +37,12 @@
                     class="form-control" rows="3" ></textarea>
           
       </div>
-      <p style="text-align:right">
+    </div>
+    <div style="text-align:right;">
+      <p >
         <button (click)="postAnnouncement()" id="announceButton" class="btn btn-secondary btn-fill" style="margin-top:-10px;">POSTAVI OBAVEŠTENJE</button>
       </p>
+    </div>
     </div>
 
 </div>
