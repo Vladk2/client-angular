@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { TenantService } from '../../services/tenant-service/tenant.service';
 
 @Component({
   selector: 'app-home',
@@ -8,23 +9,21 @@ import { AuthService } from '../../services/auth-service/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-
-  private token: any;
   private loggedTenants: any[]; 
-  private otherRoles: any;  // other roles: admin or employee
+  private userRoles: any;  // roles: admin, employee, tenant
   private username: String; 
   firms: any[];
   progress;
 
-  constructor(private authService: AuthService) {  }
+  constructor(private authService: AuthService, 
+              private tenantService: TenantService) {  }
 
   
   ngOnInit() {
-    this.token = JSON.parse(localStorage.getItem('token'));
-    this.loggedTenants = this.token.tenants;
-    this.otherRoles = this.token.roles;
-    this.username = this.token.username;
-    if(this.otherRoles.employee !== "") {
+    const token = JSON.parse(localStorage.getItem('token'));
+    this.userRoles = token.roles;
+    this.username = token.username;
+    if(this.userRoles.employee !== "") {
       this.progress = true;
       this.authService.findFirm().subscribe(res =>{
         console.log(res);
@@ -32,8 +31,16 @@ export class HomeComponent implements OnInit {
         this.progress = false;
       });
     }
+    if(this.userRoles.tenant !== "") {
+      this.progress = true;
+      this.tenantService.getUsersTenants().subscribe(res =>{
+        console.log(res);
+        this.loggedTenants = res;
+        this.progress = false;
+      });
+    }
     console.log(this.loggedTenants);
-    console.log(this.otherRoles);
+    console.log(this.userRoles);
     console.log(this.username);
     
   }

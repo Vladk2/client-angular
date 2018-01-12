@@ -39,7 +39,6 @@ export class AuthService {
       this.employee = '';
       this.tenant = '';
       this.supervisor = '';
-
       for (let i = 0; i < tokenPayload.userRoles.roles.length; i++) {
         if (tokenPayload.userRoles.roles[i] === 'ADMIN') {
           this.admin = 'ADMIN';
@@ -48,37 +47,25 @@ export class AuthService {
           this.employee = 'EMPLOYEE';
         }
       }
-
       if (tokenPayload.userRoles.tenants.length !== 0) {
         this.tenant = 'TENANT';
       }
-
-      if (tokenPayload.userRoles.supervisors.length !== 0) {
-        this.supervisor = 'SUPERVISOR';
-      }
-
-      console.log(tokenPayload.userRoles.tenants);
       const token = {
         'username': credentials.username,
         'roles': {
           'admin': this.admin,
           'employee': this.employee,
-          'tenant': this.tenant,
-          'supervisor': this.supervisor
+          'tenant': this.tenant
         },
         'tenants': tokenPayload.userRoles.tenants,
-        'supervisors_id': tokenPayload.userRoles.supervisors,
         'jwt': res.jwt
       };
-
       localStorage.setItem('token', JSON.stringify(token));
-
       this.router.navigate(['/']);
       return res;
       });
   }
-
-
+  
   logout_service() {
      if (localStorage.getItem('token')) {
       localStorage.removeItem('token');

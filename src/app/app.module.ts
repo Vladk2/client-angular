@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { AuthService } from './services/auth-service/auth.service';
 import { AdminService } from './services/admin-service/admin.service';
+import { TenantService } from './services/tenant-service/tenant.service';
 import { AlertService } from './services/alert-service/alert.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AnonymusGuard } from './guards/anonymus.guard';
@@ -55,6 +56,7 @@ import { AlertComponent } from './components/alert/alert.component';
     AuthGuard,
     AnonymusGuard,
     TokenService,
+    TenantService,
     AuthService,
     AlertService,
     {

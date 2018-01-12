@@ -15,9 +15,8 @@
     </ul>
   </div>
 </nav>
-<div >
-  
-  <div *ngIf="otherRoles.admin !== ''" class="container"> <br>
+<div id="wall">
+  <div *ngIf="userRoles.admin !== ''" class="container"> <br>
       <div class="col-md-12">
         <div class="modal-dialog" [routerLink]="['admin']">
           <div class="modal-content">
@@ -33,7 +32,7 @@
       </div>
   </div>
 
-  <div *ngIf="otherRoles.employee !== ''" class="container" >
+  <div *ngIf="userRoles.employee !== ''" class="container" >
       <div *ngFor="let firm of firms">
         <br>
         <div class="col-md-12">
@@ -55,14 +54,17 @@
   <div *ngFor="let tenant of loggedTenants" class="container" >
       <br>
       <div class="col-md-12">
-        <div class="modal-dialog" [routerLink]="['tenant/' + tenant.tenant]">
+        <div class="modal-dialog" [routerLink]="['tenant/' + tenant.id]">
           <div class="modal-content">
             
             <div class="panel-heading">
               <h3 class="panel-title" style="text-align:center">STANAR</h3>
             </div>
             <div class="panel-body">
-                <p style="text-align: center"> {{tenant.address}} </p>
+                <p style="text-align: center"> 
+                  {{tenant.building.addressDTO.street}} {{tenant.building.addressDTO.number}},
+                  {{tenant.building.addressDTO.city}} / Apartment No: {{tenant.apartmentNo}}
+                </p>
             </div>
           </div>
         </div>

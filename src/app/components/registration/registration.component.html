@@ -29,7 +29,6 @@
                 Odaberite adresu:
                 <div class="form-group">
                   <select class="form-control"  name="buildingId" [(ngModel)]="abode.buildingId">
-                      <option value="" selected disabled>Please select</option>
                     <option *ngFor="let item of building" value="{{item.id}}">{{item.addressDTO.street}} {{item.addressDTO.number}}</option>
                   </select>
                 </div>

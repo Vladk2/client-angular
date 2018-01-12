@@ -35,15 +35,15 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem('sidebar')){
-      const token = localStorage.getItem('sidebar');
-      if(token === 'admin') {
+      const sidebarType = localStorage.getItem('sidebar');
+      const token = JSON.parse(localStorage.getItem('token'));
+      if(sidebarType === 'admin') {
         this.menuItems = ROUTES_ADMIN;
         this.title = "ADMIN PANEL";
-      } else if(token === 'employee') {
+      } else if(sidebarType === 'employee') {
         let employee_id;
         this.activeRoute.params.subscribe(params => {
           this.employee_id = (params['id']);
-
         });
         this.title = "ZAPOSLENI";
         this.ROUTES_EMPLOYEE = [
@@ -51,88 +51,36 @@ export class SidebarComponent implements OnInit {
           { path: '/employee/'+this.employee_id, title: 'Popravke',  icon: 'pe-7s-note2', class: '' },
         ]
 
-      } else if(token === 'tenant') {
+      } else if(sidebarType === 'tenant') {
         this.title = "STANAR";
         let tenants_id;
         this.activeRoute.params.subscribe(params => {
                  this.tenants_id = (params['id']);
-
               });
-
         this.ROUTES_TENANT = [
           { path: '/tenant/' + this.tenants_id, title: 'Početna',  icon: 'pe-7s-home', class: '' },
           { path: '/tenant/' + this.tenants_id + "/kvarovi", title: 'Kvarovi',  icon: 'pe-7s-tools', class: '' },
         ];
+         for(let tenant of token.tenants){
+           if(tenant.tenant == this.tenants_id){
+             if(tenant.owner == 'true') {
+              this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
+                { path: '/tenant/' + this.tenants_id , title: 'Vlasnik stana dugme',  icon: 'pe-7s-key', class: '' },
+               );
+              if(tenant.supervisor){
+                this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
+                 { path: '/tenant/' + this.tenants_id , title: 'Predsedničko dugme',  icon: 'pe-7s-piggy', class: '' },
+                );
+              }
+             }
+           }
+         }
+
         this.menuItems = this.ROUTES_TENANT;
       }
     }
   }
 
-  
-/*
-  onSupervisor(event) {
-    this.ROUTES_SUPERVISOR = [
-      { path: '', title: 'Profil',  icon: 'pe-7s-graph', class: '' },
-      { path: 'supervisor/' + event, title: 'Početna',  icon: 'pe-7s-graph', class: '' },
-      { path: 'supervisor/nesto/' + event, title: 'novi supervisor',  icon: 'pe-7s-user', class: '' },
-    ];
-
-    this.menuItems = this.ROUTES_SUPERVISOR.filter(menuItem => menuItem);
-    document.getElementById('myRole').style.display = 'none';
-    this.title = 'SUPERVISOR ' + event;
-    
-    localStorage.setItem("sidebar", "supervisor");
-    localStorage.setItem("supervisorSide", event);
-  }
-
-  onTenant(event) {
-    this.ROUTES_TENANT = [
-      { path: '', title: 'Profil',  icon: 'pe-7s-graph', class: '' },
-      { path: 'tenant', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
-      { path: 'tenant/' + event, title: 'novi tenant',  icon: 'pe-7s-user', class: '' },
-    ];
-
-    this.menuItems = this.ROUTES_TENANT.filter(menuItem => menuItem);
-    document.getElementById('myRole').style.display = 'none';
-    this.title = 'TENANT ' + event;
-
-    localStorage.setItem("sidebar", "tenant");
-    localStorage.setItem("tenantSide", event);
-  }
-
-  onRole() {
-    document.getElementById('myRole').style.display = 'block';
-    const token = JSON.parse(localStorage.getItem('token'));
-    this.ROLES = [
-        { role: token.roles.admin, button: '', id: '', elementID: '' },
-        { role: token.roles.employee, button: '', id: '', elementID: '' },
-        { role: token.roles.supervisor, button: 'supervisor', idSupervisors: token.supervisors_id, elementID: 'mySupervisor' },
-        { role: token.roles.tenant, button: 'tenant', idTenants: token.tenants_id, elementID: 'myTenant' }
-    ];
-    this.menuRoles = this.ROLES.filter(menuItem => menuItem);
-  }
-
-  onShow(role, event) {
-    if (role === 'ADMIN') {
-      this.menuItems = ROUTES_ADMIN.filter(menuItem => menuItem);
-      document.getElementById('myRole').style.display = 'none';
-      this.title = 'ADMIN';
-      localStorage.setItem("sidebar", "admin");
-    }
-    if (role === 'EMPLOYEE') {
-      this.menuItems = ROUTES_EMPLOYEE.filter(menuItem => menuItem);
-      document.getElementById('myRole').style.display = 'none';
-      this.title = 'EMPLOYE';
-      localStorage.setItem("sidebar", "emloyee");
-    }
-    if (event === 'tenant') {
-      document.getElementById('myTenant').style.display = 'block';
-    }
-    if (event === 'supervisor') {
-      document.getElementById('mySupervisor').style.display = 'block';
-    }
-  }
-  */
   logout() {
     this.authService.logout_service();
   }

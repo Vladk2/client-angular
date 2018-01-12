@@ -1,11 +1,17 @@
-<div class="sidebar" data-color="black" data-image="">
+<div class="sidebar sidebar-tenant"  data-color=""  data-image="">
     <app-sidebar></app-sidebar>
 </div>
 
 <div class="main-panel">
   <app-navbar-cmp></app-navbar-cmp>
-    <p>
-      Prva stranica vezana samo za tenanta
-    </p>
+    <div id="wall">
+
+    </div>
+    <div id="announceDiv">
+      <div class="form-group">
+          <textarea id="announceTextArea" class="form-control" rows="3" id="comment"></textarea>
+      </div>
+      <p style="text-align:right"><button  id="announceButton" class="btn btn-secondary btn-fill" style="margin-top:-10px;">POSTAVI OBAVEŠTENJE</button></p>
+    </div>
 
 </div>
