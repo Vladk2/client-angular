@@ -6,13 +6,39 @@
   <app-navbar-cmp></app-navbar-cmp>
     <div id="wall">
 
+        <div *ngIf="loading"><div id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div></div>
+        <div *ngFor="let ann of announcements">  <br>
+          <div  class="card ">
+            <div class="card-header ">
+                <p class="announcementHeader stats">OBAVEŠTENJE</p>
+                <h4 class="announcementTitle">{{ann.title}}</h4>
+            </div>
+            <div class="card-body ">
+                <p class="announcementDesc"> {{ann.message}}</p>
+            </div>
+            <div class="card-footer">
+                
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-user-o announcementAuthor"></i>  {{ann.tenant.user.name}} {{ann.tenant.user.last_name}}  <br>
+                    <i class="fa fa-clock-o"></i> {{ann.date}}
+                </div>
+            </div>
+          </div>
+      </div>
 
     </div>
     <div id="announceDiv">
       <div class="form-group">
-          <textarea id="announceTextArea" class="form-control" rows="3" id="comment"></textarea>
+          <input type="text" class="form-control" placeholder="Unesite naslov obaveštenja..." [(ngModel)]="announcement.title">
+          <textarea id="announceTextArea" [(ngModel)]="announcement.message" 
+                    placeholder="Unesite tekst... Primer: Obaveštavaju se svi stanari da sutra pravim rodjendan, te da ne zamere na glasnoj muzici. " 
+                    class="form-control" rows="3" ></textarea>
+          
       </div>
-      <p style="text-align:right"><button  id="announceButton" class="btn btn-secondary btn-fill" style="margin-top:-10px;">POSTAVI OBAVEŠTENJE</button></p>
+      <p style="text-align:right">
+        <button (click)="postAnnouncement()" id="announceButton" class="btn btn-secondary btn-fill" style="margin-top:-10px;">POSTAVI OBAVEŠTENJE</button>
+      </p>
     </div>
 
 </div>

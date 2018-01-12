@@ -1,8 +1,33 @@
 #wall {
-    height: 70vw;
+    height: 75vh;
+    overflow-y: auto;
 }
 #announceDiv {
-    height: 15vw;
+    margin-top:1px;
+    height: 18vh;
+}
+.card {
+    width: 50%;
+    margin: 0 auto;
+}
+.announcementHeader {
+    margin: 15px;
+   
+    text-align: center;
+}
+.announcementTitle {
+
+    text-align: center;
+
+}
+.announcementDesc {
+    margin: 30px;
+}
+
+.announcementAuthor {
+
+    margin-top:0;
+    padding:0;
 }
 
 #announceButton{
