@@ -1,11 +1,13 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
 import { AnonymusGuard } from './anonymus.guard';
+import { RouterModule } from '@angular/router';
 
 describe('AnonymusGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AnonymusGuard]
+      providers: [AnonymusGuard],
+      imports: [ RouterModule ]
     });
   });
 
