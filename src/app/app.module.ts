@@ -19,6 +19,7 @@ import { TenantService } from './services/tenant-service/tenant.service';
 import { AlertService } from './services/alert-service/alert.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AnonymusGuard } from './guards/anonymus.guard';
+import { TenantGuard } from './guards/tenant.guard';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { TokenService } from './guards/token.service';
 import { HomeComponent } from './components/home/home.component';
@@ -55,6 +56,7 @@ import { AlertComponent } from './components/alert/alert.component';
     AdminService,
     AuthGuard,
     AnonymusGuard,
+    TenantGuard,
     TokenService,
     TenantService,
     AuthService,
