@@ -17,24 +17,24 @@ const routes: Routes = [
 { path: '', component: HomeComponent, canActivate: [AuthGuard]},
 { path: 'login', component: LoginComponent, canActivate: [AnonymusGuard]},
 { path: 'registration', component: RegistrationComponent, canActivate: [AnonymusGuard]},
-{ path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
+{ path: 'admin', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
   children: [
-    { path: 'admin', component: AdminHomeComponent },
-    { path: 'admin/lists', component: AdminHomeComponent },
-    { path: 'admin/news', component: AdminHomeComponent }
+    { path: '', component: AdminHomeComponent },
+    { path: 'lists', component: AdminHomeComponent },
+    { path: 'news', component: AdminHomeComponent }
   ]
 },
 
-{ path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'EMPLOYEE'},
+{ path: 'employee', canActivateChild: [AuthGuard], data: { expectedRole: 'EMPLOYEE'},
   children: [
-    { path: 'employee/:id', component: EmployeeHomeComponent }
+    { path: ':id', component: EmployeeHomeComponent }
   ]
 },
 
-{ path: '', canActivateChild: [AuthGuard], data: { expectedRole: 'TENANT'},
+{ path: 'tenant', canActivateChild: [AuthGuard], data: { expectedRole: 'TENANT'},
   children: [
-    { path: 'tenant/:id', canActivate: [TenantGuard], component: TenantHomeComponent },
-    { path: 'tenant/:id/kvarovi', canActivate: [TenantGuard], component: TenantProblemComponent }
+    { path: ':id', canActivate: [TenantGuard], component: TenantHomeComponent },
+    { path: ':id/kvarovi', canActivate: [TenantGuard], component: TenantProblemComponent }
   ]
 },
 {path: '?', component: NotFoundComponent},
