@@ -1,0 +1,73 @@
+
+<nav class="navbar navbar-default" style="margin:0">
+  <div *ngIf="progress"><div id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div></div>
+  <div class="container"> 
+      <div class = "navbar navbar-header" style="margin:0;padding:0"> 
+          <a class="navbar-brand" href="#" >{{username}}</a>
+      </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a role="button" (click)="logout()">
+                <p> Odjavi se</p>
+            </a>
+        </li>
+        <li class="separator hidden-lg hidden-md"></li>
+    </ul>
+  </div>
+</nav>
+<div id="wall">
+  <div *ngIf="userRoles.admin !== ''" class="container"> <br>
+      <div class="col-md-12">
+        <div class="modal-dialog" [routerLink]="['admin']">
+          <div class="modal-content">
+            
+            <div class="panel-heading">
+              <h3 class="panel-title" style="text-align:center">ADMINISTRATOR</h3>
+            </div>
+            <div class="panel-body">
+                <p style="text-align: center"> <i>Pritisnite ovde da biste ušli u admin panel </i> </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div *ngIf="userRoles.employee !== ''" class="container" >
+      <div *ngFor="let firm of firms">
+        <br>
+        <div class="col-md-12">
+          <div class="modal-dialog" [routerLink]="['employee/' + firm.id]">
+            <div class="modal-content">
+              
+              <div class="panel-heading">
+                <h3 class="panel-title" style="text-align:center">FIRMA / ZAPOSLENI</h3>
+              </div>
+              <div class="panel-body">
+                  <p style="text-align: center"> <i>Pritisnite ovde da biste ušli u panel zaposlenog za firmu "{{firm.firm_name}}" </i> </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div *ngFor="let tenant of loggedTenants" class="container" >
+      <br>
+      <div class="col-md-12">
+        <div class="modal-dialog" [routerLink]="['tenant/' + tenant.id]">
+          <div class="modal-content">
+            
+            <div class="panel-heading">
+              <h3 class="panel-title" style="text-align:center">STANAR</h3>
+            </div>
+            <div class="panel-body">
+                <p style="text-align: center"> 
+                  {{tenant.building.addressDTO.street}} {{tenant.building.addressDTO.number}},
+                  {{tenant.building.addressDTO.city}} / Apartment No: {{tenant.apartmentNo}}
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
