@@ -1,4 +1,4 @@
-##  KTS/NWT Project(Client-side) - Building Management
+##  KTS/NWT Project (Client-side) - Building Management
 
 ### - About App 
 
