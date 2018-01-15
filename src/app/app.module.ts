@@ -29,6 +29,12 @@ import { TenantProblemComponent } from './components/tenant/tenant-problem/tenan
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { ParliamentHomeComponent } from './components/parliament/parliament-home/parliament-home.component';
+import { ParliamentAnnounceComponent } from './components/parliament/parliament-announce/parliament-announce.component';
+import { ParliamentProposalsComponent } from './components/parliament/parliament-proposals/parliament-proposals.component';
+import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
+import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
+import { ParliamentService } from './services/parliament-service/parliament.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +47,12 @@ import { AlertComponent } from './components/alert/alert.component';
     TenantProblemComponent,
     NotFoundComponent,
     RegistrationComponent,
-    AlertComponent
+    AlertComponent,
+    ParliamentHomeComponent,
+    ParliamentAnnounceComponent,
+    ParliamentProposalsComponent,
+    ParliamentVotingComponent,
+    ParliamentRecordComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +71,7 @@ import { AlertComponent } from './components/alert/alert.component';
     TokenService,
     TenantService,
     AuthService,
+    ParliamentService,
     AlertService,
     {
       provide: HTTP_INTERCEPTORS,
