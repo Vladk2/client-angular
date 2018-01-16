@@ -62,6 +62,7 @@ export class SidebarComponent implements OnInit {
         { path: '/employee/'+this.employee_id, title: 'Početna',  icon: 'pe-7s-graph', class: '' },
         { path: '/employee/'+this.employee_id, title: 'Popravke',  icon: 'pe-7s-note2', class: '' },
       ]
+      this.menuItems = this.ROUTES_EMPLOYEE;
     } 
     
     else if(sidebarType === 'tenant') {
