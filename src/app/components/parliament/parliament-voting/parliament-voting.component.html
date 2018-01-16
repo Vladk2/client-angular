@@ -1,3 +1,8 @@
-<p>
-  parliament-voting works!
-</p>
+<div *ngFor="let agendaPoint of agendaPoints" class="card modal-dialog">
+    <div class="card-header ">
+        <p class="agendaPointHeader stats">PREDLOG ZA TAČKU DNEVNOG REDA</p>
+    </div>
+    <div class="card-body ">
+        <p class="agendaPointContent">{{agendaPoint.point}}</p> <br/>
+    </div>
+  </div>

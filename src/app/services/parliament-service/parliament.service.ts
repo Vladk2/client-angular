@@ -14,4 +14,12 @@ export class ParliamentService {
     return this.http.get('http://localhost:8080/api/parliaments/' + tenantId + "/status"); 
   }
 
+  getProposedAgendaPoints(tenantId, parlId){
+    return this.http.get('http://localhost:8080/api/parliaments/agendaVote/' + tenantId + "/" + parlId); 
+  }
+
+  postProposal(tenantId, parlId, point) {
+    return this.http.post('http://localhost:8080/api/parliaments/proposePoint/' + tenantId + "/" + parlId, point); 
+  }
+
 }

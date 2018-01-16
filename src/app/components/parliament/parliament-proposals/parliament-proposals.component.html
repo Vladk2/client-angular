@@ -1,3 +1,18 @@
-<p>
-  parliament-proposals works!
-</p>
+<br> <div class="card modal-dialog" id="proposeDiv">
+    <div class="card-header ">
+        <p class="agendaPointHeader stats">PREDLOŽITE TAČKU DNEVNOG REDA</p>
+    </div>
+ <textarea id="proposeTextArea" [(ngModel)]="agendaProposal" 
+ placeholder="Unesite predlog za tačku dnevnog reda..." 
+ class="form-control" rows="3" ></textarea>
+ <button (click)="postProposal()" [disabled]="agendaProposal == ''" id="proposeButton" class="btn btn-default btn-fill ">POSTAVI PREDLOG</button>
+</div> <br> <br>
+
+<div *ngFor="let agendaPoint of agendaPoints" class="card modal-dialog">
+  <div class="card-header ">
+      <p class="agendaPointHeader stats">PREDLOG ZA TAČKU DNEVNOG REDA</p>
+  </div>
+  <div class="card-body ">
+      <p class="agendaPointContent">{{agendaPoint.point}}</p> <br/>
+  </div>
+</div>

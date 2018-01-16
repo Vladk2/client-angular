@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ParliamentService } from '../../../services/parliament-service/parliament.service';
 import { AlertService } from "../../../services/alert-service/alert.service";
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,10 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ParliamentAnnounceComponent implements OnInit {
 
+  @Input() tenantId : any;
   private date : Date;
   private announceDate : any;
   private loading : boolean;
-  private tenants_id : any;
   private parl_status : String;
 
   constructor(private parliamentService: ParliamentService, 
@@ -23,7 +23,7 @@ export class ParliamentAnnounceComponent implements OnInit {
 
   ngOnInit() {
     this.activeRoute.params.subscribe(params => {
-      this.tenants_id = (params['id']);
+      this.tenantId = (params['id']);
    });
    
    
@@ -39,13 +39,13 @@ export class ParliamentAnnounceComponent implements OnInit {
       'date' : this.announceDate
     }
     
-    this.parliamentService.announceParliament(this.tenants_id, date).subscribe(res => {
+    this.parliamentService.announceParliament(this.tenantId, date).subscribe(res => {
       
       let responseMessage = JSON.parse(JSON.stringify(res)).message;
       console.log("PORUKA JE " + responseMessage); 
       // ovo mozda otkomentarisati kada se doda iks za zatvaranje na alert divu
       this.alertService.success(responseMessage + " Do početka skupštine možete predlagati tačke dnevnog reda sa ostalim stanarima.", true); 
-      this.router.navigate(['tenant/'+ this.tenants_id]);
+      this.router.navigate(['tenant/'+ this.tenantId]);
       
     },
     error => {
