@@ -29,8 +29,7 @@ export class TenantHomeComponent implements OnInit {
    });
     this.loading = true;
     this.tenantService.getAnnouncements(this.tenants_id).subscribe(res =>{
-      console.log(res);
-      this.announcements = res;
+      this.announcements = res.slice().reverse();
       this.loading = false;
     });
 
@@ -52,7 +51,6 @@ export class TenantHomeComponent implements OnInit {
       // ovo mozda otkomentarisati kada se doda iks za zatvaranje na alert divu
       // this.alertService.success(responseMessage); 
       this.tenantService.getAnnouncements(this.tenants_id).subscribe(res =>{
-        console.log(res);
         this.announcements = res;
         this.loading = false;
       });

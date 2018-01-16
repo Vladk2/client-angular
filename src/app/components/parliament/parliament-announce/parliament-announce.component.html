@@ -1,3 +1,14 @@
-<p>
-  parliament-announce works!
-</p>
+<div  class="card modal-dialog modal-lg">
+  <div class="card-header ">
+      <p class="announcementHeader stats">ZAKAZIVANJE SKUPŠTINE STANARA</p>
+      <h4 class="announcementTitle">Odaberite datum početka skupštine: </h4>
+  </div>
+  <div class="card-body">
+      <p-calendar  showTime="true" [(ngModel)]="date" [inline]="true"></p-calendar>
+  </div>
+  <div class="card-footer">
+      <div class="announceButton">
+          <button (click)="announceParliament()" id="announceButton" class="btn btn-secondary btn-fill" style="margin-bottom:30px;">ZAKAŽI</button>
+      </div>
+  </div>
+</div>

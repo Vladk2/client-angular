@@ -1,3 +1,19 @@
-<p>
-  parliament-home works!
-</p>
+<div class="sidebar sidebar-tenant" data-color="" data-image="">
+    <app-sidebar></app-sidebar>
+</div>
+
+<div class="main-panel">
+   
+    <app-navbar-cmp></app-navbar-cmp>
+    <div *ngIf="parl_status == 'NONE'">
+        <app-parliament-announce> 
+            <div class="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
+        </app-parliament-announce>
+    </div>
+    <div *ngIf="parl_status == 'ANNOUNCED'">
+            <app-parliament-proposals> 
+                <div class="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
+            </app-parliament-proposals>
+        </div>
+
+</div>
