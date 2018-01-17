@@ -20,7 +20,6 @@ export class AdminHomeComponent implements OnInit {
     localStorage.setItem("navbarTitle", "Početna");
 
     this.adminService.getProfile().subscribe(res => {
-      console.log(res);
       this.user = res;
     })
 

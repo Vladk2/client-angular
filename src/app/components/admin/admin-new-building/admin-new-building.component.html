@@ -3,8 +3,8 @@
 </div>
 
 <div class="main-panel">
-	<app-navbar-cmp></app-navbar-cmp>
-
+	<app-navbar-cmp> </app-navbar-cmp>
+	<div *ngIf="message" id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
 	
 	<div class="main-content" >
 		<div class="alert alert-success" *ngIf="message">

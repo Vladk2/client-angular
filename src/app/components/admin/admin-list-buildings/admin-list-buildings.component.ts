@@ -13,7 +13,6 @@ export class AdminListBuildingsComponent implements OnInit {
 
   ngOnInit() {
   	this.adminService.getAllBuildings().subscribe(res => {
-      console.log(res);
       this.buildings = res;
     })
   }

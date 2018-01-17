@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin-service/admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-new-firm',
@@ -11,12 +12,12 @@ export class AdminNewFirmComponent implements OnInit {
   private address: any = {};
   private firm: any = {};
   private users: any = [];
-  message; 
-  constructor(private adminService: AdminService) { this.message = false; }
+  message;
+  private currentTimeout: number;
+  constructor(private adminService: AdminService, private router: Router) { this.message = false; }
 
   ngOnInit() {
   	this.adminService.getAllUser().subscribe(res => {
-      console.log(res);
       this.users = res;
     })
   }
@@ -27,8 +28,11 @@ export class AdminNewFirmComponent implements OnInit {
   		address: this.address
   	} 
   	this.adminService.addFirm(firms, this.firm.user_id).subscribe(res =>{
-  		console.log(res);
   		this.message = true;
+
+      this.currentTimeout = setTimeout(() => {
+        this.router.navigate(['/admin/lists/firms']);
+      }, 1000)
   	})
   }
 }

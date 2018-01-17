@@ -52,4 +52,12 @@ export class AdminService {
   getAllBuildings(): Observable<any> {
     return this.http.get('http://localhost:8080/api/admins/buildings/');
   }
+
+  getAllFirms(): Observable<any> {
+    return this.http.get('http://localhost:8080/api/admins/firms/');
+  }
+
+  removeFirm(id_firm): Observable<any> {
+    return this.http.delete('http://localhost:8080/api/admins/firm/'+id_firm);
+  }
 }

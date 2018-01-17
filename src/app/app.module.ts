@@ -33,6 +33,7 @@ import { AdminNewBuildingComponent } from './components/admin/admin-new-building
 import { AdminNewFirmComponent } from './components/admin/admin-new-firm/admin-new-firm.component';
 import { AdminListUsersComponent } from './components/admin/admin-list-users/admin-list-users.component';
 import { AdminListBuildingsComponent } from './components/admin/admin-list-buildings/admin-list-buildings.component';
+import { AdminListFirmsComponent } from './components/admin/admin-list-firms/admin-list-firms.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AdminListBuildingsComponent } from './components/admin/admin-list-build
     AdminNewBuildingComponent,
     AdminNewFirmComponent,
     AdminListUsersComponent,
-    AdminListBuildingsComponent
+    AdminListBuildingsComponent,
+    AdminListFirmsComponent
   ],
   imports: [
     BrowserModule,

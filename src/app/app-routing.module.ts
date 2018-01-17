@@ -15,6 +15,7 @@ import { AdminNewBuildingComponent } from './components/admin/admin-new-building
 import { AdminNewFirmComponent } from './components/admin/admin-new-firm/admin-new-firm.component';
 import { AdminListUsersComponent } from './components/admin/admin-list-users/admin-list-users.component';
 import { AdminListBuildingsComponent } from './components/admin/admin-list-buildings/admin-list-buildings.component';
+import { AdminListFirmsComponent } from './components/admin/admin-list-firms/admin-list-firms.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
     { path: 'news/building', component: AdminNewBuildingComponent },
     { path: 'news/firm', component: AdminNewFirmComponent },
     { path: 'lists/users', component: AdminListUsersComponent },
-    { path: 'lists/buildings', component: AdminListBuildingsComponent }
+    { path: 'lists/buildings', component: AdminListBuildingsComponent },
+    { path: 'lists/firms', component: AdminListFirmsComponent }
   ]
 },
 

@@ -11,38 +11,48 @@ export class AdminListUsersComponent implements OnInit {
   private users: any = [];
   private proba: any = [];
   messageAdd;
-  mesageRemove; 
-  constructor( private adminService: AdminService) { this.messageAdd = false; this.mesageRemove = false; }
+  mesageRemove;
+  progres;
+  private currentTimeout: number;
+  constructor( private adminService: AdminService) { this.messageAdd = false; this.mesageRemove = false; this.progres = false; }
 
   ngOnInit() {
   	
     this.adminService.getAllUser().subscribe(res => {
-      console.log(res);
       this.users = res;
     })
   }
 
   onAddAdmin(event) {
   	this.adminService.addAdmin(event).subscribe(res =>{
-  		console.log("dodao admina");
-  		this.adminService.getAllUser().subscribe(res => {
-	      console.log(res);
-	      this.users = res;
-	      this.messageAdd = true;
-	      this.mesageRemove = false;
-	    })
+
+      this.progres = true;
+
+      this.currentTimeout = setTimeout(() => {
+        this.adminService.getAllUser().subscribe(res => {
+          this.users = res;
+          this.messageAdd = true;
+          this.mesageRemove = false;
+          this.progres = false;
+        })
+      }, 1000)
+
+  		
    	})
   }
 
   onRemoveAdmin(event) {
   	this.adminService.removeAdmin(event).subscribe(res =>{
-  		console.log("uklonio admina");
-  		this.adminService.getAllUser().subscribe(res => {
-	      console.log(res);
-	      this.users = res;
-	      this.mesageRemove = true;
-	      this.messageAdd = false;
-	    })
+  		this.progres = true;
+
+      this.currentTimeout = setTimeout(() => {
+        this.adminService.getAllUser().subscribe(res => {
+          this.users = res;
+          this.messageAdd = false;
+          this.mesageRemove = true;
+          this.progres = false;
+        })
+      }, 1000)
    	})
   }
 
