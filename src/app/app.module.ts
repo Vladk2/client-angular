@@ -29,6 +29,7 @@ import { TenantProblemComponent } from './components/tenant/tenant-problem/tenan
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AlertComponent } from './components/alert/alert.component';
     TenantProblemComponent,
     NotFoundComponent,
     RegistrationComponent,
-    AlertComponent
+    AlertComponent,
+    TenantRegistrationComponent
   ],
   imports: [
     BrowserModule,

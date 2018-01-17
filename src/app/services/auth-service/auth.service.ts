@@ -65,7 +65,7 @@ export class AuthService {
       return res;
       });
   }
-  
+
   logout_service() {
      if (localStorage.getItem('token')) {
       localStorage.removeItem('token');
@@ -78,7 +78,7 @@ export class AuthService {
   }
 
   getAllBuildings(): Observable<any> {
-    return this.http.get('http://localhost:8080/api/users/buildings');
+    return this.http.get('http://localhost:8080/api/buildings');
   }
 
   findFirm(): Observable<any> {

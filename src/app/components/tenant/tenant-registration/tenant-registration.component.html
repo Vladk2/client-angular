@@ -1,0 +1,47 @@
+<nav class="navbar navbar-default" style="margin:0">
+  <div *ngIf="progress"><div id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div></div>
+  <div class="container">
+    <div class = "navbar navbar-header" style="margin:0;padding:0">
+      <a class="navbar-brand" href="" >{{username}}</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a role="button" (click)="authService.logout_service()">
+          <p> Odjavi se</p>
+        </a>
+      </li>
+      <li class="separator hidden-lg hidden-md"></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container" style="margin-top:30px"> <br>
+  <div class="col-md-12" >
+
+    <div class="modal-dialog" style="margin-bottom:0">
+      <div class="modal-content">
+        <div class="panel-heading">
+          <h3 class="panel-title">Unesite novo mesto boravka</h3>
+          <div *ngIf="loading" style="margin:0 auto;align-content:center;width:50%;"><img style="height:50px;" src="assets/img/loader-preview.svg" alt="loading"></div>
+        </div>
+        <div class="panel-body" >
+          <form role="form">
+            <fieldset>
+              Odaberite adresu:
+              <div class="form-group">
+                <select class="form-control"  name="buildingId" [(ngModel)]="abode.buildingId">
+                  <option *ngFor="let item of buildings" value="{{item.id}}">{{item.addressDTO.street}} {{item.addressDTO.number}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <input class="form-control" placeholder="Broj stana" name="apartmentNo" type="number" value="" [(ngModel)]="abode.apartmentNo">
+              </div>
+              <input type="submit" class="btn btn-info fill pull-right" value="Posalji" (click)="registerNewAbode()"> <br><br><br>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

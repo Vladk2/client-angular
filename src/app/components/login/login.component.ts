@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.message = true;
-   
   }
 
   login() {
@@ -26,5 +25,5 @@ export class LoginComponent implements OnInit {
     });
   }
 
- 
+
 }
