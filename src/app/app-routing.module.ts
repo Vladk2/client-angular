@@ -12,6 +12,9 @@ import { TenantProblemComponent } from './components/tenant/tenant-problem/tenan
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AdminNewBuildingComponent } from './components/admin/admin-new-building/admin-new-building.component';
+import { AdminNewFirmComponent } from './components/admin/admin-new-firm/admin-new-firm.component';
+import { AdminListUsersComponent } from './components/admin/admin-list-users/admin-list-users.component';
+import { AdminListBuildingsComponent } from './components/admin/admin-list-buildings/admin-list-buildings.component';
 
 
 const routes: Routes = [
@@ -24,7 +27,9 @@ const routes: Routes = [
     { path: '', component: AdminHomeComponent },
     { path: 'lists', component: AdminHomeComponent },
     { path: 'news/building', component: AdminNewBuildingComponent },
-    { path: 'news/firm', component: AdminHomeComponent }
+    { path: 'news/firm', component: AdminNewFirmComponent },
+    { path: 'lists/users', component: AdminListUsersComponent },
+    { path: 'lists/buildings', component: AdminListBuildingsComponent }
   ]
 },
 

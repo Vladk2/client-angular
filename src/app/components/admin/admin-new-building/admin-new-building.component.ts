@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../../../services/admin-service/admin.service';
+
 
 @Component({
   selector: 'app-admin-new-building',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminNewBuildingComponent implements OnInit {
 
-  constructor() { }
+  private addressDTO: any = {};
+  message; 
+  constructor(private adminService: AdminService) { this.message = false; }
 
   ngOnInit() {
+  }
+
+  onAddBuilding() {
+  	let building = {
+  		addressDTO: this.addressDTO
+  	}
+  	this.adminService.addBuilding(building).subscribe(res => {
+      console.log(res);
+      this.message = true;
+    })
   }
 
 }

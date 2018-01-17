@@ -1,0 +1,57 @@
+<div class="sidebar" data-color="black" data-image="">
+    <app-sidebar></app-sidebar>
+</div>
+
+<div class="main-panel">
+	<app-navbar-cmp></app-navbar-cmp>
+
+
+	<div class="main-content">
+		<div class="alert alert-success" *ngIf="messageAdd">
+		    <span><b> Dodato - </b> Uspesno ste dodali novg admina!</span>
+		</div>
+		<div class="alert alert-warning" *ngIf="mesageRemove">
+		    <span><b> Ispravno - </b> Uspesno ste uklonili admina!</span>
+		</div>
+	    <div class="container-fluid">
+	        <div class="row">
+	            <div class="col-md-12">
+	                <div class="card">
+	                    <div class="header">
+	                        <h4 class="title">Prikaz svih zgrada</h4>
+	                        <p class="category"></p>
+	                    </div>
+	                    <div class="content table-responsive table-full-width">
+	                          <table class="table table-hover table-striped">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Id</th>
+	                                        <th>Ulica</th>
+	                                        <th>Broj</th>
+	                                        <th>Grad</th>
+	                                        <th>Zip</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr *ngFor="let item of buildings">
+	                                    	<td>{{item.id}} </td>
+	                                    	<td>{{item.addressDTO.street}}</td>
+	                                    	<td>{{item.addressDTO.number}}</td>
+	                                    	<td>{{item.addressDTO.city}}</td>
+	                                    	<td>{{item.addressDTO.zip}}</td>
+	                                    	
+	                                    	
+	                                    </tr>
+	                                </tbody>
+	                          </table>
+
+	                    </div>
+	                </div>
+	            </div>
+	            
+	        </div>
+	    </div>
+	</div>
+
+
+</div>

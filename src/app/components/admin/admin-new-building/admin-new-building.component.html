@@ -6,5 +6,62 @@
 	<app-navbar-cmp></app-navbar-cmp>
 
 	
+	<div class="main-content" >
+		<div class="alert alert-success" *ngIf="message">
+		    <span><b> Ispravno - </b> Uspesno ste dodali novu zgradu!</span>
+		</div>
+	    <div class="container-fluid">
+	        <div class="row">
+	            <div class="col-md-12">
+	                <div class="card">
+	                    <div class="header">
+	                        <h4 class="title">Dodati novu zgradu</h4>
+	                    </div>
+	                    <div class="content">
+	                        <form>
+	                            
+
+	                            <div class="row">
+	                                <div class="col-md-10">
+	                                    <div class="form-group">
+	                                        <label>Adresa zgrade</label>
+	                                        <input type="text" class="form-control" placeholder="adresa" name="street" [(ngModel)]="addressDTO.street">
+	                                    </div>
+	                                </div>
+	                                <div class="col-md-2">
+	                                    <div class="form-group">
+	                                        <label>Broj zgrade</label>
+	                                        <input type="text" class="form-control" placeholder="Broj" name="number" [(ngModel)]="addressDTO.number">
+	                                    </div>
+	                                </div>
+	                                <div class="col-md-12">
+	                                    <div class="form-group">
+	                                        <label for="exampleInputEmail1">Grag adresa</label>
+	                                        <input type="email" class="form-control" placeholder="grad" name="zip" [(ngModel)]="addressDTO.city">
+	                                    </div>
+	                                </div>
+	                                <div class="col-md-12">
+	                                    <div class="form-group">
+	                                        <label>Zip broj</label>
+	                                        <input type="text" class="form-control" placeholder="Zip" name="zip" [(ngModel)]="addressDTO.zip">
+	                                    </div>
+	                                </div>
+	                            </div>
+
+	                            
+
+	                           
+	                            <button type="submit" class="btn btn-info btn-fill pull-right" (click)="onAddBuilding()">Dodajte novu</button>
+	                            <div class="clearfix"></div>
+	                        </form>
+
+	                    </div>
+	                </div>
+	            </div>
+
+	            
+	        </div>
+	    </div>
+	</div>
 
 </div>

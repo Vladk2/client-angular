@@ -30,6 +30,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { AdminNewBuildingComponent } from './components/admin/admin-new-building/admin-new-building.component';
+import { AdminNewFirmComponent } from './components/admin/admin-new-firm/admin-new-firm.component';
+import { AdminListUsersComponent } from './components/admin/admin-list-users/admin-list-users.component';
+import { AdminListBuildingsComponent } from './components/admin/admin-list-buildings/admin-list-buildings.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { AdminNewBuildingComponent } from './components/admin/admin-new-building
     NotFoundComponent,
     RegistrationComponent,
     AlertComponent,
-    AdminNewBuildingComponent
+    AdminNewBuildingComponent,
+    AdminNewFirmComponent,
+    AdminListUsersComponent,
+    AdminListBuildingsComponent
   ],
   imports: [
     BrowserModule,
