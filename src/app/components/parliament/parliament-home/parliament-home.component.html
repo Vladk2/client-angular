@@ -3,27 +3,50 @@
 </div>
 
 <div class="main-panel">
-   
+
     <app-navbar-cmp></app-navbar-cmp>
     <div *ngIf="parl_status == 'NONE' && is_supervisor == true">
-        <app-parliament-announce [tenantId]='tenants_id'> 
-            <div class="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
+        <app-parliament-announce [tenantId]='tenants_id'>
+            <div class="loader">
+                <img src="assets/img/loader-preview.svg" alt="loading">
+            </div>
         </app-parliament-announce>
     </div>
     <div *ngIf="parl_status == 'NONE' && is_supervisor == false">
-        <h4 style="text-align: center; margin:50px">Trenutno ne postoji aktivna ili zakazana skupština stanara.</h4> 
+        <h4 style="text-align: center; margin:50px">Trenutno ne postoji aktivna ili zakazana skupština stanara.</h4>
     </div>
 
     <div *ngIf="parl_status == 'ANNOUNCED'">
-        <app-parliament-proposals [parlId]='parl_id' [tenantId]='tenants_id'> 
-            <div class="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
+        <app-parliament-proposals [parlId]='parl_id' [tenantId]='tenants_id'>
+            <div class="loader">
+                <img src="assets/img/loader-preview.svg" alt="loading">
+            </div>
         </app-parliament-proposals>
     </div>
 
     <div *ngIf="parl_status == 'VOTING'">
-            <app-parliament-voting [parlId]='parl_id' [tenantId]='tenants_id'> 
-                <div class="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
-            </app-parliament-voting>
-        </div>
+        <app-parliament-voting [parlId]='parl_id' [tenantId]='tenants_id'>
+            <div class="loader">
+                <img src="assets/img/loader-preview.svg" alt="loading">
+            </div>
+        </app-parliament-voting>
+    </div>
+
+    <div *ngIf="parl_status == 'VOTED' && is_supervisor == false">
+        <h4 style="text-align: center; margin:50px">Glasanje je završeno. Sastavljanje zapisnika je u toku. Zapisnik će biti objavljen na početnoj stranici.</h4>
+        <app-parliament-voting [parlId]='parl_id' [tenantId]='tenants_id'>
+            <div class="loader">
+                <img src="assets/img/loader-preview.svg" alt="loading">
+            </div>
+        </app-parliament-voting>
+    </div>
+
+    <div *ngIf="parl_status == 'VOTED' && is_supervisor == true">
+        <app-parliament-record [parlId]='parl_id' [tenantId]='tenants_id'>
+            <div class="loader">
+                <img src="assets/img/loader-preview.svg" alt="loading">
+            </div>
+        </app-parliament-record>
+    </div>
 
 </div>

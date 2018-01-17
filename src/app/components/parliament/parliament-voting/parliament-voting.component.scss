@@ -5,8 +5,34 @@
     margin: 15px;
     text-align: center;
 }
-
 .agendaPointContent {
     margin-top: 30px;
     text-align: center;
+}
+.voteBtn {
+    display: inline;
+    margin: 0;
+    font-size: 1.4em;
+}
+.upVote {
+    width: 49%;
+}
+.downVote {
+   width: 50%;
+}
+
+.finishVoting {
+    width: 100%;
+}
+
+.voteUpResults {
+  width: 48%;
+}
+.voteDownResults {
+    width: 51%;  
+  }
+.voteResults {
+   display: inline-block;
+   text-align: center;
+   font-size: 1.5em;
 }
