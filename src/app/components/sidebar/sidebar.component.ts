@@ -13,7 +13,8 @@ declare interface RouteInfo {
 export const ROUTES_ADMIN: RouteInfo[] = [
     { path: '/admin', title: 'Početna',  icon: 'pe-7s-graph', class: '' },
     { path: '/admin/lists', title: 'Lista',  icon: 'pe-7s-note2', class: '' },
-    { path: '/admin/news', title: 'Dodavanje',  icon: 'pe-7s-plus', class: '' }
+    { path: '/admin/news/building', title: 'Dodavanje',  icon: 'pe-7s-plus', class: '' },
+    { path: '/admin/news/firm', title: 'Dodavanje',  icon: 'pe-7s-plus', class: '' }
 ];
 
 @Component({

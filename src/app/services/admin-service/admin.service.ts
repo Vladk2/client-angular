@@ -17,4 +17,15 @@ export class AdminService {
   	return this.http.get('http://localhost:8080/api/admins/buildings/');
   }
 
+  getProfile(): Observable<any> {
+  	return this.http.get('http://localhost:8080/api/users/');
+  }
+
+  updateInfo(user): Observable<any> {
+  	return this.http.put('http://localhost:8080/api/users/', user);
+  }
+
+  updatePassword(pass): Observable<any> {
+  	return this.http.post('http://localhost:8080/api/users/password', pass);
+  }
 }

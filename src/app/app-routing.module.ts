@@ -11,6 +11,8 @@ import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home
 import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { AdminNewBuildingComponent } from './components/admin/admin-new-building/admin-new-building.component';
+
 
 const routes: Routes = [
 
@@ -21,7 +23,8 @@ const routes: Routes = [
   children: [
     { path: '', component: AdminHomeComponent },
     { path: 'lists', component: AdminHomeComponent },
-    { path: 'news', component: AdminHomeComponent }
+    { path: 'news/building', component: AdminNewBuildingComponent },
+    { path: 'news/firm', component: AdminHomeComponent }
   ]
 },
 
