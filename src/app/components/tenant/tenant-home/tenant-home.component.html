@@ -1,48 +1,78 @@
-<div class="sidebar sidebar-tenant"  data-color=""  data-image="">
+<div class="sidebar sidebar-tenant" data-color="" data-image="">
     <app-sidebar></app-sidebar>
 </div>
 
 <div class="main-panel">
-  <app-navbar-cmp></app-navbar-cmp>
+    <app-navbar-cmp></app-navbar-cmp>
     <div id="wall">
 
-        <div *ngIf="loading"><div id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div></div>
-        <div *ngFor="let ann of announcements">  <br>
-          <div  class="card modal-dialog modal-lg">
-            <div class="card-header ">
-                <p class="announcementHeader stats">OBAVEŠTENJE</p>
-                <h4 class="announcementTitle">{{ann.title}}</h4>
+        <div *ngIf="loading">
+            <div id="loader">
+                <img src="assets/img/loader-preview.svg" alt="loading">
             </div>
-            <div class="card-body ">
-                <p class="announcementDesc"> {{ann.message}}</p>
-            </div>
-            <div class="card-footer">
-                
-                <hr>
-                <div class="stats">
-                    <i class="fa fa-user-o announcementAuthor"></i>  {{ann.tenant.user.name}} {{ann.tenant.user.last_name}}  <br>
-                    <i class="fa fa-clock-o"></i> {{ann.date}}
+        </div>
+        <div *ngFor="let ann of announcements">
+            <br>
+            <div *ngIf="ann.assembly == false" class="card modal-dialog modal-lg">
+                <div class="card-header ">
+                    <p class="announcementHeader stats">OBAVEŠTENJE</p>
+                    <h4 class="announcementTitle">{{ann.title}}</h4>
+                </div>
+                <div class="card-body ">
+                    <p class="announcementDesc"> {{ann.message}}</p>
+                </div>
+                <div class="card-footer">
+
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-user-o announcementAuthor"></i> {{ann.tenant.user.name}} {{ann.tenant.user.last_name}}
+                        <br>
+                        <i class="fa fa-clock-o"></i> {{ann.date}}
+                    </div>
                 </div>
             </div>
-          </div>
-      </div> <br> <br> <br>
-
+            <div *ngIf="ann.assembly == true" class="card modal-dialog modal-lg">
+                <div class="card-header ">
+                    <p class="announcementHeader stats">OBAVEŠTENJE</p>
+                    <h4 class="announcementTitle">{{ann.title}}</h4>
+                    <p class="announcementDesc"> Poštovane komšije, u nastavku se nalazi zapisnik sa skupštine stanara, po tačkama dnevnog reda:</p>
+                </div>
+                <div class="assemblyRecord">
+                    <div *ngFor="let point of parlRecord">
+                        <p class="announcementDesc">
+                            <b>{{point.title}}</b>
+                        </p>
+                        <p class="assemblyPoint">{{point.content}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <br>
+                    <div class="stats">
+                        <i class="fa fa-user-o announcementAuthor"></i> Predsednik kućnog saveta: {{ann.tenant.user.name}} {{ann.tenant.user.last_name}}
+                        <br>
+                        <i class="fa fa-clock-o"></i> {{ann.date}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
     </div>
     <div id="announceDivWrapper">
-    <div id="announceDiv">
-      <div class="form-group">
-          <input type="text" class="form-control" placeholder="Unesite naslov obaveštenja..." [(ngModel)]="announcement.title">
-          <textarea id="announceTextArea" [(ngModel)]="announcement.message" 
-                    placeholder="Unesite tekst... Primer: Obaveštavaju se svi stanari da sutra pravim rodjendan, te da ne zamere na glasnoj muzici. " 
-                    class="form-control" rows="3" ></textarea>
-          
-      </div>
-    </div>
-    <div style="text-align:right;">
-      <p>
-        <button (click)="postAnnouncement()" id="announceButton" class="btn btn-secondary btn-fill" style="margin-top:-10px;">POSTAVI OBAVEŠTENJE</button>
-      </p>
-    </div>
+        <div id="announceDiv">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Unesite naslov obaveštenja..." [(ngModel)]="announcement.title">
+                <textarea id="announceTextArea" [(ngModel)]="announcement.message" placeholder="Unesite tekst... Primer: Obaveštavaju se svi stanari da sutra pravim rodjendan, te da ne zamere na glasnoj muzici. "
+                    class="form-control" rows="3"></textarea>
+
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <p>
+                <button (click)="postAnnouncement()" id="announceButton" [disabled]="announcement.message == ''" class="btn btn-secondary btn-fill" style="margin-top:-10px;">POSTAVI OBAVEŠTENJE</button>
+            </p>
+        </div>
     </div>
 
 </div>

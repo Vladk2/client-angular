@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AlertService } from "../../services/alert-service/alert.service";
+import { AlertService } from '../../services/alert-service/alert.service';
 
 @Component({
     moduleId: module.id,
@@ -13,6 +13,7 @@ export class AlertComponent {
 
     constructor(private alertService: AlertService) { }
 
+    // tslint:disable-next-line:use-life-cycle-interface
     ngOnInit() {
         this.alertService.getMessage().subscribe(message => { this.message = message; });
     }

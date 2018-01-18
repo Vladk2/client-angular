@@ -904,7 +904,7 @@ input:focus {
   .alert button.close {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 20px;
     margin-top: -13px;
     z-index: 1033;
     background-color: #FFFFFF;

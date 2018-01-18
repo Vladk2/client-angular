@@ -1,4 +1,8 @@
-<div *ngIf="message" 
-[ngClass]="{ 'alert': message, 'alert-info': message.type === 'success', 'alert-danger': message.type === 'error' }">
-<p> {{message.text}} </p> 
+<div *ngIf="message" [ngClass]="{ 'alert': message, 'alert-info': message.type === 'success', 'alert-danger': message.type === 'error' }">
+    <div id="iks"><button type="button" aria-hidden="true" class="close" data-dismiss="alert">
+        <i class="pe-7s-close"></i>
+    </button>
+    </div>
+    <p> {{message.text}} </p>
+
 </div>

@@ -1,3 +1,15 @@
-<p>
-  parliament-record works!
-</p>
+<br>
+<div class="card modal-dialog modal-lg">
+  <div class="card-header ">
+    <p class="agendaHeader stats">ZAPISNIK SA SKUPŠTINE</p>
+  </div>
+  <div *ngFor="let point of record">
+    <input class="pointTitle form-control" type="text" [(ngModel)]="point.title" />
+    <textarea placeholder="Unesite opis za tacku dnevnog reda '{{point.title}}'" [(ngModel)]="point.content" class="form-control pointDesc" rows="3"></textarea>
+  </div>
+  <br>
+  <button (click)="postRecord()" id="postRecord" class="btn btn-default btn-fill ">POSTAVI ZAPISNIK</button>
+</div>
+
+<br>
+<br>

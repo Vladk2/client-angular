@@ -42,5 +42,9 @@ export class ParliamentService {
     return this.http.get('http://localhost:8080/api/parliaments/agendaRecord/' + tenantId + '/' + parlId);
   }
 
+  postAgendaRecord(tenantId, parlId, record) {
+    return this.http.patch('http://localhost:8080/api/parliaments/agendaRecord/'  + tenantId + '/' + parlId, record);
+  }
+
 
 }
