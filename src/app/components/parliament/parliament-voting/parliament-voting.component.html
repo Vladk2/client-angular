@@ -1,0 +1,29 @@
+<div *ngIf="loading"><div class="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div></div>
+<div *ngFor="let agendaPoint of agendaPoints" class="card modal-dialog">
+    <div class="card-header ">
+        <p class="agendaPointHeader stats">PREDLOG ZA TAČKU DNEVNOG REDA</p>
+    </div>
+    <div class="card-body ">
+        <p class="agendaPointContent">{{agendaPoint.point}}</p>
+        <br/>
+    </div>
+    <button (click)="voteUp(agendaPoint.id)" id="upVote{{agendaPoint.id}}" title="Glasaj ZA" class="btn btn-success voteBtn upVote">
+        <i class="glyphicon glyphicon-thumbs-up"></i>
+    </button>
+    <button (click)="voteDown(agendaPoint.id)" id="downVote{{agendaPoint.id}}" title="Glasaj PROTIV" class="btn btn-danger voteBtn downVote">
+        <i class="glyphicon glyphicon-thumbs-down"></i>
+    </button>
+    <div *ngIf="tenantVoted">
+        <div class="voteUpResults voteResults">{{agendaPoint.upVotes}}</div> 
+        <div class="voteDownResults voteResults">{{agendaPoint.downVotes}}</div> 
+    </div>
+</div>
+<br>
+<br>
+
+<div *ngIf="!tenantVoted" class="card modal-dialog">
+    <button (click)="postVotes()" class="btn btn-default btn-fill finishVoting">POŠALJI GLASOVE</button>
+</div>
+<div *ngIf="tenantVoted && isSupervisor" class="card modal-dialog">
+    <button (click)="finishVoting()" class="btn btn-default btn-fill finishVoting">PREBROJ GLASOVE I ZAPOČNI ZAPISNIK</button>
+</div>

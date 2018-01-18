@@ -1,0 +1,25 @@
+.card {
+    margin: 0 auto;
+    border: 1px solid grey;
+}
+.agendaHeader {
+    margin: 15px;
+    text-align: center;
+}
+
+.pointDesc {
+    border: none;
+    resize: none;
+}
+
+.pointTitle {
+    width:95%;
+    margin: 0 auto;
+    font-weight:bold; 
+    border: none;
+}
+
+#postRecord {
+    width:100%;
+    border-radius: 0;
+}

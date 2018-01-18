@@ -11,11 +11,19 @@ import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home
 import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+
 import { AdminNewBuildingComponent } from './components/admin/admin-new-building/admin-new-building.component';
 import { AdminNewFirmComponent } from './components/admin/admin-new-firm/admin-new-firm.component';
 import { AdminListUsersComponent } from './components/admin/admin-list-users/admin-list-users.component';
 import { AdminListBuildingsComponent } from './components/admin/admin-list-buildings/admin-list-buildings.component';
 import { AdminListFirmsComponent } from './components/admin/admin-list-firms/admin-list-firms.component';
+
+import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
+import { ParliamentHomeComponent } from './components/parliament/parliament-home/parliament-home.component';
+import { ParliamentAnnounceComponent } from './components/parliament/parliament-announce/parliament-announce.component';
+import { ParliamentProposalsComponent } from './components/parliament/parliament-proposals/parliament-proposals.component';
+import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
+import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
 
 
 const routes: Routes = [
@@ -23,6 +31,7 @@ const routes: Routes = [
 { path: '', component: HomeComponent, canActivate: [AuthGuard]},
 { path: 'login', component: LoginComponent, canActivate: [AnonymusGuard]},
 { path: 'registration', component: RegistrationComponent, canActivate: [AnonymusGuard]},
+{ path: 'new_abode', component: TenantRegistrationComponent, canActivate: [AuthGuard]},
 { path: 'admin', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
   children: [
     { path: '', component: AdminHomeComponent },
@@ -44,7 +53,8 @@ const routes: Routes = [
 { path: 'tenant', canActivateChild: [AuthGuard], data: { expectedRole: 'TENANT'},
   children: [
     { path: ':id', canActivate: [TenantGuard], component: TenantHomeComponent },
-    { path: ':id/kvarovi', canActivate: [TenantGuard], component: TenantProblemComponent }
+    { path: ':id/kvarovi', canActivate: [TenantGuard], component: TenantProblemComponent },
+    { path: ':id/skupstina', canActivate: [TenantGuard], component: ParliamentHomeComponent }
   ]
 },
 {path: '?', component: NotFoundComponent},
