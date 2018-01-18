@@ -42,11 +42,11 @@ export class AdminListUsersComponent implements OnInit {
   }
 
   onRemoveAdmin(event) {
-    this.adminService.removeAdmin(event).subscribe(res => {
+    this.adminService.removeAdmin(event).subscribe(resp => {
       this.progres = true;
 
       this.currentTimeout = setTimeout(() => {
-        this.adminService.getAllUser().subscribe(resp => {
+        this.adminService.getAllUser().subscribe(res => {
           this.users = res;
           this.messageAdd = false;
           this.mesageRemove = true;
