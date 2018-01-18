@@ -52,7 +52,7 @@ import { ParliamentRecordComponent } from './components/parliament/parliament-re
     NotFoundComponent,
     RegistrationComponent,
     AlertComponent,
-    TenantRegistrationComponent
+    TenantRegistrationComponent,
     ParliamentHomeComponent,
     ParliamentAnnounceComponent,
     ParliamentProposalsComponent,
