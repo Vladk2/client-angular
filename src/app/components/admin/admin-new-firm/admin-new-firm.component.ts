@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../../services/admin-service/admin.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AdminService} from '../../../services/admin-service/admin.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin-new-firm',
@@ -13,26 +13,28 @@ export class AdminNewFirmComponent implements OnInit {
   private firm: any = {};
   private users: any = [];
   message;
-  private currentTimeout: number;
-  constructor(private adminService: AdminService, private router: Router) { this.message = false; }
+  private currentTimeout;
+  constructor(private adminService: AdminService, private router: Router) {
+    this.message = false;
+  }
 
   ngOnInit() {
-  	this.adminService.getAllUser().subscribe(res => {
+    this.adminService.getAllUser().subscribe(res => {
       this.users = res;
-    })
+    });
   }
 
   onAddFirm() {
-  	let firms = {
-  		firm_name: this.firm.firm_name,
-  		address: this.address
-  	} 
-  	this.adminService.addFirm(firms, this.firm.user_id).subscribe(res =>{
-  		this.message = true;
+    const firms = {
+      firm_name: this.firm.firm_name,
+      address: this.address
+    };
+    this.adminService.addFirm(firms, this.firm.user_id).subscribe(res => {
+      this.message = true;
 
       this.currentTimeout = setTimeout(() => {
         this.router.navigate(['/admin/lists/firms']);
-      }, 1000)
-  	})
+      }, 1000);
+    });
   }
 }

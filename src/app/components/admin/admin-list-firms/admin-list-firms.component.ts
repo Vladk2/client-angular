@@ -10,29 +10,31 @@ export class AdminListFirmsComponent implements OnInit {
 
   private firms: any = [];
   message;
-  progres;s
-  private currentTimeout: number;
-  constructor(private adminService: AdminService) { this.message = false; this.progres = false; }
+  progres;
+  private currentTimeout;
+  constructor(private adminService: AdminService) {
+    this.message = false; this.progres = false;
+  }
 
   ngOnInit() {
-  	this.adminService.getAllFirms().subscribe(res => {
+      this.adminService.getAllFirms().subscribe(res => {
       this.firms = res;
-    })
+    });
   }
 
   onRemoveFirm(event) {
-  	this.adminService.removeFirm(event).subscribe(res =>{
-  		
+    this.adminService.removeFirm(event).subscribe(resp =>  {
+
       this.progres = true;
       this.currentTimeout = setTimeout(() => {
         this.adminService.getAllFirms().subscribe(res => {
           this.message = true;
           this.progres = false;
           this.firms = res;
-        })
-      }, 1000)
-  		
-  	})
+        });
+      }, 1000);
+
+    });
   }
 
 }

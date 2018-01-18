@@ -10,25 +10,27 @@ import { Router } from '@angular/router';
 export class AdminNewBuildingComponent implements OnInit {
 
   private addressDTO: any = {};
-  message; 
-  private currentTimeout: number;
-  constructor(private adminService: AdminService, private router: Router) { this.message = false; }
+  message;
+  private currentTimeout;
+  constructor(private adminService: AdminService, private router: Router) {
+    this.message = false;
+  }
 
   ngOnInit() {
   }
 
   onAddBuilding() {
-  	let building = {
-  		addressDTO: this.addressDTO
-  	}
-  	this.adminService.addBuilding(building).subscribe(res => {
+    const building = {
+      addressDTO: this.addressDTO
+    };
+    this.adminService.addBuilding(building).subscribe(res => {
       this.message = true;
 
       this.currentTimeout = setTimeout(() => {
         this.router.navigate(['/admin/lists/buildings']);
-      }, 1000)
-      
-    })
+      }, 1000);
+
+    });
   }
 
 }

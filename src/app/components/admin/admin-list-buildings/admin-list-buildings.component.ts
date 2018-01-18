@@ -12,9 +12,9 @@ export class AdminListBuildingsComponent implements OnInit {
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-  	this.adminService.getAllBuildings().subscribe(res => {
+    this.adminService.getAllBuildings().subscribe(res => {
       this.buildings = res;
-    })
+    });
   }
 
 }

@@ -9,91 +9,10 @@
 
 
 <div class="main-content" >
-	<div class="alert alert-success" *ngIf="message">
-	    <span><b> Ispravno - </b> Uspesno ste promenili osnovne informacije!</span>
-	</div>
-	<div class="alert alert-success" *ngIf="message1">
-	    <span><b> Ispravno - </b> Uspesno ste promenili kredencijale!</span>
-	</div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Podesite profil</h4>
-                    </div>
-                    <hr>
-                    <div class="header">
-                        <h5 class="title">Osnovne informacije</h5>
-                    </div>
-                    <div class="content">
-                        <form>
-                            
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Ime</label>
-                                        <input type="text" class="form-control" placeholder="ime" name="name" [(ngModel)]="user.name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Prezime</label>
-                                        <input type="text" class="form-control" placeholder="prezime" name="last_name" [(ngModel)]="user.last_name">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email adresa</label>
-                                        <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="user.email">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Rola (disable)</label>
-                                        <input type="text" class="form-control" disabled placeholder="Rola" value="Admin">
-                                    </div>
-                                </div>
-                            </div>
-
-                            
-
-                           
-                            <button type="submit" class="btn btn-info btn-fill pull-right" (click)="onUpdateInfo()">Azurirajte</button>
-                            <div class="clearfix"></div>
-                        </form>
-
-                    </div>
-
-
-                    <hr>
-                    <div class="header">
-                        <h5 class="title">Kredencijali</h5>
-                    </div>
-                    <div class="content">
-                        <form>
-
-                        	<div class="row">
-                                
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Sifra</label>
-                                        <input type="password" class="form-control" placeholder="sifra" name="password" [(ngModel)]="user.password">
-                                    </div>
-                                </div>
-                                
-                            </div>
-
-                            <button type="submit" class="btn btn-info btn-fill pull-right" (click)="onCredencial()">Azurirajte</button>
-                            <div class="clearfix"></div>
-
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
+            
+            <div class="col-md-12" >
                 <div class="card card-user">
                     <div class="image">
                         <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
@@ -106,10 +25,17 @@
                                 <h4 class="title">{{user.name}} {{user.last_name}}<br />
                                     <small>{{user.username}}</small>
                                 </h4>
+
+                                <h5 class="border-gray">
+                                    EMAIL: {{user.email}}
+                                </h5>
                             </a>
+                            <p class="description text-center" *ngIf="user.activated" > "Profile je aktivan" </p>
+                            
                         </div>
-                        <p class="description text-center"> "Profile je <span *ngIf="user.activated">aktivan</span>" <br>
-                        </p>
+
+                        
+                        
                         
                     </div>
                     

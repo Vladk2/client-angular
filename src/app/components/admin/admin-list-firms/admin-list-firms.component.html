@@ -5,12 +5,12 @@
 <div class="main-panel">
 	<app-navbar-cmp></app-navbar-cmp>
 
-	<div *ngIf="progres" id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
+	<div id="loader" *ngIf="progres" ><img src="assets/img/loader-preview.svg" alt="loading"></div>
 	
 
 	<div class="main-content">
 		<div class="alert alert-warning" *ngIf="message">
-		    <span><b> Izbrisano - </b> Uspesno ste uklonili firmu!</span>
+		    <span><b> Uklonjeno - </b> Uspesno ste uklonili firmu!</span>
 		</div>
 	    <div class="container-fluid">
 	        <div class="row">

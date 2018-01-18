@@ -13,18 +13,18 @@ export class AdminListUsersComponent implements OnInit {
   messageAdd;
   mesageRemove;
   progres;
-  private currentTimeout: number;
+  private currentTimeout;
   constructor( private adminService: AdminService) { this.messageAdd = false; this.mesageRemove = false; this.progres = false; }
 
   ngOnInit() {
-  	
+
     this.adminService.getAllUser().subscribe(res => {
       this.users = res;
-    })
+    });
   }
 
   onAddAdmin(event) {
-  	this.adminService.addAdmin(event).subscribe(res =>{
+    this.adminService.addAdmin(event).subscribe(resp =>  {
 
       this.progres = true;
 
@@ -34,26 +34,26 @@ export class AdminListUsersComponent implements OnInit {
           this.messageAdd = true;
           this.mesageRemove = false;
           this.progres = false;
-        })
-      }, 1000)
+        });
+      }, 1000);
 
-  		
-   	})
+
+    });
   }
 
   onRemoveAdmin(event) {
-  	this.adminService.removeAdmin(event).subscribe(res =>{
-  		this.progres = true;
+    this.adminService.removeAdmin(event).subscribe(res => {
+      this.progres = true;
 
       this.currentTimeout = setTimeout(() => {
-        this.adminService.getAllUser().subscribe(res => {
+        this.adminService.getAllUser().subscribe(resp => {
           this.users = res;
           this.messageAdd = false;
           this.mesageRemove = true;
           this.progres = false;
-        })
-      }, 1000)
-   	})
+        });
+      }, 1000);
+    });
   }
 
 }
