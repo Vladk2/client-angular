@@ -11,6 +11,7 @@ import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home
 import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
 import { ParliamentHomeComponent } from './components/parliament/parliament-home/parliament-home.component';
 import { ParliamentAnnounceComponent } from './components/parliament/parliament-announce/parliament-announce.component';
 import { ParliamentProposalsComponent } from './components/parliament/parliament-proposals/parliament-proposals.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
 { path: '', component: HomeComponent, canActivate: [AuthGuard]},
 { path: 'login', component: LoginComponent, canActivate: [AnonymusGuard]},
 { path: 'registration', component: RegistrationComponent, canActivate: [AnonymusGuard]},
+{ path: 'new_abode', component: TenantRegistrationComponent, canActivate: [AuthGuard]},
 { path: 'admin', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
   children: [
     { path: '', component: AdminHomeComponent },

@@ -18,9 +18,9 @@ export class TenantHomeComponent implements OnInit {
   private parlRecord: any = [];
 
   constructor(private tenantService: TenantService,
-    private activeRoute: ActivatedRoute,
-    private router: Router,
-    private alertService: AlertService) { }
+              private activeRoute: ActivatedRoute,
+              private router: Router,
+              private alertService: AlertService) { }
 
   ngOnInit() {
     localStorage.setItem('sidebar', 'tenant');

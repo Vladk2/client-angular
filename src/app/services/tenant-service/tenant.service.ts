@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 
 @Injectable()
 export class TenantService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   // gets all tenants for a logged user
   getUsersTenants(): Observable<any> {
@@ -18,9 +19,12 @@ export class TenantService {
     return this.http.get('http://localhost:8080/api/tenants/announcement/' + tenantId);
   }
 
-  
   postAnnouncement(tenantId, announcement) {
     return this.http.post('http://localhost:8080/api/tenants/announcement/' + tenantId, announcement);
-     
+  }
+
+  // register new abode for user
+  createNewTenant(abode) {
+    return this.http.post('http://localhost:8080/api/tenants/', abode);
   }
 }

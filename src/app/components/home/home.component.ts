@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth-service/auth.service';
-import { TenantService } from '../../services/tenant-service/tenant.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth-service/auth.service';
+import {TenantService} from '../../services/tenant-service/tenant.service';
 
 @Component({
   selector: 'app-home',
@@ -9,31 +9,32 @@ import { TenantService } from '../../services/tenant-service/tenant.service';
 })
 export class HomeComponent implements OnInit {
 
-  private loggedTenants: any[]; 
+  private loggedTenants: any[];
   private userRoles: any;  // roles: admin, employee, tenant
-  private username: String; 
+  private username: String;
   firms: any[];
   progress;
 
-  constructor(private authService: AuthService, 
-              private tenantService: TenantService) {  }
+  constructor(private authService: AuthService,
+              private tenantService: TenantService) {
+  }
 
-  
   ngOnInit() {
     const token = JSON.parse(localStorage.getItem('token'));
     this.userRoles = token.roles;
     this.username = token.username;
-    if(this.userRoles.employee !== "") {
+    if (this.userRoles.employee !== '') {
       this.progress = true;
-      this.authService.findFirm().subscribe(res =>{
+      this.authService.findFirm().subscribe(res => {
         console.log(res);
         this.firms = res;
         this.progress = false;
       });
     }
-    if(this.userRoles.tenant !== "") {
+
+    if (this.userRoles.tenant !== '') {
       this.progress = true;
-      this.tenantService.getUsersTenants().subscribe(res =>{
+      this.tenantService.getUsersTenants().subscribe(res => {
         console.log(res);
         this.loggedTenants = res;
         this.progress = false;
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
     console.log(this.loggedTenants);
     console.log(this.userRoles);
     console.log(this.username);
-    
+
   }
 
   logout() {
