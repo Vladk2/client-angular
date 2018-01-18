@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth-service/auth.service';
-import {AlertService} from '../../services/alert-service/alert.service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { AlertService } from '../../services/alert-service/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
         'apartmentNo': this.abode.apartmentNo
       }
     };
-
+    
     this.auth.registration_service(information).subscribe(res => {
         this.alertService.success('Registracija novog korisnika uspešna! ' +
           'Poslat Vam je verifikacioni mejl. Da biste aktivirali profil,' +

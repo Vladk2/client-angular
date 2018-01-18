@@ -1,0 +1,25 @@
+.card {
+    margin: 0 auto;
+}
+.agendaPointHeader {
+    margin: 15px;
+    text-align: center;
+}
+
+.agendaPointContent {
+    margin: 30px;
+    text-align: center;
+}
+
+#proposeDiv {
+    border: 1px solid grey;
+}
+
+#proposeTextArea {
+    border: none;
+}
+
+#proposeButton {
+    width:100%;
+    border-radius: 0;
+}
