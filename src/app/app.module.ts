@@ -39,6 +39,7 @@ import { ParliamentAnnounceComponent } from './components/parliament/parliament-
 import { ParliamentProposalsComponent } from './components/parliament/parliament-proposals/parliament-proposals.component';
 import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
 import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ParliamentRecordComponent } from './components/parliament/parliament-re
     ParliamentAnnounceComponent,
     ParliamentProposalsComponent,
     ParliamentVotingComponent,
-    ParliamentRecordComponent
+    ParliamentRecordComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

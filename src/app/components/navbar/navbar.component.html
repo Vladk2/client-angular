@@ -11,7 +11,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
-               
+
                 <li class="dropdown">
                     <a  class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-globe"></i>
@@ -34,12 +34,12 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#">
+                <li *ngIf="!this.router.isActive('/profil')">
+                    <a [routerLink]="['/profil']">
                         <p>Profil</p>
                     </a>
                 </li>
-                
+
                 <li>
                     <a role="button" (click)="onLogout()">
                         <p>Odjavi se</p>

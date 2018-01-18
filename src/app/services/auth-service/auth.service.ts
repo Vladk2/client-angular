@@ -67,6 +67,9 @@ export class AuthService {
 
   logout_service() {
      if (localStorage.getItem('token')) {
+       if (localStorage.getItem('profile')) {
+         localStorage.removeItem('profile');
+       }
       localStorage.removeItem('token');
       this.router.navigate(['login']);
     }
