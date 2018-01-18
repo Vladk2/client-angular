@@ -25,17 +25,28 @@
 }
 .announcementHeader {
     margin: 15px;
-   
     text-align: center;
 }
 .announcementTitle {
-    border-radius: 10px;
     text-align: center;
-
 }
 .announcementDesc {
-    border-radius: 10px;
     margin: 30px;
+}
+
+.assemblyPoint {
+    margin-left: 45px;
+    margin-right: 40px;
+    font-style: italic;
+}
+
+.assemblyRecord {
+    border: 1px solid #e5e5e5;
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-left: 10px;
+    background-color: #fcfcfc;
+
 }
 
 .form-control{
@@ -45,13 +56,11 @@
   }
 
 .announcementAuthor {
-
     margin-top:0;
     padding:0;
 }
 
 #announceButton{
-    margin-right: 30px;
-    
+    margin-right: 30px; 
 }
 
