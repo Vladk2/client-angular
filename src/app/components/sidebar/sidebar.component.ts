@@ -36,14 +36,11 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-
     if (localStorage.getItem('sidebar')) {
-
       const sidebarType = localStorage.getItem('sidebar');
       const token = JSON.parse(localStorage.getItem('token'));
       this.setSidebarItems(sidebarType, token);
     }
-
   }
 
   // setting sidebar items based on entered role (roles: admin, employee, tenant)

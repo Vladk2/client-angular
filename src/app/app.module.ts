@@ -40,6 +40,7 @@ import { ParliamentProposalsComponent } from './components/parliament/parliament
 import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
 import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
 import { UserComponent } from './components/user/user.component';
+import {UserService} from './services/user-service/user.service';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { UserComponent } from './components/user/user.component';
     TenantGuard,
     TokenService,
     TenantService,
+    UserService,
     AuthService,
     ParliamentService,
     AlertService,
