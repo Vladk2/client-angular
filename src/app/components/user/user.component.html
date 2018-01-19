@@ -5,25 +5,32 @@
 <div class="main-panel">
   <app-navbar-cmp></app-navbar-cmp>
 
-  <form role="form">
-    <fieldset>
-      <!--<div class="form-group">
-        <input class="form-control" placeholder="Šifra" name="password" type="password" value=""
-               [(ngModel)]="user.password">
-      </div>-->
-      <div class="form-group">
-        <input class="form-control" placeholder="Ime" name="name" type="text" value="" [(ngModel)]="user.name">
-      </div>
-      <div class="form-group">
-        <input class="form-control" placeholder="Prezime" name="last_name" type="text" value=""
-               [(ngModel)]="user.last_name">
-      </div>
-      <div class="form-group">
-        <input class="form-control" required placeholder="Email" name="email" type="email" value=""
-               [(ngModel)]="user.email">
-      </div>
-      <input type="submit" class="btn btn-info fill pull-right" value="Ažuriraj" (click)="updateProfile()">
-      <br><br><br>
-    </fieldset>
-  </form>
+  <br><br><br><br>
+  <div class="form-container">
+      <form role="form" id="form-user">
+        <fieldset>
+          <div class="form-group">
+            <input class="form-control" placeholder="Ime" name="name" type="text" value="" [(ngModel)]="user.name">
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="Prezime" name="last_name" type="text" value=""
+                   [(ngModel)]="user.last_name">
+          </div>
+          <div class="form-group">
+            <input class="form-control" required placeholder="Email" name="email" type="email" value=""
+                   [(ngModel)]="user.email">
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="Nova lozinka" name="password" type="password" value="" [(ngModel)]="password.pw"
+                   required="required">
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="Potvrdite lozinku" name="re-password" type="password" value=""
+                   [(ngModel)]="password.re_pw" required="required">
+          </div>
+          <input type="submit" class="btn btn-info fill button-big-jasta" value="Ažuriraj" (click)="update()">
+          <br><br><br>
+        </fieldset>
+      </form>
+  </div>
 </div>

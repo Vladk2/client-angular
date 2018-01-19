@@ -1,31 +1,30 @@
-
 <div class="sidebar-wrapper">
-    <div class="logo">
-        <a role="button" class="simple-text" >
-            <div class="logo-img">
-                <img src="/assets/img/angular2-logo-white.png"/>
-            </div>
-            {{title}}
-        </a>
-    </div>
+  <div class="logo">
+    <a role="button" class="simple-text">
+      <div class="logo-img">
+        <img src="/assets/img/angular2-logo-white.png"/>
+      </div>
+      {{title}}
+    </a>
+  </div>
 
-    <ul class="nav responsive-nav">
-        <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
-        <li  *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
-            <a  [routerLink]="[menuItem.path]">
-                <i class="{{menuItem.icon}}"></i>
-                <p> {{menuItem.title}}</p>
-            </a>
-        </li>
-        <li class="active-pro">
-            <a role="button" [routerLink]="['']">
-                <i class="pe-7s-users"></i>
-                <p> Promeni ulogu </p>
-            </a>
-            <a role="button" (click)="logout()">
-                <i class="pe-7s-left-arrow"></i>
-                <p> Odjavi se </p>
-            </a>
-        </li>
-    </ul>
+  <ul class="nav responsive-nav">
+    <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
+    <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+      <a [routerLink]="[menuItem.path]">
+        <i class="{{menuItem.icon}}"></i>
+        <p> {{menuItem.title}}</p>
+      </a>
+    </li>
+    <li class="active-pro">
+      <a role="button" [routerLink]="['']">
+        <i class="pe-7s-users"></i>
+        <p> Promeni ulogu </p>
+      </a>
+      <a role="button" (click)="logout()">
+        <i class="pe-7s-left-arrow"></i>
+        <p> Odjavi se </p>
+      </a>
+    </li>
+  </ul>
 </div>

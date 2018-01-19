@@ -1,15 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
-body { 
-    background: #f6f6f6;
+body {
+  background: #f6f6f6;
 }
 
 .sidebar-tenant {
-    background-image: url('./assets/img/sidebar-tenant.jpg');
+  background-image: url('./assets/img/sidebar-tenant.jpg');
 }
 
 .sidebar-employee {
-    background-image: url('./assets/img/sidebar-employee.jpg');
+  background-image: url('./assets/img/sidebar-employee.jpg');
 }
 
+.sidebar-user {
+  background-image: url("./assets/img/sidebar-user.png");
+}
 
+.button-big-jasta {
+  width:100%;
+  border-radius: 0;
+}

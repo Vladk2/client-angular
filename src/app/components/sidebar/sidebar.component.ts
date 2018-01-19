@@ -87,7 +87,6 @@ export class SidebarComponent implements OnInit {
     } else if (sidebarType === 'user') {
       this.title = 'Vaš nalog';
     }
-
   }
 
   logout() {
