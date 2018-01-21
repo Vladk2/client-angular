@@ -25,6 +25,8 @@ import { ParliamentProposalsComponent } from './components/parliament/parliament
 import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
 import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
 import { UserComponent } from './components/user/user.component';
+import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
+import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
 
 
 const routes: Routes = [
@@ -53,12 +55,12 @@ const routes: Routes = [
     ]
   },
 
-  {
-    path: 'tenant', canActivateChild: [AuthGuard], data: {expectedRole: 'TENANT'},
+  { path: 'tenant', canActivateChild: [AuthGuard], data: { expectedRole: 'TENANT'},
     children: [
-      {path: ':id', canActivate: [TenantGuard], component: TenantHomeComponent},
-      {path: ':id/kvarovi', canActivate: [TenantGuard], component: TenantProblemComponent},
-      {path: ':id/skupstina', canActivate: [TenantGuard], component: ParliamentHomeComponent}
+      { path: ':id', canActivate: [TenantGuard], component: TenantHomeComponent },
+      { path: ':id/problems', canActivate: [TenantGuard], component: ProblemHomeComponent },
+      { path: ':id/problems/new', canActivate: [TenantGuard], component: ProblemPostingComponent },
+      { path: ':id/parliament', canActivate: [TenantGuard], component: ParliamentHomeComponent }
     ]
   },
   {path: '?', component: NotFoundComponent},

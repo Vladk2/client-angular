@@ -68,18 +68,18 @@ export class SidebarComponent implements OnInit {
         this.tenants_id = (params['id']);
       });
       this.ROUTES_TENANT = [
-        {path: '/tenant/' + this.tenants_id, title: 'Početna', icon: 'pe-7s-home', class: ''},
-        {path: '/tenant/' + this.tenants_id + '/kvarovi', title: 'Kvarovi', icon: 'pe-7s-tools', class: ''},
+        { path: '/tenant/' + this.tenants_id, title: 'Početna', icon: 'pe-7s-home', class: '' },
+        { path: '/tenant/' + this.tenants_id + '/problems', title: 'Kvarovi', icon: 'pe-7s-tools', class: '' },
       ];
       for (const tenant of token.tenants) {
         if (tenant.tenant === this.tenants_id) {
           if (tenant.owner === 'true') {
             this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
-              {path: '/tenant/' + this.tenants_id + '/skupstina', title: 'Skupština stanara', icon: 'pe-7s-hammer', class: ''},
+              { path: '/tenant/' + this.tenants_id + '/parliament', title: 'Skupština stanara', icon: 'pe-7s-hammer', class: '' },
             );
             if (tenant.supervisor) {
               this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
-                {path: '/tenant/' + this.tenants_id, title: 'Predsedničko dugme', icon: 'pe-7s-piggy', class: ''},
+                { path: '/tenant/' + this.tenants_id, title: 'Predsedničko dugme', icon: 'pe-7s-piggy', class: '' },
               );
             }
           }

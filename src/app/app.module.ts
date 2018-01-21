@@ -7,7 +7,7 @@ import {SidebarModule} from './components/sidebar/sidebar.module';
 import {NavbarModule} from './components/navbar/navbar.module';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {RouterModule, Routes} from '@angular/router';
-import {CalendarModule, DialogModule} from 'primeng/primeng';
+import {CalendarModule, DialogModule, FileUploadModule, GalleriaModule} from 'primeng/primeng';
 import {ConfirmDialogModule} from 'primeng/primeng';
 import {ConfirmationService} from 'primeng/primeng';
 
@@ -52,6 +52,9 @@ import { ParliamentRecordComponent } from './components/parliament/parliament-re
 import {UserComponent} from './components/user/user.component';
 import {UserService} from './services/user-service/user.service';
 
+import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
+import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
+
 
 @NgModule({
   declarations: [
@@ -76,7 +79,9 @@ import {UserService} from './services/user-service/user.service';
     ParliamentProposalsComponent,
     ParliamentVotingComponent,
     ParliamentRecordComponent,
-    UserComponent
+    UserComponent,
+    ProblemHomeComponent,
+    ProblemPostingComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +94,9 @@ import {UserService} from './services/user-service/user.service';
     NavbarModule,
     CalendarModule,
     DialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    FileUploadModule,
+    GalleriaModule
   ],
   providers: [
     AdminService,
