@@ -20,3 +20,32 @@ body {
   width:100%;
   border-radius: 0;
 }
+
+.imageUpload .ui-fileupload-content {
+
+    background: #fafafa;
+    border: none;
+}
+
+.imageUpload .ui-fileupload {
+
+    
+}
+
+.imageUpload .ui-fileupload-buttonbar {
+
+    background: white;
+    border: none;
+}
+
+.imageUpload .ui-fileupload-choose.ui-button,  {
+    background-color: grey;
+    border: 1px solid grey;
+    color: #ffffff;
+}
+
+.imageUpload  .ui-fileupload-choose.ui-button, .ui-fileupload-choose.ui-button .ui-widget, .ui-fileupload-choose.ui-button .ui-state-default  {
+    background-color: grey;
+    border: 1px solid grey;
+    color: #ffffff;
+}

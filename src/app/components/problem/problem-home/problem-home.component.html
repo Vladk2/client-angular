@@ -1,0 +1,15 @@
+<div class="sidebar sidebar-tenant" data-color="" data-image="">
+  <app-sidebar></app-sidebar>
+</div>
+
+<div class="main-panel">
+  <app-navbar-cmp></app-navbar-cmp>
+
+  <div class="card modal-dialog">
+    <button id = "postProblemBtn" [routerLink]="['/tenant/'+ tenant_id +'/problems/new']" class="btn btn-default btn-fill">
+      <span class="pe-7s-tools"> </span> &nbsp; PRIJAVI NOVI KVAR</button>
+</div>
+<div class="card modal-dialog" style="margin:0 auto;">
+<p-galleria [images]="images" styleClass="completa" panelWidth="500" panelHeight="313" ></p-galleria>
+</div>
+</div>

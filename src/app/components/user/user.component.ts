@@ -48,6 +48,8 @@ export class UserComponent implements OnInit {
     this.userService.update(this.user).subscribe(res => {
       this.messageSuccess = true;
     }, error => {
+      this.messageSuccess = false;
+      this.messageWarningPassword = false;
       this.messageWarningEmail = true;
     });
   }
