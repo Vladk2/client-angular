@@ -23,19 +23,19 @@
           <h3 class="panel-title">Unesite novo mesto boravka</h3>
           <div *ngIf="loading" style="margin:0 auto;align-content:center;width:50%;"><img style="height:50px;" src="assets/img/loader-preview.svg" alt="loading"></div>
         </div>
-        <div class="panel-body" >
-          <form role="form">
+        <div class="panel-body">
+          <form ngNativeValidate role="form" (ngSubmit)="registerNewAbode()">
             <fieldset>
               Odaberite adresu:
               <div class="form-group">
-                <select class="form-control"  name="buildingId" [(ngModel)]="abode.buildingId">
+                <select required class="form-control"  name="buildingId" [(ngModel)]="abode.buildingId">
                   <option *ngFor="let item of buildings" value="{{item.id}}">{{item.addressDTO.street}} {{item.addressDTO.number}}</option>
                 </select>
               </div>
               <div class="form-group">
-                <input class="form-control" placeholder="Broj stana" name="apartmentNo" type="number" value="" [(ngModel)]="abode.apartmentNo">
+                <input class="form-control" required placeholder="Broj stana" name="apartmentNo" type="number" value="" [(ngModel)]="abode.apartmentNo">
               </div>
-              <input type="submit" class="btn btn-info fill pull-right" value="Posalji" (click)="registerNewAbode()"> <br><br><br>
+              <input type="submit" class="btn btn-info fill pull-right" value="Posalji"> <br><br><br>
             </fieldset>
           </form>
         </div>

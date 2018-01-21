@@ -5,6 +5,16 @@
 <div class="main-panel">
   <app-navbar-cmp></app-navbar-cmp>
 
+  <div class="alert alert-success" *ngIf="messageSuccess">
+    <span>Uspešno ste izmenili nalog.</span>
+  </div>
+  <div class="alert alert-info" *ngIf="messageWarningEmail">
+    <span>Email adresa je već zauzeta.</span>
+  </div>
+  <div class="alert alert-warning" *ngIf="messageWarningPassword">
+    <span>Lozinke se ne poklapaju.</span>
+  </div>
+
   <br><br><br><br>
   <div class="form-container">
     <form ngNativeValidate role="form" id="form-user" (ngSubmit)="update()">

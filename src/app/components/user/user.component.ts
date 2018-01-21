@@ -1,9 +1,9 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth-service/auth.service';
 import {UserService} from '../../services/user-service/user.service';
 import {AlertService} from '../../services/alert-service/alert.service';
-import {ConfirmationService, Message} from 'primeng/primeng';
+import {ConfirmationService} from 'primeng/primeng';
 
 
 @Component({
@@ -13,18 +13,23 @@ import {ConfirmationService, Message} from 'primeng/primeng';
 })
 export class UserComponent implements OnInit {
 
-  msgs: Message[] = [];
-
   private user: any = {};
   private password: any = {};
 
-  private display: boolean = false;
+  private messageSuccess;
+  private messageWarningEmail;
+  private messageWarningPassword;
+  private display;
 
   constructor(private authService: AuthService,
               private userService: UserService,
               private alertService: AlertService,
               private confirmationService: ConfirmationService,
               private router: Router) {
+    this.messageSuccess = false;
+    this.messageWarningEmail = false;
+    this.messageWarningPassword = false;
+    this.display = false;
   }
 
   ngOnInit() {
@@ -41,10 +46,9 @@ export class UserComponent implements OnInit {
 
   update() {
     this.userService.update(this.user).subscribe(res => {
-      alert('Uspešno ste izmenili nalog.');
+      this.messageSuccess = true;
     }, error => {
-      this.alertService.error('Email adresa je već zauzeta.');
-      this.router.navigate(['/profile']);
+      this.messageWarningEmail = true;
     });
   }
 
@@ -52,12 +56,12 @@ export class UserComponent implements OnInit {
     if (this.password.pw === this.password.re_pw) {
       this.userService.updatePassword({'password': this.password.pw}).subscribe(resp => {
         this.hideDialog();
-        alert('Uspešno ste izmenili nalog.');
+        this.messageSuccess = true;
       }, error => {
         alert('Greška !');
       });
     } else {
-      alert('Lozinke se ne poklapaju.');
+      this.messageWarningPassword = true;
     }
   }
 
