@@ -15,6 +15,8 @@ export class UserComponent implements OnInit {
   private user: any = {};
   private password: any = {};
 
+  private display: boolean = false;
+
   constructor(private authService: AuthService,
               private userService: UserService,
               private alertService: AlertService,
@@ -35,19 +37,32 @@ export class UserComponent implements OnInit {
 
   update() {
     this.userService.update(this.user).subscribe(res => {
-      if (this.password.pw === this.password.re_pw) {
-        this.userService.updatePassword({'password': this.password.pw}).subscribe(resp => {
-          alert('Uspešno ste izmenili nalog.');
-        }, error => {
-          alert('Greška !');
-        });
-      } else {
-        alert('Lozinke se ne poklapaju.');
-      }
+      alert('Uspešno ste izmenili nalog.');
     }, error => {
       this.alertService.error('Email adresa je već zauzeta.');
       this.router.navigate(['/profile']);
     });
+  }
+
+  updatePassword() {
+    if (this.password.pw === this.password.re_pw) {
+      this.userService.updatePassword({'password': this.password.pw}).subscribe(resp => {
+        this.hideDialog();
+        alert('Uspešno ste izmenili nalog.');
+      }, error => {
+        alert('Greška !');
+      });
+    } else {
+      alert('Lozinke se ne poklapaju.');
+    }
+  }
+
+  showDialog() {
+    this.display = true;
+  }
+
+  hideDialog() {
+    this.display = false;
   }
 
 }

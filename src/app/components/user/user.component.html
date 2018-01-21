@@ -7,30 +7,45 @@
 
   <br><br><br><br>
   <div class="form-container">
-      <form role="form" id="form-user">
-        <fieldset>
-          <div class="form-group">
-            <input class="form-control" placeholder="Ime" name="name" type="text" value="" [(ngModel)]="user.name">
-          </div>
-          <div class="form-group">
-            <input class="form-control" placeholder="Prezime" name="last_name" type="text" value=""
-                   [(ngModel)]="user.last_name">
-          </div>
-          <div class="form-group">
-            <input class="form-control" required placeholder="Email" name="email" type="email" value=""
-                   [(ngModel)]="user.email">
-          </div>
-          <div class="form-group">
-            <input class="form-control" placeholder="Nova lozinka" name="password" type="password" value="" [(ngModel)]="password.pw"
-                   required="required">
-          </div>
-          <div class="form-group">
-            <input class="form-control" placeholder="Potvrdite lozinku" name="re-password" type="password" value=""
-                   [(ngModel)]="password.re_pw" required="required">
-          </div>
-          <input type="submit" class="btn btn-info fill button-big-jasta" value="Ažuriraj" (click)="update()">
-          <br><br><br>
-        </fieldset>
-      </form>
+    <form ngNativeValidate role="form" id="form-user" (ngSubmit)="update()">
+      <fieldset>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Ime" name="name" type="text" value=""
+                 [(ngModel)]="user.name">
+        </div>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Prezime" name="last_name" type="text" value=""
+                 [(ngModel)]="user.last_name">
+        </div>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Email" name="email" type="email" value=""
+                 [(ngModel)]="user.email">
+        </div>
+        <input type="submit" class="btn btn-info fill button-big-jasta" value="Ažuriraj">
+        <br><br><br>
+      </fieldset>
+    </form>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="showDialog()">Izmeni lozinku</button>
+    </div>
   </div>
+
+  <p-dialog appendTo="body" header="Izmena lozinke" [(visible)]="display" modal="modal" width="300" [responsive]="true">
+    <form role="form" ngNativeValidate (ngSubmit)="updatePassword()">
+      <fieldset>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Nova lozinka" name="password" type="password" value=""
+                 [(ngModel)]="password.pw">
+        </div>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Potvrdite lozinku" name="repassword" type="password"
+                 value="" [(ngModel)]="password.re_pw">
+        </div>
+      </fieldset>
+      <p-footer>
+        <button type="submit" class="btn btn-primary">Ažuriraj</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideDialog()">Zatvori</button>
+      </p-footer>
+    </form>
+  </p-dialog>
 </div>
