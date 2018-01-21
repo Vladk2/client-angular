@@ -22,4 +22,9 @@ export class UserService {
   updatePassword(password) {
     return this.http.post('http://localhost:8080/api/users/password', password);
   }
+
+  // remove account
+  destroy() {
+    return this.http.delete('http://localhost:8080/api/users/');
+  }
 }

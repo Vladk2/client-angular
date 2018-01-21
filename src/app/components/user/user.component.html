@@ -25,8 +25,13 @@
         <br><br><br>
       </fieldset>
     </form>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="showDialog()">Izmeni lozinku</button>
+    <div class="modal-footer row">
+      <div class="col-md-6" style="text-align: left;">
+        <button type="button" class="btn btn-danger" (click)="confirm()">Obriši nalog</button>
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button type="button" class="btn btn-primary" (click)="showDialog()">Izmeni lozinku</button>
+      </div>
     </div>
   </div>
 
@@ -43,9 +48,27 @@
         </div>
       </fieldset>
       <p-footer>
-        <button type="submit" class="btn btn-primary">Ažuriraj</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideDialog()">Zatvori</button>
+        <div class="modal-footer row">
+          <div class="col-md-6" style="text-align: left;">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideDialog()">Zatvori</button>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <button type="submit" class="btn btn-primary">Ažuriraj</button>
+          </div>
+        </div>
       </p-footer>
     </form>
   </p-dialog>
+
+  <p-confirmDialog appendTo="body" icon="fa fa-question-circle" width="425">
+    <p-footer>
+      <div class="row">
+        <div class="col-md-6" style="text-align: left;">
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <button type="submit" class="btn btn-primary" (click)="deleteAccount()">Ažuriraj</button>
+        </div>
+      </div>
+    </p-footer>
+  </p-confirmDialog>
 </div>

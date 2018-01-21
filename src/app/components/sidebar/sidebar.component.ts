@@ -86,6 +86,9 @@ export class SidebarComponent implements OnInit {
       this.menuItems = this.ROUTES_TENANT;
     } else if (sidebarType === 'user') {
       this.title = 'Vaš nalog';
+      const ROUTES = [
+        {path: '', title: 'Obrišite nalog', icon: 'pe-7s-hammer', class: ''}
+      ];
     }
   }
 

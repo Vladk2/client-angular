@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth-service/auth.service';
 import {UserService} from '../../services/user-service/user.service';
 import {AlertService} from '../../services/alert-service/alert.service';
+import {ConfirmationService, Message} from 'primeng/primeng';
 
 
 @Component({
@@ -12,6 +13,8 @@ import {AlertService} from '../../services/alert-service/alert.service';
 })
 export class UserComponent implements OnInit {
 
+  msgs: Message[] = [];
+
   private user: any = {};
   private password: any = {};
 
@@ -20,6 +23,7 @@ export class UserComponent implements OnInit {
   constructor(private authService: AuthService,
               private userService: UserService,
               private alertService: AlertService,
+              private confirmationService: ConfirmationService,
               private router: Router) {
   }
 
@@ -55,6 +59,20 @@ export class UserComponent implements OnInit {
     } else {
       alert('Lozinke se ne poklapaju.');
     }
+  }
+
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Da li ste sigurni da želite da obrišete svoj nalog?',
+      header: 'Potvrda',
+      icon: 'fa fa-question-circle'
+    });
+  }
+
+  deleteAccount() {
+    this.userService.destroy().subscribe(res => {
+      this.authService.logout_service();
+    });
   }
 
   showDialog() {

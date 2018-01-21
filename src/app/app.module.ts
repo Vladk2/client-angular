@@ -8,6 +8,8 @@ import {NavbarModule} from './components/navbar/navbar.module';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {RouterModule, Routes} from '@angular/router';
 import {CalendarModule, DialogModule} from 'primeng/primeng';
+import {ConfirmDialogModule} from 'primeng/primeng';
+import {ConfirmationService} from 'primeng/primeng';
 
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from './guards/token.interceptor';
@@ -72,7 +74,8 @@ import {UserService} from './services/user-service/user.service';
     SidebarModule,
     NavbarModule,
     CalendarModule,
-    DialogModule
+    DialogModule,
+    ConfirmDialogModule
   ],
   providers: [
     AdminService,
@@ -85,6 +88,7 @@ import {UserService} from './services/user-service/user.service';
     AuthService,
     ParliamentService,
     AlertService,
+    ConfirmationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
