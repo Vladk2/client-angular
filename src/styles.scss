@@ -20,3 +20,51 @@ body {
   width:100%;
   border-radius: 0;
 }
+
+.imageUpload .ui-fileupload-content {
+
+    background: #fafafa;
+    border: none;
+}
+
+.imageUpload .ui-fileupload {
+
+    
+}
+
+.imageUpload .ui-fileupload-buttonbar {
+
+    background: white;
+    border: none;
+}
+
+.imageUpload .ui-fileupload-choose.ui-button,  {
+    background-color: grey;
+    border: 1px solid grey;
+    color: #ffffff;
+}
+
+.imageUpload  .ui-fileupload-choose.ui-button, .ui-fileupload-choose.ui-button .ui-widget, .ui-fileupload-choose.ui-button .ui-state-default  {
+    background-color: grey;
+    border: 1px solid grey;
+    color: #ffffff;
+}
+
+
+.imageUpload .ui-fileupload-choose.ui-button.ui-state-hover, .ui-fileupload-choose.ui-button.ui-state-focus, .ui-fileupload-choose.ui-button.ui-state-active {
+    background-color: grey;
+    border-color: grey;
+    
+}
+
+.completa { 
+    position: fixed;
+}
+    
+.ui-panel-images{
+    position: fixed;
+    width: 500px;
+    height: 310px;
+    border: 1px solid #e2e2e2;
+}
+
