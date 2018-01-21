@@ -2,10 +2,10 @@
     <div class="card-header ">
         <p class="agendaPointHeader stats">PREDLOŽITE TAČKU DNEVNOG REDA</p>
     </div>
- <textarea id="proposeTextArea" [(ngModel)]="agendaProposal" 
- placeholder="Unesite predlog za tačku dnevnog reda..." 
+ <textarea id="proposeTextArea" [(ngModel)]="agendaProposal"
+ placeholder="Unesite predlog za tačku dnevnog reda..."
  class="form-control" rows="3" ></textarea>
- <button (click)="postProposal()" [disabled]="agendaProposal == ''" id="proposeButton" class="btn btn-default btn-fill ">POSTAVI PREDLOG</button>
+ <button (click)="postProposal()" [disabled]="agendaProposal == ''" id="proposeButton" class="btn btn-default btn-fill button-big-jasta">POSTAVI PREDLOG</button>
 </div> <br> <br>
 
 <div *ngFor="let agendaPoint of agendaPoints" class="card modal-dialog">

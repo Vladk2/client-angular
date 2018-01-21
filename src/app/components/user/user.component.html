@@ -1,0 +1,74 @@
+<div class="sidebar sidebar-user" data-color="" data-image="">
+  <app-sidebar></app-sidebar>
+</div>
+
+<div class="main-panel">
+  <app-navbar-cmp></app-navbar-cmp>
+
+  <br><br><br><br>
+  <div class="form-container">
+    <form ngNativeValidate role="form" id="form-user" (ngSubmit)="update()">
+      <fieldset>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Ime" name="name" type="text" value=""
+                 [(ngModel)]="user.name">
+        </div>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Prezime" name="last_name" type="text" value=""
+                 [(ngModel)]="user.last_name">
+        </div>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Email" name="email" type="email" value=""
+                 [(ngModel)]="user.email">
+        </div>
+        <input type="submit" class="btn btn-info fill button-big-jasta" value="Ažuriraj">
+        <br><br><br>
+      </fieldset>
+    </form>
+    <div class="modal-footer row">
+      <div class="col-md-6" style="text-align: left;">
+        <button type="button" class="btn btn-danger" (click)="confirm()">Obriši nalog</button>
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button type="button" class="btn btn-primary" (click)="showDialog()">Izmeni lozinku</button>
+      </div>
+    </div>
+  </div>
+
+  <p-dialog appendTo="body" header="Izmena lozinke" [(visible)]="display" modal="modal" width="300" [responsive]="true">
+    <form role="form" ngNativeValidate (ngSubmit)="updatePassword()">
+      <fieldset>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Nova lozinka" name="password" type="password" value=""
+                 [(ngModel)]="password.pw">
+        </div>
+        <div class="form-group">
+          <input class="form-control" required placeholder="Potvrdite lozinku" name="repassword" type="password"
+                 value="" [(ngModel)]="password.re_pw">
+        </div>
+      </fieldset>
+      <p-footer>
+        <div class="modal-footer row">
+          <div class="col-md-6" style="text-align: left;">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideDialog()">Zatvori</button>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <button type="submit" class="btn btn-primary">Ažuriraj</button>
+          </div>
+        </div>
+      </p-footer>
+    </form>
+  </p-dialog>
+
+  <p-confirmDialog appendTo="body" icon="fa fa-question-circle" width="425">
+    <p-footer>
+      <div class="row">
+        <div class="col-md-6" style="text-align: left;">
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <button type="submit" class="btn btn-primary" (click)="deleteAccount()">Ažuriraj</button>
+        </div>
+      </div>
+    </p-footer>
+  </p-confirmDialog>
+</div>

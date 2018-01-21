@@ -24,6 +24,7 @@ import { ParliamentAnnounceComponent } from './components/parliament/parliament-
 import { ParliamentProposalsComponent } from './components/parliament/parliament-proposals/parliament-proposals.component';
 import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
 import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
+import { UserComponent } from './components/user/user.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
 { path: '', component: HomeComponent, canActivate: [AuthGuard]},
 { path: 'login', component: LoginComponent, canActivate: [AnonymusGuard]},
 { path: 'registration', component: RegistrationComponent, canActivate: [AnonymusGuard]},
+{ path: 'profil', component: UserComponent, canActivate: [AuthGuard]},
 { path: 'new_abode', component: TenantRegistrationComponent, canActivate: [AuthGuard]},
 { path: 'admin', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN'},
   children: [
@@ -44,21 +46,23 @@ const routes: Routes = [
   ]
 },
 
-{ path: 'employee', canActivateChild: [AuthGuard], data: { expectedRole: 'EMPLOYEE'},
-  children: [
-    { path: ':id', component: EmployeeHomeComponent }
-  ]
-},
+  {
+    path: 'employee', canActivateChild: [AuthGuard], data: {expectedRole: 'EMPLOYEE'},
+    children: [
+      {path: ':id', component: EmployeeHomeComponent}
+    ]
+  },
 
-{ path: 'tenant', canActivateChild: [AuthGuard], data: { expectedRole: 'TENANT'},
-  children: [
-    { path: ':id', canActivate: [TenantGuard], component: TenantHomeComponent },
-    { path: ':id/kvarovi', canActivate: [TenantGuard], component: TenantProblemComponent },
-    { path: ':id/skupstina', canActivate: [TenantGuard], component: ParliamentHomeComponent }
-  ]
-},
-{path: '?', component: NotFoundComponent},
-{path: '**', redirectTo: '/%3F'}
+  {
+    path: 'tenant', canActivateChild: [AuthGuard], data: {expectedRole: 'TENANT'},
+    children: [
+      {path: ':id', canActivate: [TenantGuard], component: TenantHomeComponent},
+      {path: ':id/kvarovi', canActivate: [TenantGuard], component: TenantProblemComponent},
+      {path: ':id/skupstina', canActivate: [TenantGuard], component: ParliamentHomeComponent}
+    ]
+  },
+  {path: '?', component: NotFoundComponent},
+  {path: '**', redirectTo: '/%3F'}
 
 
 ];
@@ -67,4 +71,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

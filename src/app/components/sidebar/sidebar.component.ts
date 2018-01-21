@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth-service/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth-service/auth.service';
+import {ActivatedRoute} from '@angular/router';
 
 declare const $: any;
+
 declare interface RouteInfo {
   path: string;
   title: string;
@@ -34,17 +35,15 @@ export class SidebarComponent implements OnInit {
   ROLES: any[];
   ROUTES_EMPLOYEE: any[];
 
-  constructor(private authService: AuthService, private activeRoute: ActivatedRoute) { }
+  constructor(private authService: AuthService, private activeRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
-
     if (localStorage.getItem('sidebar')) {
-
       const sidebarType = localStorage.getItem('sidebar');
       const token = JSON.parse(localStorage.getItem('token'));
       this.setSidebarItems(sidebarType, token);
     }
-
   }
 
   // setting sidebar items based on entered role (roles: admin, employee, tenant)
@@ -59,28 +58,28 @@ export class SidebarComponent implements OnInit {
       });
       this.title = 'ZAPOSLENI';
       this.ROUTES_EMPLOYEE = [
-        { path: '/employee/' + this.employee_id, title: 'Početna', icon: 'pe-7s-graph', class: '' },
-        { path: '/employee/' + this.employee_id, title: 'Popravke', icon: 'pe-7s-note2', class: '' },
+        {path: '/employee/' + this.employee_id, title: 'Početna', icon: 'pe-7s-graph', class: ''},
+        {path: '/employee/' + this.employee_id, title: 'Popravke', icon: 'pe-7s-note2', class: ''},
       ];
       this.menuItems = this.ROUTES_EMPLOYEE;
-    }  else if (sidebarType === 'tenant') {
+    } else if (sidebarType === 'tenant') {
       this.title = 'STANAR';
       this.activeRoute.params.subscribe(params => {
         this.tenants_id = (params['id']);
       });
       this.ROUTES_TENANT = [
-        { path: '/tenant/' + this.tenants_id, title: 'Početna', icon: 'pe-7s-home', class: '' },
-        { path: '/tenant/' + this.tenants_id + '/kvarovi', title: 'Kvarovi', icon: 'pe-7s-tools', class: '' },
+        {path: '/tenant/' + this.tenants_id, title: 'Početna', icon: 'pe-7s-home', class: ''},
+        {path: '/tenant/' + this.tenants_id + '/kvarovi', title: 'Kvarovi', icon: 'pe-7s-tools', class: ''},
       ];
       for (const tenant of token.tenants) {
         if (tenant.tenant === this.tenants_id) {
           if (tenant.owner === 'true') {
             this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
-              { path: '/tenant/' + this.tenants_id + '/skupstina', title: 'Skupština stanara', icon: 'pe-7s-hammer', class: '' },
+              {path: '/tenant/' + this.tenants_id + '/skupstina', title: 'Skupština stanara', icon: 'pe-7s-hammer', class: ''},
             );
             if (tenant.supervisor) {
               this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
-                { path: '/tenant/' + this.tenants_id, title: 'Predsedničko dugme', icon: 'pe-7s-piggy', class: '' },
+                {path: '/tenant/' + this.tenants_id, title: 'Predsedničko dugme', icon: 'pe-7s-piggy', class: ''},
               );
             }
           }
@@ -88,8 +87,12 @@ export class SidebarComponent implements OnInit {
       }
 
       this.menuItems = this.ROUTES_TENANT;
+    } else if (sidebarType === 'user') {
+      this.title = 'Vaš nalog';
+      const ROUTES = [
+        {path: '', title: 'Obrišite nalog', icon: 'pe-7s-hammer', class: ''}
+      ];
     }
-
   }
 
   logout() {
