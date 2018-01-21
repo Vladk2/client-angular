@@ -14,9 +14,14 @@ export class TenantRegistrationComponent implements OnInit {
   private abode: any = {};
   private buildings: any = [];
 
+  private messageSuccess;
+  private messageWarning;
+
   constructor(private authService: AuthService,
               private router: Router,
               private tenantService: TenantService) {
+    this.messageSuccess = false;
+    this.messageWarning = false;
   }
 
   ngOnInit() {
@@ -28,11 +33,13 @@ export class TenantRegistrationComponent implements OnInit {
 
   registerNewAbode() {
     this.tenantService.createNewTenant(this.abode).subscribe(res => {
-      alert('Vas zahtev je prihvacen.');
-      this.router.navigate(['/']);
+      this.messageSuccess = true;
+      setTimeout(() => {
+        this.router.navigate(['/']);
+      }, 7000);
     }, error => {
         if (error.status === 406) {
-          alert('You already live in this apartment.');
+          this.messageWarning = true;
         } else {
           this.router.navigate(['/login']);
         }
