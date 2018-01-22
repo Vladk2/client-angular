@@ -51,6 +51,7 @@ import { ParliamentRecordComponent } from './components/parliament/parliament-re
 
 import {UserComponent} from './components/user/user.component';
 import {UserService} from './services/user-service/user.service';
+import { TenantSurveyComponent } from './components/tenant/tenant-survey/tenant-survey.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import {UserService} from './services/user-service/user.service';
     ParliamentProposalsComponent,
     ParliamentVotingComponent,
     ParliamentRecordComponent,
-    UserComponent
+    UserComponent,
+    TenantSurveyComponent
   ],
   imports: [
     BrowserModule,
