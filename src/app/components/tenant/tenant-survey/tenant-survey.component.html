@@ -21,6 +21,7 @@
                     <th>Opis</th>
                     <th>Datum kreiranja</th>
                     <th>Datum isteka</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,7 @@
                     <td>{{item.description}}</td>
                     <td>{{item.create_survey}}</td>
                     <td>{{item.time_duration}}</td>
+                    <td><button class="btn btn-warning btn-fill" (click)="report(item.id)">Prijavi</button></td>
                   </tr>
                 </tbody>
               </table>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
 import { TenantService } from "../../../services/tenant-service/tenant.service";
+import { SurveyService } from "../../../services/survey-service/survey.service";
 
 @Component({
   selector: 'app-tenant-survey',
@@ -10,14 +12,34 @@ import { TenantService } from "../../../services/tenant-service/tenant.service";
 export class TenantSurveyComponent implements OnInit {
 
   private surveys: any = [];
+  private tenant: any = {};
 
-  constructor(private tenantService: TenantService) { }
+  constructor(private tenantService: TenantService,
+    private surveyService: SurveyService,
+    private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.surveys.push({
-      'name_survey': 'anketa1', 'description': 'opis',
-      'create_survey': '23.12.2017', 'time_duration': '11.01.2018'
+    localStorage.setItem('sidebar', 'tenant');
+    localStorage.setItem('navbarTitle', 'Početna');
+
+    this.activeRoute.params.subscribe(params => {
+      this.tenant['id'] = params['id'];
+      this.tenantService.getUsersTenants().subscribe(res => {
+        this.tenant = res.filter(t => t.building.id === +this.tenant.id)[0];
+        this.getSurveys();
+      });
     });
+  }
+
+  getSurveys() {
+    this.surveyService.getSurveys(this.tenant.building.id).subscribe(res => {
+      console.log(res);
+      this.surveys = res;
+    });
+  }
+
+  report(surveyId) {
+    
   }
 
 }
