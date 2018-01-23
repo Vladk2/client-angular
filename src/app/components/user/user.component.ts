@@ -16,20 +16,15 @@ export class UserComponent implements OnInit {
   private user: any = {};
   private password: any = {};
 
-  private messageSuccess;
-  private messageWarningEmail;
-  private messageWarningPassword;
-  private display;
+  private messageSuccess: boolean = false;
+  private messageWarningEmail: boolean = false;
+  private messageWarningPassword: boolean = false;
+  private display: boolean = false;
 
   constructor(private authService: AuthService,
-              private userService: UserService,
-              private alertService: AlertService,
-              private confirmationService: ConfirmationService) {
-
-    this.messageSuccess = false;
-    this.messageWarningEmail = false;
-    this.messageWarningPassword = false;
-    this.display = false;
+    private userService: UserService,
+    private alertService: AlertService,
+    private confirmationService: ConfirmationService) {
   }
 
   ngOnInit() {

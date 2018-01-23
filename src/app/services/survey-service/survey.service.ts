@@ -17,10 +17,16 @@ export class SurveyService {
     return this.http.get('http://localhost:8080/api/surveys/buildings/' + buildingId);
   }
 
+  // destroy surveys
+  delete(id) {
+    return this.http.delete('http://localhost:8080/api/surveys/' + id);
+  }
+
   convert(object: any): Survey {
     let survey = new Survey();
 
     survey.id = object.id;
+    survey.userId = object.creator.id;
     survey.name = object.name_survey;
     survey.description = object.description;
     survey.dateCreated = object.create_survey;

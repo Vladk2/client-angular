@@ -3,8 +3,11 @@ import { ActivatedRoute } from "@angular/router";
 
 import { TenantService } from "../../../services/tenant-service/tenant.service";
 import { SurveyService } from "../../../services/survey-service/survey.service";
+import { AlertService } from "../../../services/alert-service/alert.service";
 
 import { Survey } from "../../../models/survey/survey.model";
+
+import { ConfirmationService } from "primeng/primeng";
 
 @Component({
   selector: 'app-tenant-survey',
@@ -13,7 +16,10 @@ import { Survey } from "../../../models/survey/survey.model";
 })
 export class TenantSurveyComponent implements OnInit {
 
+  private messageDeleted: boolean = false;
+
   private fillDialog: boolean = false;
+  private deleteDialog: boolean = false;
   private createSurveyDialog: boolean = false;
 
   private selectedSurvey: Survey;
@@ -23,6 +29,8 @@ export class TenantSurveyComponent implements OnInit {
 
   constructor(private tenantService: TenantService,
     private surveyService: SurveyService,
+    private alertService: AlertService,
+    private confirmationService: ConfirmationService,
     private activeRoute: ActivatedRoute) {
 
     this.selectedSurvey = new Survey();
@@ -53,6 +61,18 @@ export class TenantSurveyComponent implements OnInit {
 
   }
 
+  destroy() {
+    this.surveyService.delete(this.selectedSurvey.id).subscribe(res => {
+      let index = this.surveys.findIndex(s => s.id === this.selectedSurvey.id);
+      this.surveys.splice(index, 1);
+
+      this.messageDeleted = true;
+      this.deleteDialog = false;
+    }, error => {
+      alert('error');
+    });
+  }
+
   openFillDialog(surveyId) {
     this.surveys.forEach(s => {
       if (s.id === surveyId) {
@@ -64,6 +84,20 @@ export class TenantSurveyComponent implements OnInit {
 
   hideFillDialog() {
     this.fillDialog = false;
+  }
+
+  confirm(survey) {
+    this.deleteDialog = true;
+    this.selectedSurvey = survey;
+    this.confirmationService.confirm({
+      message: 'Da li ste sigurni da želite da obrišete anketu?',
+      header: 'Potvrda',
+      icon: 'fa fa-question-circle'
+    });
+  }
+
+  private resetMessageDivs() {
+    this.messageDeleted = false;
   }
 
 }

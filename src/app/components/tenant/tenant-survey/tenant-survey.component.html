@@ -4,6 +4,11 @@
 
 <div class="main-panel">
   <app-navbar-cmp></app-navbar-cmp>
+
+  <div class="alert alert-success" *ngIf="messageDeleted">
+    <span>Uspešno ste obirsali anketu.</span>
+  </div>
+
   <br /><br />
   <div class="form-container">
     <div class="row">
@@ -17,6 +22,7 @@
               <th style="text-align: center;">Datum isteka</th>
               <th style="text-align: center;">Popunite</th>
               <th style="text-align: center;">Izveštaj</th>
+              <th style="text-align: center;">Obriši</th>
             </thead>
             <tbody>
               <tr *ngFor="let item of surveys">
@@ -35,6 +41,13 @@
                   <p data-placement="top" data-toggle="tooltip" title="Izveštaj">
                     <button class="btn btn-info btn-xs">
                       <span class="glyphicon glyphicon-print"></span>
+                    </button>
+                  </p>
+                </td>
+                <td>
+                  <p data-placement="top" data-toggle="tooltip" title="Obriši">
+                    <button class="btn btn-danger btn-xs" [disabled]="this.tenant.user.id !== item.userId" (click)="confirm(item)">
+                      <span class="glyphicon glyphicon-trash"></span>
                     </button>
                   </p>
                 </td>
@@ -97,4 +110,16 @@
       </p-footer>
     </form>
   </p-dialog>
+
+  <p-confirmDialog appendTo="body" [(visible)]="deleteDialog" icon="fa fa-question-circle" width="425">
+    <p-footer>
+      <div class="row">
+        <div class="col-md-6" style="text-align: left;">
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <button type="submit" class="btn btn-primary" (click)="destroy()">Obriši</button>
+        </div>
+      </div>
+    </p-footer>
+  </p-confirmDialog>
 </div>

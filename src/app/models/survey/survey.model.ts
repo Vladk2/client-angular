@@ -3,6 +3,7 @@ import { Question } from "./question.model";
 export class Survey {
 
   private _id: number;
+  private _userId: number;
   private _name: string;
   private _description: string;
   private _dateCreated: Date;
@@ -17,6 +18,14 @@ export class Survey {
 
   get id(): number {
     return this._id;
+  }
+
+  set userId(user: number) {
+    this._userId = user;
+  }
+
+  get userId(): number {
+    return this._userId;
   }
 
   get name(): string {

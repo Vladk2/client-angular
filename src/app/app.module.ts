@@ -9,7 +9,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { CalendarModule, DialogModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/primeng';
-import { ConfirmationService } from 'primeng/primeng';
+import { ConfirmationService, ProgressSpinnerModule } from 'primeng/primeng';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './guards/token.interceptor';
@@ -93,7 +93,8 @@ import { SurveyService } from "./services/survey-service/survey.service";
     NavbarModule,
     CalendarModule,
     DialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ProgressSpinnerModule
   ],
   providers: [
     AdminService,
