@@ -3,12 +3,12 @@ import { Survey } from "./survey.model";
 import { Question } from "./question.model";
 
 export class SurveyResponse {
-  private _survey: Survey;
-  private _questionReports: QuestionReport[];
+  public survey: Survey;
+  public questionReports: QuestionReport[];
 
   constructor() {
-    this._survey = new Survey();
-    this._questionReports = new Array<QuestionReport>();
+    this.survey = new Survey();
+    this.questionReports = new Array<QuestionReport>();
     let dataGrade = {
       labels: ['5', '4', '3', '2', '1'],
       datasets: [
@@ -45,15 +45,8 @@ export class SurveyResponse {
           ]
         }]
     };
-    this._questionReports.push(new QuestionReport(new Question(1, 'Koliko kida nas sajt?', 'GRADE'), dataGrade));
-    this._questionReports.push(new QuestionReport(new Question(1, 'Jeste li debeli?', 'BOOL'), dataBool));
+    this.questionReports.push(new QuestionReport(new Question(1, 'Koliko kida nas sajt?', 'GRADE'), dataGrade));
+    this.questionReports.push(new QuestionReport(new Question(1, 'Jeste li debeli?', 'BOOL'), dataBool));
   }
 
-  get survey(): Survey {
-    return this._survey;
-  }
-
-  get questionReports(): QuestionReport[] {
-    return this._questionReports;
-  }
 }

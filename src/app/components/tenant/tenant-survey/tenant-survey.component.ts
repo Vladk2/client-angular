@@ -74,6 +74,7 @@ export class TenantSurveyComponent implements OnInit {
   getSurveys() {
     this.surveyService.getSurveys(this.tenant.buildingId).subscribe((res: Array<any>) => {
       res.forEach(s => {
+        console.log(s);
         this.surveys.push(this.surveyService.convert(s));
       });
     });
@@ -136,7 +137,7 @@ export class TenantSurveyComponent implements OnInit {
   }
 
   private fillResponseWithQuestions() {
-    this.userResponse.survey = this.selectedSurvey;
+    this.userResponse.survey = this.selectedSurvey.id;
     this.selectedSurvey.questions.forEach(q => {
       this.userResponse.answers.push(new Answer(q));
     });

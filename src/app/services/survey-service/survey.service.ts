@@ -24,7 +24,6 @@ export class SurveyService {
 
   // fill survey
   fillOut(obj) {
-    console.log(obj);
     return this.http.post('http://localhost:8080/api/surveys/fill', obj);
   }
 
@@ -33,10 +32,10 @@ export class SurveyService {
 
     survey.id = object.id;
     survey.userId = object.creator.id;
-    survey.name = object.name_survey;
+    survey.name = object.name;
     survey.description = object.description;
-    survey.dateCreated = object.create_survey;
-    survey.dateExpires = object.time_duration;
+    survey.dateCreated = object.dateCreated;
+    survey.dateExpires = object.dateCreated;
 
     let questions: Question[] = [];
     object.questionDTO.forEach(q => {
