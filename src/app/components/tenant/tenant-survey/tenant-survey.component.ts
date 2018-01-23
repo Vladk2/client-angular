@@ -8,8 +8,10 @@ import { AlertService } from "../../../services/alert-service/alert.service";
 import { Survey } from "../../../models/survey/survey.model";
 import { Tenant } from "../../../models/user/tenant.model";
 import { SurveyResponse } from "../../../models/survey/survey-response.model";
+import { UserResponse } from "../../../models/survey/user-response.model";
 
 import { ConfirmationService } from "primeng/primeng";
+import { Answer } from "../../../models/survey/answer.model";
 
 @Component({
   selector: 'app-tenant-survey',
@@ -21,7 +23,7 @@ export class TenantSurveyComponent implements OnInit {
   private messageDeleted: boolean = false;
 
   private fillDialog: boolean = false;
-  private reportDialog: boolean = true;
+  private reportDialog: boolean = false;
   private deleteDialog: boolean = false;
   private createSurveyDialog: boolean = false;
 
@@ -31,6 +33,7 @@ export class TenantSurveyComponent implements OnInit {
   private tenant: Tenant = new Tenant();
 
   private _response: SurveyResponse = new SurveyResponse();
+  private userResponse: UserResponse = new UserResponse();
 
   constructor(private tenantService: TenantService,
     private surveyService: SurveyService,
@@ -76,10 +79,6 @@ export class TenantSurveyComponent implements OnInit {
     });
   }
 
-  report(surveyId) {
-
-  }
-
   destroy() {
     this.surveyService.delete(this.selectedSurvey.id).subscribe(res => {
       let index = this.surveys.findIndex(s => s.id === this.selectedSurvey.id);
@@ -96,13 +95,26 @@ export class TenantSurveyComponent implements OnInit {
     this.surveys.forEach(s => {
       if (s.id === surveyId) {
         this.selectedSurvey = s;
+        this.fillResponseWithQuestions();
       }
     });
     this.fillDialog = true;
   }
 
+  submit() {
+    this.surveyService.fillOut(this.userResponse).subscribe(res => {
+      alert('jes');
+    }, err => {
+      alert('nene');
+    });
+  }
+
   hideFillDialog() {
     this.fillDialog = false;
+  }
+
+  openReportDialog(survey) {
+    this.reportDialog = true;
   }
 
   hideReportDialog() {
@@ -121,6 +133,13 @@ export class TenantSurveyComponent implements OnInit {
 
   private resetMessageDivs() {
     this.messageDeleted = false;
+  }
+
+  private fillResponseWithQuestions() {
+    this.userResponse.survey = this.selectedSurvey;
+    this.selectedSurvey.questions.forEach(q => {
+      this.userResponse.answers.push(new Answer(q));
+    });
   }
 
 }

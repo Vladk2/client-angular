@@ -22,6 +22,12 @@ export class SurveyService {
     return this.http.delete('http://localhost:8080/api/surveys/' + id);
   }
 
+  // fill survey
+  fillOut(obj) {
+    console.log(obj);
+    return this.http.post('http://localhost:8080/api/surveys/fill', obj);
+  }
+
   convert(object: any): Survey {
     let survey = new Survey();
 
