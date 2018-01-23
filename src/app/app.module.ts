@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalendarModule, DialogModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/primeng';
 import { ConfirmationService, ProgressSpinnerModule } from 'primeng/primeng';
+import { ChartModule } from 'primeng/primeng';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './guards/token.interceptor';
@@ -94,7 +95,8 @@ import { SurveyService } from "./services/survey-service/survey.service";
     CalendarModule,
     DialogModule,
     ConfirmDialogModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ChartModule
   ],
   providers: [
     AdminService,

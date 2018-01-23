@@ -12,6 +12,12 @@
   <br /><br />
   <div class="form-container">
     <div class="row">
+      <div class="col-md-12" style="text-align: right;">
+        <button type="button" class="btn btn-primary">Nova anketa</button>
+      </div>
+    </div>
+    <br />
+    <div class="row">
       <div class="col-md-12">
         <div class="table-responsive">
           <table class="table table-bordred table-striped">
@@ -39,14 +45,14 @@
                 </td>
                 <td>
                   <p data-placement="top" data-toggle="tooltip" title="Izveštaj">
-                    <button class="btn btn-info btn-xs">
+                    <button class="btn btn-info btn-xs" [disabled]="this.tenant.userId !== item.userId">
                       <span class="glyphicon glyphicon-print"></span>
                     </button>
                   </p>
                 </td>
                 <td>
                   <p data-placement="top" data-toggle="tooltip" title="Obriši">
-                    <button class="btn btn-danger btn-xs" [disabled]="this.tenant.user.id !== item.userId" (click)="confirm(item)">
+                    <button class="btn btn-danger btn-xs" [disabled]="this.tenant.userId !== item.userId || !this.tenant.supervisor" (click)="confirm(item)">
                       <span class="glyphicon glyphicon-trash"></span>
                     </button>
                   </p>
@@ -58,6 +64,48 @@
       </div>
     </div>
   </div>
+
+  <p-dialog appendTo="body" [(visible)]="reportDialog" header="Trenutni izveštaj ankete" modal="modal">
+    <div class="container">
+      <div style="padding-left: 10%; padding-right: 10%;">
+        <div class="row" *ngFor="let res of _response.questionReports;">
+          <div class="col-md-12" style="text-align: center; width: 100%;">
+            <br />
+            <p>
+              {{res.question.content}}
+            </p>
+            <br />
+            <p-chart *ngIf="res.chartType !== 'text'" type="{{res.chartType}}" [data]="res.data" width="40" height="7"></p-chart>
+          </div>
+          <!-- <div class="col-md-4" style="text-align: center;  width: 100%;">
+            <p>
+              {{_response.questionReports[0].question.content}}
+            </p>
+            <p-chart type="pie" [data]="_response.questionReports[0].data" width="40" height="7"></p-chart>
+          </div>
+          <div class="col-md-4" style="text-align: center;  width: 100%;">
+            <p>
+              {{_response.questionReports[0].question.content}}
+            </p>
+            <p>
+              Jesam
+            </p>
+          </div> -->
+        </div>
+        <br /> <br />
+      </div>
+      <br />
+    </div>
+    <p-footer>
+      <div class="modal-footer row">
+        <div class="col-md-6" style="text-align: left;">
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideReportDialog()">Zatvori</button>
+        </div>
+      </div>
+    </p-footer>
+  </p-dialog>
 
   <p-dialog appendTo="body" header="Popunite anketu" [(visible)]="fillDialog" modal="modal" width="800" [responsive]="true">
     <form role="form" ngNativeValidate (ngSubmit)="submit(selectedSurvey.id)">

@@ -18,6 +18,10 @@ export class Question {
     return this._type;
   }
 
+  set type(type: string) {
+    this._type = type;
+  }
+
   get content(): string {
     return this._content;
   }

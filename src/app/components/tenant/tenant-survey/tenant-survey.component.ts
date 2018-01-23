@@ -6,6 +6,8 @@ import { SurveyService } from "../../../services/survey-service/survey.service";
 import { AlertService } from "../../../services/alert-service/alert.service";
 
 import { Survey } from "../../../models/survey/survey.model";
+import { Tenant } from "../../../models/user/tenant.model";
+import { SurveyResponse } from "../../../models/survey/survey-response.model";
 
 import { ConfirmationService } from "primeng/primeng";
 
@@ -19,21 +21,23 @@ export class TenantSurveyComponent implements OnInit {
   private messageDeleted: boolean = false;
 
   private fillDialog: boolean = false;
+  private reportDialog: boolean = true;
   private deleteDialog: boolean = false;
   private createSurveyDialog: boolean = false;
 
-  private selectedSurvey: Survey;
+  private selectedSurvey: Survey = new Survey();
 
   private surveys: Survey[] = [];
-  private tenant: any = {};
+  private tenant: Tenant = new Tenant();
+
+  private _response: SurveyResponse = new SurveyResponse();
 
   constructor(private tenantService: TenantService,
     private surveyService: SurveyService,
     private alertService: AlertService,
     private confirmationService: ConfirmationService,
     private activeRoute: ActivatedRoute) {
-
-    this.selectedSurvey = new Survey();
+    console.log(this._response);
   }
 
   ngOnInit() {
@@ -41,16 +45,31 @@ export class TenantSurveyComponent implements OnInit {
     localStorage.setItem('navbarTitle', 'Početna');
 
     this.activeRoute.params.subscribe(params => {
-      this.tenant['id'] = params['id'];
+      this.tenant.id = params['id'];
+
       this.tenantService.getUsersTenants().subscribe(res => {
-        this.tenant = res.filter(t => t.building.id === +this.tenant.id)[0];
+        const resTenant = res.filter(t => t.building.id === +this.tenant.id)[0];
+
+        this.tenant.userId = resTenant.user.id;
+        this.tenant.buildingId = resTenant.building.id;
+
+        const tenantsFromToken = JSON.parse(localStorage.getItem('token'));
+
+        tenantsFromToken.tenants.forEach(t => {
+          if (t.tenant === this.tenant.id) {
+            this.tenant.owner = t.owner;
+            if (t.supervisor) {
+              this.tenant.supervisor = true;
+            }
+          }
+        });
         this.getSurveys();
       });
     });
   }
 
   getSurveys() {
-    this.surveyService.getSurveys(this.tenant.building.id).subscribe((res: Array<any>) => {
+    this.surveyService.getSurveys(this.tenant.buildingId).subscribe((res: Array<any>) => {
       res.forEach(s => {
         this.surveys.push(this.surveyService.convert(s));
       });
@@ -84,6 +103,10 @@ export class TenantSurveyComponent implements OnInit {
 
   hideFillDialog() {
     this.fillDialog = false;
+  }
+
+  hideReportDialog() {
+    this.reportDialog = false;
   }
 
   confirm(survey) {
