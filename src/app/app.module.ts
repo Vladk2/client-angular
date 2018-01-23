@@ -24,6 +24,8 @@ import {TenantService} from './services/tenant-service/tenant.service';
 import {AlertService} from './services/alert-service/alert.service';
 import {ParliamentService} from './services/parliament-service/parliament.service';
 import {TokenService} from './guards/token.service';
+import {ProblemService} from './services/problem-service/problem.service';
+import {UserService} from './services/user-service/user.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -31,29 +33,26 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
 import { HomeComponent } from './components/home/home.component';
 import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home.component';
 import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
-import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AlertComponent } from './components/alert/alert.component';
-
 import { AdminNewBuildingComponent } from './components/admin/admin-new-building/admin-new-building.component';
 import { AdminNewFirmComponent } from './components/admin/admin-new-firm/admin-new-firm.component';
 import { AdminListUsersComponent } from './components/admin/admin-list-users/admin-list-users.component';
 import { AdminListBuildingsComponent } from './components/admin/admin-list-buildings/admin-list-buildings.component';
 import { AdminListFirmsComponent } from './components/admin/admin-list-firms/admin-list-firms.component';
-
 import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
 import { ParliamentHomeComponent } from './components/parliament/parliament-home/parliament-home.component';
 import { ParliamentAnnounceComponent } from './components/parliament/parliament-announce/parliament-announce.component';
 import { ParliamentProposalsComponent } from './components/parliament/parliament-proposals/parliament-proposals.component';
 import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
 import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
-
-import {UserComponent} from './components/user/user.component';
-import {UserService} from './services/user-service/user.service';
-
+import { UserComponent } from './components/user/user.component';
 import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
 import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
+
+
+
 
 
 @NgModule({
@@ -64,7 +63,6 @@ import { ProblemPostingComponent } from './components/problem/problem-posting/pr
     HomeComponent,
     TenantHomeComponent,
     EmployeeHomeComponent,
-    TenantProblemComponent,
     NotFoundComponent,
     RegistrationComponent,
     AlertComponent,
@@ -81,7 +79,7 @@ import { ProblemPostingComponent } from './components/problem/problem-posting/pr
     ParliamentRecordComponent,
     UserComponent,
     ProblemHomeComponent,
-    ProblemPostingComponent
+    ProblemPostingComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +108,7 @@ import { ProblemPostingComponent } from './components/problem/problem-posting/pr
     ParliamentService,
     AlertService,
     ConfirmationService,
+    ProblemService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

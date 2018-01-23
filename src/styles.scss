@@ -25,12 +25,9 @@ body {
 
     background: #fafafa;
     border: none;
+    min-height: 80px;
 }
 
-.imageUpload .ui-fileupload {
-
-    
-}
 
 .imageUpload .ui-fileupload-buttonbar {
 
@@ -48,4 +45,12 @@ body {
     background-color: grey;
     border: 1px solid grey;
     color: #ffffff;
+}
+
+    
+.ui-panel-images{
+    
+    position: static;
+    width: 600px;
+    height: 350px;
 }

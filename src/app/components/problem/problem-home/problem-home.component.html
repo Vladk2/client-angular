@@ -1,15 +1,74 @@
-<div class="sidebar sidebar-tenant" data-color="" data-image="">
+<div *ngIf='current_role === "employee"' class="sidebar sidebar-employee" data-color="" data-image="">
+  <app-sidebar></app-sidebar>
+</div>
+<div *ngIf='current_role === "tenant"' class="sidebar sidebar-tenant" data-color="" data-image="">
   <app-sidebar></app-sidebar>
 </div>
 
 <div class="main-panel">
   <app-navbar-cmp></app-navbar-cmp>
 
-  <div class="card modal-dialog">
-    <button id = "postProblemBtn" [routerLink]="['/tenant/'+ tenant_id +'/problems/new']" class="btn btn-default btn-fill">
+  <div *ngIf='current_role === "tenant"' class="card modal-dialog">
+    <button id="postProblemBtn" [routerLink]="['/tenant/'+ role_id +'/problems/new']" class="btn btn-default btn-fill">
       <span class="pe-7s-tools"> </span> &nbsp; PRIJAVI NOVI KVAR</button>
-</div>
-<div class="card modal-dialog" style="margin:0 auto;">
-<p-galleria [images]="images" styleClass="completa" panelWidth="500" panelHeight="313" ></p-galleria>
-</div>
+  </div>
+  <div style="text-align:center" *ngIf="problems.length == 0">
+    <h4>Trenutno nema aktivnih kvarova.</h4>
+  </div> 
+  <div *ngFor="let problem of problems" class="card modal-dialog">
+
+    <p class="problemHeader stats">KVAR</p>
+    <p class="problemTitle"> {{problem.title}} </p>
+    <p class="problemDesc"> {{problem.description}} </p>
+    <p-galleria [images]="images" panelHeight="350"></p-galleria>
+    <p class="problemDesc stats"> Datum popravke: {{problem.repairDate}} </p>
+    <div *ngIf='current_role === "tenant" && problem.tenant.id == role_id' style="text-align:center">
+      <button class="btn btn-default" (click)="resolveProblem(problem.id)" style="margin-bottom:5px;">Označi kvar kao otklonjen</button>
+    </div>
+    <div style="text-align:center">
+      <span *ngIf='current_role === "employee" || (problem.firm == null && is_supervisor)'>
+        <button class="btn btn-default btn-fill" (click)="forwardProblem(problem.id)">Prosledi kvar</button>
+      </span>
+      <span *ngIf='current_role === "employee"'>
+        <button class="btn btn-default btn-fill" (click)="setRepairDate(problem.id)">Zakaži datum popravke</button>
+      </span>
+    </div>
+
+    <hr>
+    <div class="stats">
+      <i class="fa fa-user-o"></i> {{problem.tenant.user.name}} {{problem.tenant.user.last_name}}
+      <br>
+      <i class="fa fa-clock-o"></i> {{problem.postDate}}
+    </div>
+    <hr>
+    <div *ngIf="visibleComments['problem' + problem.id] == false" class="showComments" style="text-align:center;">
+      <p>
+        <i (click)="showComments(problem.id)" style="cursor:pointer">Komentari</i>
+      </p>
+      <hr>
+    </div>
+    <div *ngIf="visibleComments['problem' + problem.id] == true" class="comments">
+      <div *ngFor="let comm of comments" class="comment">
+        <div *ngIf="comm.problem.id === problem.id">
+          <div class="userComment">
+            <i class="fa fa-user-o"></i> {{comm.creator.name}} {{comm.creator.last_name}}
+            <span style="float:right" class="stats">{{comm.date}}</span>
+          </div>
+          <div class="contentComment">
+            <p> {{comm.message}}</p>
+          </div>
+          <hr>
+        </div>
+        
+      </div>
+      <div class="commentPosting" style="height:100px">
+        <textarea [(ngModel)]="newComment.message" placeholder="Unesite komentar..." class="form-control commentTextArea" rows="2"></textarea>
+        <button class="btn btn-default btn-fill postComment" (click)="postComment(problem.id)">Pošalji</button>
+      </div>
+
+    </div>
+
+  </div>
+
+
 </div>

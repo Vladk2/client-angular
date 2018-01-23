@@ -7,3 +7,34 @@
 .pe-7s-tools {
     font-size: 1.3em;
 }
+
+.problemHeader {
+    margin: 15px;
+    text-align: center;
+}
+.problemTitle {
+    text-align: center;
+    font-size: 1.5em;
+}
+.problemDesc {
+    margin:20px;
+}
+
+.userComment {
+    font-size: 1.2em;
+    margin:30px;
+}
+
+.contentComment {
+    margin:20px;
+}
+
+.commentTextArea {
+    resize: none;
+    border:none;
+}
+
+.postComment {
+    float:right;
+    margin-right: 5px;
+}

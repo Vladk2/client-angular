@@ -8,7 +8,6 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
 import { HomeComponent } from './components/home/home.component';
 import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
 import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home.component';
-import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
@@ -51,7 +50,8 @@ const routes: Routes = [
   {
     path: 'employee', canActivateChild: [AuthGuard], data: {expectedRole: 'EMPLOYEE'},
     children: [
-      {path: ':id', component: EmployeeHomeComponent}
+      { path: ':id', component: EmployeeHomeComponent },
+      { path: ':id/problems', component: ProblemHomeComponent }
     ]
   },
 
