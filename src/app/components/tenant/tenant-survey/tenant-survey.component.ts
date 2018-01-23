@@ -4,6 +4,8 @@ import { ActivatedRoute } from "@angular/router";
 import { TenantService } from "../../../services/tenant-service/tenant.service";
 import { SurveyService } from "../../../services/survey-service/survey.service";
 
+import { Survey } from "../../../models/survey/survey.model";
+
 @Component({
   selector: 'app-tenant-survey',
   templateUrl: './tenant-survey.component.html',
@@ -11,12 +13,20 @@ import { SurveyService } from "../../../services/survey-service/survey.service";
 })
 export class TenantSurveyComponent implements OnInit {
 
-  private surveys: any = [];
+  private fillDialog: boolean = false;
+  private createSurveyDialog: boolean = false;
+
+  private selectedSurvey: Survey;
+
+  private surveys: Survey[] = [];
   private tenant: any = {};
 
   constructor(private tenantService: TenantService,
     private surveyService: SurveyService,
-    private activeRoute: ActivatedRoute) { }
+    private activeRoute: ActivatedRoute) {
+
+    this.selectedSurvey = new Survey();
+  }
 
   ngOnInit() {
     localStorage.setItem('sidebar', 'tenant');
@@ -32,14 +42,28 @@ export class TenantSurveyComponent implements OnInit {
   }
 
   getSurveys() {
-    this.surveyService.getSurveys(this.tenant.building.id).subscribe(res => {
-      console.log(res);
-      this.surveys = res;
+    this.surveyService.getSurveys(this.tenant.building.id).subscribe((res: Array<any>) => {
+      res.forEach(s => {
+        this.surveys.push(this.surveyService.convert(s));
+      });
     });
   }
 
   report(surveyId) {
-    
+
+  }
+
+  openFillDialog(surveyId) {
+    this.surveys.forEach(s => {
+      if (s.id === surveyId) {
+        this.selectedSurvey = s;
+      }
+    });
+    this.fillDialog = true;
+  }
+
+  hideFillDialog() {
+    this.fillDialog = false;
   }
 
 }

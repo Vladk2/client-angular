@@ -4,40 +4,97 @@
 
 <div class="main-panel">
   <app-navbar-cmp></app-navbar-cmp>
-
-  <div class="main-content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="header">
-              <h4 class="title">Ankete</h4>
-            </div>
-            <div class="content table-responsive table-full-width">
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>Naziv</th>
-                    <th>Opis</th>
-                    <th>Datum kreiranja</th>
-                    <th>Datum isteka</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of surveys">
-                    <td>{{item.name_survey}} </td>
-                    <td>{{item.description}}</td>
-                    <td>{{item.create_survey}}</td>
-                    <td>{{item.time_duration}}</td>
-                    <td><button class="btn btn-warning btn-fill" (click)="report(item.id)">Prijavi</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+  <br /><br />
+  <div class="form-container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-bordred table-striped">
+            <thead>
+              <th style="text-align: center;">Naziv</th>
+              <th style="text-align: center;">Opis</th>
+              <th style="text-align: center;">Datum kreiranja</th>
+              <th style="text-align: center;">Datum isteka</th>
+              <th style="text-align: center;">Popunite</th>
+              <th style="text-align: center;">Izveštaj</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of surveys">
+                <td>{{item.name}} </td>
+                <td>{{item.description}}</td>
+                <td>{{item.dateCreated}}</td>
+                <td>{{item.dateExpires}}</td>
+                <td>
+                  <p data-placement="top" data-toggle="tooltip" title="Popunite anketu">
+                    <button class="btn btn-primary btn-xs" (click)="openFillDialog(item.id)">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                  </p>
+                </td>
+                <td>
+                  <p data-placement="top" data-toggle="tooltip" title="Izveštaj">
+                    <button class="btn btn-info btn-xs">
+                      <span class="glyphicon glyphicon-print"></span>
+                    </button>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
+
+  <p-dialog appendTo="body" header="Popunite anketu" [(visible)]="fillDialog" modal="modal" width="800" [responsive]="true">
+    <form role="form" ngNativeValidate (ngSubmit)="submit(selectedSurvey.id)">
+      <div style="padding-left: 10%; padding-right: 10%;">
+        <fieldset>
+          <div class="form-group" *ngFor="let item of selectedSurvey.questions">
+            <div class="row" *ngIf="item.type === 'BOOL'">
+              <div class="col-md-6">
+                <label>{{item.content}}</label> &nbsp;&nbsp;
+              </div>
+              <div class="col-md-6">
+                <input type="checkbox" />
+              </div>
+            </div>
+            <div class="row" *ngIf="item.type === 'TEXT'">
+              <div class="col-md-6">
+                <label>{{item.content}}</label> &nbsp;&nbsp;
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="row" *ngIf="item.type === 'GRADE'">
+              <div class="col-md-6">
+                <label>{{item.content}}</label> &nbsp;&nbsp;
+              </div>
+              <div class="col-md-6">
+                <select class="selectpicker">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+            </div>
+            <br />
+          </div>
+        </fieldset>
+      </div>
+      <p-footer>
+        <div class="modal-footer row">
+          <div class="col-md-6" style="text-align: left;">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideFillDialog()">Zatvori</button>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <button type="submit" class="btn btn-primary">Pošalji</button>
+          </div>
+        </div>
+      </p-footer>
+    </form>
+  </p-dialog>
 </div>
