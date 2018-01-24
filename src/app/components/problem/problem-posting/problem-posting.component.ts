@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProblemService } from '../../../services/problem-service/problem.service';
 import { AlertService } from '../../../services/alert-service/alert.service';
 import { ActivatedRoute } from '@angular/router';
+import { Problem } from '../../../models/problem/problem.model';
 @Component({
   selector: 'app-problem-posting',
   templateUrl: './problem-posting.component.html',
@@ -10,12 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProblemPostingComponent implements OnInit {
 
-  private problem: any = {};
+  private problem: Problem;
   private images: File[];
   private tenantId;
   constructor(private problemService: ProblemService,
-             private activeRoute: ActivatedRoute,
-             private alertService: AlertService) { }
+    private activeRoute: ActivatedRoute,
+    private alertService: AlertService) {
+      this.problem = new Problem();
+  }
 
   ngOnInit() {
     localStorage.setItem('sidebar', 'tenant');
@@ -28,13 +31,7 @@ export class ProblemPostingComponent implements OnInit {
 
   postProblem() {
     console.log(this.images);
-    const problem = {
-      'title': this.problem.title,
-      'description': this.problem.desc,
-      'openForAll': this.problem.openForAll,
-      'images': this.images
-    };
-    this.problemService.postProblem(this.tenantId, problem).subscribe((res: any) => {
+    this.problemService.postProblem(this.tenantId, this.problem).subscribe((res: any) => {
 
       const responseMessage = res.message;
 
