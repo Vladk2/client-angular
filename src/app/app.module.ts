@@ -10,7 +10,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalendarModule, DialogModule } from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/primeng';
 import { ConfirmationService, ProgressSpinnerModule } from 'primeng/primeng';
-import { ChartModule } from 'primeng/primeng';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './guards/token.interceptor';
@@ -54,7 +53,7 @@ import { UserComponent } from './components/user/user.component';
 import { UserService } from './services/user-service/user.service';
 
 import { TenantSurveyComponent } from './components/tenant/tenant-survey/tenant-survey.component';
-import { SurveyService } from "./services/survey-service/survey.service";
+import { SurveyModule } from "./modules/survey/survey.module";
 
 
 @NgModule({
@@ -80,8 +79,7 @@ import { SurveyService } from "./services/survey-service/survey.service";
     ParliamentProposalsComponent,
     ParliamentVotingComponent,
     ParliamentRecordComponent,
-    UserComponent,
-    TenantSurveyComponent
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +94,7 @@ import { SurveyService } from "./services/survey-service/survey.service";
     DialogModule,
     ConfirmDialogModule,
     ProgressSpinnerModule,
-    ChartModule
+    SurveyModule
   ],
   providers: [
     AdminService,
@@ -110,7 +108,6 @@ import { SurveyService } from "./services/survey-service/survey.service";
     ParliamentService,
     AlertService,
     ConfirmationService,
-    SurveyService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

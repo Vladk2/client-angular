@@ -3,10 +3,10 @@ import { Survey } from "./survey.model";
 import { Answer } from "./answer.model";
 
 export class UserResponse {
-  public responseDTO: Answer[];
+  public answers: Answer[];
   public survey: number;
 
   constructor() {
-    this.responseDTO = new Array<Answer>();
+    this.answers = new Array<Answer>();
   }
 }

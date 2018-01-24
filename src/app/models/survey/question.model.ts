@@ -1,13 +1,13 @@
 export class Question {
 
-  public id: number;
-  public content: string;
-  public type: string;
+  public id;
+  public question;
+  public typeQuestion;
 
   constructor(id, content, type) {
     this.id = id;
-    this.content = content;
-    this.type = type;
+    this.question = content;
+    this.typeQuestion = type;
   }
 
 }

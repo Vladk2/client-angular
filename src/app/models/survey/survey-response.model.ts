@@ -5,6 +5,7 @@ import { Question } from "./question.model";
 export class SurveyResponse {
   public survey: Survey;
   public questionReports: QuestionReport[];
+  public users: number[] = [];
 
   constructor() {
     this.survey = new Survey();
@@ -45,8 +46,8 @@ export class SurveyResponse {
           ]
         }]
     };
-    this.questionReports.push(new QuestionReport(new Question(1, 'Koliko kida nas sajt?', 'GRADE'), dataGrade));
-    this.questionReports.push(new QuestionReport(new Question(1, 'Jeste li debeli?', 'BOOL'), dataBool));
+    this.questionReports.push(new QuestionReport(new Question(1, 'Koliko kida nas sajt?', 'GRADE')));
+    this.questionReports.push(new QuestionReport(new Question(1, 'Jeste li debeli?', 'BOOL')));
   }
 
 }
