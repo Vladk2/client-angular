@@ -141,6 +141,10 @@ export class TenantSurveyComponent implements OnInit {
       this.newQuestion.typeQuestion));
   }
 
+  createSurvey() {
+    console.log(this.newSurvey);
+  }
+
   confirm(survey) {
     this.deleteDialog = true;
     this.selectedSurvey = survey;

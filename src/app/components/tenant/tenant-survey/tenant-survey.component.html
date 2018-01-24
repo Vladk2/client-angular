@@ -98,17 +98,17 @@
 
   <p-dialog appendTo="body" header="Kreiranje ankete" [(visible)]="createSurveyDialog" modal="modal" width="800"
             [responsive]="true">
-    <form role="form" ngNativeValidate>
+    <form role="form" ngNativeValidate (ngSubmit)="createSurvey()">
       <div class="padding-left: 10%; padding-right: 10%;">
         <fieldset>
           <div class="form-group">
-            <input type="text" name="name" class="form-control" placeholder="Naziv ankete"/>
+            <input type="text" name="name" [(ngModel)]="newSurvey.name" class="form-control" placeholder="Naziv ankete"/>
           </div>
           <div class="form-group">
-            <textarea type="text" name="description" class="form-control" placeholder="Opis"></textarea>
+            <textarea type="text" name="description" [(ngModel)]="newSurvey.description" class="form-control" placeholder="Opis"></textarea>
           </div>
           <div class="form-group">
-            <input type="date" name="dateExpires" class="form-control" placeholder="Datum isteka"/>
+            <input type="date" name="dateExpires" [(ngModel)]="newSurvey.dateExpires" class="form-control" placeholder="Datum isteka"/>
           </div>
           <div class="form-group row" *ngFor="let q of newSurvey.questionDTO">
             <div class="col-md-12">
@@ -122,18 +122,21 @@
                    placeholder="Pitanje"/>
           </div>
           <div class="form-group row">
-            <div class="col-md-11">
+            <div class="col-md-10">
               <select class="selectpicker form-control" [(ngModel)]="newQuestion.typeQuestion" name="select" value="Tip odgovora">
                 <option value="GRADE">Ocene</option>
                 <option value="BOOL">Da/Ne</option>
                 <option value="TEXT">Tekstualni odgovor</option>
               </select>
             </div>
-            <div class="col-lg-1">
+            <div class="col-lg-2" style="text-align: right;">
               <button class="btn btn-primary" (click)="addQuestion()">
                 <span>+</span>
               </button>
             </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary button-big-jasta">Završi</button>
           </div>
         </fieldset>
       </div>
