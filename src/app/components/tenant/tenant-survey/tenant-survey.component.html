@@ -48,22 +48,22 @@
               <td>{{item.dateExpires}}</td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Popunite anketu">
-                  <button class="btn btn-primary btn-xs" [disabled]="fillAllowed(item.userResponses)" (click)="openFillDialog(item)">
+                  <button type="button" class="btn btn-primary btn-xs" [disabled]="fillAllowed(item.userResponses)" (click)="openFillDialog(item)">
                     <span class="glyphicon glyphicon-pencil"></span>
                   </button>
                 </p>
               </td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Izveštaj">
-                  <button class="btn btn-info btn-xs" [disabled]="this.tenant.userId !== item.creator"
-                          (click)="openReportDialog(item)">
+                  <button type="button" class="btn btn-info btn-xs" [disabled]="this.tenant.userId !== item.creator"
+                          (click)="openReportDialog(item.id)">
                     <span class="glyphicon glyphicon-print"></span>
                   </button>
                 </p>
               </td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Obriši">
-                  <button class="btn btn-danger btn-xs"
+                  <button type="button" class="btn btn-danger btn-xs"
                           [disabled]="this.tenant.userId !== item.creator || !this.tenant.supervisor"
                           (click)="confirm(item)">
                     <span class="glyphicon glyphicon-trash"></span>
@@ -88,9 +88,11 @@
               {{res.question.question}}
             </p>
             <br />
-            <p *ngIf="res.chartType === 'text'">
-              {{res.values}}
-            </p>
+            <div *ngIf="res.chartType === 'text'">
+              <p *ngFor="let r of res.values">
+                {{r}}
+              </p>
+            </div>
             <p-chart *ngIf="res.chartType !== 'text'" type="{{res.chartType}}" [data]="res.data" width="40" height="7"></p-chart>
           </div>
         </div>

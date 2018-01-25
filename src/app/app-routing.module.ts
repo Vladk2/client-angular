@@ -67,7 +67,7 @@ const routes: Routes = [
       { path: ':id', canActivate: [TenantGuard], component: TenantHomeComponent },
       { path: ':id/kvarovi', canActivate: [TenantGuard], component: TenantProblemComponent },
       { path: ':id/skupstina', canActivate: [TenantGuard], component: ParliamentHomeComponent },
-      { path: ':id/ankete', canActivate: [TenantGuard], component: TenantSurveyComponent }
+      { path: ':id/surveys', canActivate: [TenantGuard], component: TenantSurveyComponent }
     ]
   },
   { path: '?', component: NotFoundComponent },

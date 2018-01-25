@@ -70,7 +70,7 @@ export class SidebarComponent implements OnInit {
       this.ROUTES_TENANT = [
         { path: '/tenant/' + this.tenants_id, title: 'Početna', icon: 'pe-7s-home', class: '' },
         { path: '/tenant/' + this.tenants_id + '/kvarovi', title: 'Kvarovi', icon: 'pe-7s-tools', class: '' },
-        { path: '/tenant/' + this.tenants_id + '/ankete', title: 'Ankete', icon: 'pe-7s-news-paper', class: ''}
+        { path: '/tenant/' + this.tenants_id + '/surveys', title: 'Ankete', icon: 'pe-7s-news-paper', class: ''}
       ];
       for (const tenant of token.tenants) {
         if (tenant.tenant === this.tenants_id) {

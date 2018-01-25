@@ -52,6 +52,7 @@ export class SurveyResponse {
           }]
       };
     } else {
+      this.chartType = 'text';
       this.data = this.values;
     }
   }

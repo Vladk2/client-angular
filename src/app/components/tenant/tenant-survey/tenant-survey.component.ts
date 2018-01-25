@@ -108,6 +108,7 @@ export class TenantSurveyComponent implements OnInit {
       setTimeout(() => {
         this.hideFillDialog();
         this.getSurveys();
+        this.resetMessageDivs();
         this.messageFilled = true;
       }, 250);
     }, err => {
@@ -171,19 +172,26 @@ export class TenantSurveyComponent implements OnInit {
     this.fillDialog = true;
   }
 
-  private openReportDialog(survey: any) {
-    this.getSurveys();
-    setTimeout(() => {
-      if (survey.userResponses.length < 1) {
-        this.resetMessageDivs();
-        this.messageNoResposes = true;
-        return;
-      }
-      this.surveyResponses = [];
-      this.surveyResponses = this.surveyService.surveyStatistics(survey);
-      console.log(this.surveyResponses);
-      this.reportDialog = true;
-    }, 300);
+  private openReportDialog(surveyId) {
+    this.surveyService.getSurveys(this.tenant.buildingId).subscribe((res: Array<any>) => {
+      this.RESULTS = res;
+      let survey;
+      this.RESULTS.forEach(s => {
+        if (s.id === surveyId) {
+          survey = s;
+        }
+      });
+      setTimeout(() => {
+        if (survey.userResponses.length < 1) {
+          this.resetMessageDivs();
+          this.messageNoResposes = true;
+          return;
+        }
+        this.surveyResponses = [];
+        this.surveyResponses = this.surveyService.surveyStatistics(survey);
+        this.reportDialog = true;
+      }, 50);
+    });
   }
 
   private openCreateDialog() {
