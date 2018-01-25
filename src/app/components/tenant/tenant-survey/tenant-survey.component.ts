@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {TenantService} from '../../../services/tenant-service/tenant.service';
 import {SurveyService} from '../../../services/survey-service/survey.service';
@@ -7,12 +7,12 @@ import {AlertService} from '../../../services/alert-service/alert.service';
 
 import {Survey} from '../../../models/survey/survey.model';
 import {Tenant} from '../../../models/user/tenant.model';
-import {SurveyResponse} from '../../../models/survey/survey-response.model';
 import {UserResponse} from '../../../models/survey/user-response.model';
 
 import {ConfirmationService} from 'primeng/primeng';
 import {Answer} from '../../../models/survey/answer.model';
 import {Question} from '../../../models/survey/question.model';
+import {SurveyResponse} from '../../../models/survey/survey-response.model';
 
 @Component({
   selector: 'app-tenant-survey',
@@ -22,8 +22,10 @@ import {Question} from '../../../models/survey/question.model';
 export class TenantSurveyComponent implements OnInit {
 
   private messageDeleted: boolean = false;
+  private messageAddQuestion: boolean = false;
   private messageFilled: boolean = false;
   private messageCreated: boolean = false;
+  private messageNoResposes: boolean = false;
 
   private fillDialog: boolean = false;
   private reportDialog: boolean = false;
@@ -40,6 +42,7 @@ export class TenantSurveyComponent implements OnInit {
   private tenant: Tenant = new Tenant();
 
   private userResponse: UserResponse = new UserResponse();
+  private surveyResponses: SurveyResponse[];
 
   constructor(private tenantService: TenantService,
               private surveyService: SurveyService,
@@ -56,7 +59,8 @@ export class TenantSurveyComponent implements OnInit {
       this.tenant.id = params['id'];
 
       this.tenantService.getUsersTenants().subscribe(res => {
-        const resTenant = res.filter(t => t.building.id === +this.tenant.id)[0];
+        console.log('TENANT ID: ' + this.tenant.id);
+        const resTenant = res.filter(t => t.id === +this.tenant.id)[0];
 
         this.tenant.userId = resTenant.user.id;
         this.tenant.buildingId = resTenant.building.id;
@@ -84,9 +88,9 @@ export class TenantSurveyComponent implements OnInit {
 
   destroy() {
     this.surveyService.delete(this.selectedSurvey.id).subscribe(res => {
-      let index = this.RESULTS.findIndex(s => s.survey.id === this.selectedSurvey.id);
+      const index = this.RESULTS.findIndex(s => s.id === this.selectedSurvey.id);
       this.RESULTS.splice(index, 1);
-
+      this.resetMessageDivs();
       this.messageDeleted = true;
       this.deleteDialog = false;
     }, error => {
@@ -94,58 +98,49 @@ export class TenantSurveyComponent implements OnInit {
     });
   }
 
-  openFillDialog(survey) {
-    this.selectedSurvey = survey;
-    this.fillResponseWithQuestions();
-    this.fillDialog = true;
-  }
-
   submit() {
     this.surveyService.fillOut(this.userResponse).subscribe(res => {
-      alert('jes');
+      this.resetMessageDivs();
+      setTimeout(() => {
+        this.hideFillDialog();
+        this.getSurveys();
+        this.messageFilled = true;
+      }, 250);
     }, err => {
       alert('nene');
     });
-  }
-
-  hideFillDialog() {
-    this.fillDialog = false;
-  }
-
-  openReportDialog(survey) {
-    this.reportDialog = true;
-    this.RESULTS.forEach(r => {
-      if (r.survey.id = survey.id) {
-
-      }
-    });
-  }
-
-  hideReportDialog() {
-    this.reportDialog = false;
-  }
-
-  openCreateDialog() {
-    this.newSurvey.questionDTO = new Array<Question>();
-
-    this.createSurveyDialog = true;
-  }
-
-  hideCreateDialog() {
-    this.createSurveyDialog = false;
   }
 
   addQuestion() {
     this.newSurvey.questionDTO.push(new Question(this.newQuestion.id,
       this.newQuestion.question,
       this.newQuestion.typeQuestion));
+    this.newQuestion.id = '';
+    this.newQuestion.question = '',
+      this.newQuestion.typeQuestion = '';
   }
 
-  createSurvey() {
-    console.log(this.newSurvey);
+  createSurvey(obj: Survey) {
+    if (obj.questionDTO.length < 3) {
+      this.resetMessageDivs();
+      this.messageAddQuestion = true;
+      return;
+    }
+    this.surveyService.create(obj).subscribe(res => {
+      this.resetMessageDivs();
+
+      setTimeout(() => {
+        this.hideCreateDialog();
+        this.getSurveys();
+        this.messageCreated = true;
+      }, 500);
+    }, err => {
+      alert('Error.');
+    });
   }
 
-  confirm(survey) {
+  confirm(survey: Survey) {
+    this.resetMessageDivs();
     this.deleteDialog = true;
     this.selectedSurvey = survey;
     this.confirmationService.confirm({
@@ -155,15 +150,70 @@ export class TenantSurveyComponent implements OnInit {
     });
   }
 
+  private openFillDialog(survey: Survey) {
+    this.selectedSurvey = survey;
+    this.fillResponseWithQuestions();
+    this.fillDialog = true;
+  }
+
+  private openReportDialog(survey: any) {
+    this.getSurveys();
+    setTimeout(() => {
+      if (survey.userResponses.length < 1) {
+        this.resetMessageDivs();
+        this.messageNoResposes = true;
+        return;
+      }
+      this.surveyResponses = [];
+      this.surveyResponses = this.surveyService.surveyStatistics(survey);
+      console.log(this.surveyResponses);
+      this.reportDialog = true;
+    }, 300);
+  }
+
+  private openCreateDialog() {
+    this.newSurvey.questionDTO = new Array<Question>();
+    this.newSurvey.building = this.tenant.buildingId;
+    this.createSurveyDialog = true;
+  }
+
+  private hideFillDialog() {
+    this.fillDialog = false;
+  }
+
+  private hideReportDialog() {
+    this.reportDialog = false;
+  }
+
+  private hideCreateDialog() {
+    this.createSurveyDialog = false;
+  }
+
   private resetMessageDivs() {
     this.messageDeleted = false;
+    this.messageAddQuestion = false;
+    this.messageCreated = false;
+    this.messageFilled = false;
+    this.messageNoResposes = false;
   }
 
   private fillResponseWithQuestions() {
+    this.userResponse.answers = [];
     this.userResponse.survey = this.selectedSurvey.id;
     this.selectedSurvey.questionDTO.forEach(q => {
       this.userResponse.answers.push(new Answer(q));
     });
+    console.log(this.userResponse);
   }
 
+  private fillAllowed(userResponses) {
+    let found = false;
+    userResponses.forEach(ur => {
+      if (ur.user === this.tenant.userId) {
+        found = true;
+      }
+    });
+
+    return found;
+  }
 }

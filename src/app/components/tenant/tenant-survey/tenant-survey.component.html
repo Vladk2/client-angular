@@ -5,9 +5,19 @@
 <div class="main-panel">
   <app-navbar-cmp></app-navbar-cmp>
 
-  <div class="alert alert-success" *ngIf="messageDeleted">
-    <span>Uspešno ste obirsali anketu.</span>
+  <div class="alert alert-info" *ngIf="messageNoResposes">
+    <span>Trenutno nema odgovora za ovu anketu.</span>
   </div>
+  <div class="alert alert-info" *ngIf="messageDeleted">
+    <span>Uspešno ste obrisali anketu.</span>
+  </div>
+  <div class="alert alert-success" *ngIf="messageCreated">
+    <span>Uspešno ste kreirali anketu.</span>
+  </div>
+  <div class="alert alert-success" *ngIf="messageFilled">
+    <span>Uspešno ste popunili anketu.</span>
+  </div>
+
 
   <br/><br/>
   <div class="form-container">
@@ -32,21 +42,21 @@
             </thead>
             <tbody>
             <tr *ngFor="let item of RESULTS">
-              <td>{{item.survey.name}}</td>
-              <td>{{item.survey.description}}</td>
-              <td>{{item.survey.dateCreated}}</td>
-              <td>{{item.survey.dateExpires}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.dateCreated}}</td>
+              <td>{{item.dateExpires}}</td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Popunite anketu">
-                  <button class="btn btn-primary btn-xs" (click)="openFillDialog(item.survey)">
+                  <button class="btn btn-primary btn-xs" [disabled]="fillAllowed(item.userResponses)" (click)="openFillDialog(item)">
                     <span class="glyphicon glyphicon-pencil"></span>
                   </button>
                 </p>
               </td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Izveštaj">
-                  <button class="btn btn-info btn-xs" [disabled]="this.tenant.userId !== item.survey.creator"
-                          (click)="openReportDialog(item.survey)">
+                  <button class="btn btn-info btn-xs" [disabled]="this.tenant.userId !== item.creator"
+                          (click)="openReportDialog(item)">
                     <span class="glyphicon glyphicon-print"></span>
                   </button>
                 </p>
@@ -54,8 +64,8 @@
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Obriši">
                   <button class="btn btn-danger btn-xs"
-                          [disabled]="this.tenant.userId !== item.survey.creator || !this.tenant.supervisor"
-                          (click)="confirm(item.survey)">
+                          [disabled]="this.tenant.userId !== item.creator || !this.tenant.supervisor"
+                          (click)="confirm(item)">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>
                 </p>
@@ -98,22 +108,25 @@
 
   <p-dialog appendTo="body" header="Kreiranje ankete" [(visible)]="createSurveyDialog" modal="modal" width="800"
             [responsive]="true">
-    <form role="form" ngNativeValidate (ngSubmit)="createSurvey()">
+    <form role="form" ngNativeValidate (ngSubmit)="createSurvey(newSurvey)">
       <div class="padding-left: 10%; padding-right: 10%;">
         <fieldset>
           <div class="form-group">
-            <input type="text" name="name" [(ngModel)]="newSurvey.name" class="form-control" placeholder="Naziv ankete"/>
+            <input type="text" required name="name" [(ngModel)]="newSurvey.name" class="form-control"
+                   placeholder="Naziv ankete"/>
           </div>
           <div class="form-group">
-            <textarea type="text" name="description" [(ngModel)]="newSurvey.description" class="form-control" placeholder="Opis"></textarea>
+            <textarea type="text" required name="description" [(ngModel)]="newSurvey.description" class="form-control"
+                      placeholder="Opis"></textarea>
           </div>
           <div class="form-group">
-            <input type="date" name="dateExpires" [(ngModel)]="newSurvey.dateExpires" class="form-control" placeholder="Datum isteka"/>
+            <input type="date" required name="dateExpires" [(ngModel)]="newSurvey.dateExpires" class="form-control"
+                   placeholder="Datum isteka"/>
           </div>
           <div class="form-group row" *ngFor="let q of newSurvey.questionDTO">
             <div class="col-md-12">
               <p>
-                <input type="text" value="{{q.question}}" class="form-control" disabled/>
+                <input type="text" required value="{{q.question}}" class="form-control" disabled/>
               </p>
             </div>
           </div>
@@ -123,17 +136,23 @@
           </div>
           <div class="form-group row">
             <div class="col-md-10">
-              <select class="selectpicker form-control" [(ngModel)]="newQuestion.typeQuestion" name="select" value="Tip odgovora">
+              <select class="selectpicker form-control" [(ngModel)]="newQuestion.typeQuestion" name="select"
+                      value="Tip odgovora">
                 <option value="GRADE">Ocene</option>
-                <option value="BOOL">Da/Ne</option>
+                <option value="BOOL" selected="selected">Da/Ne</option>
                 <option value="TEXT">Tekstualni odgovor</option>
               </select>
             </div>
             <div class="col-lg-2" style="text-align: right;">
-              <button class="btn btn-primary" (click)="addQuestion()">
+              <button class="btn btn-primary" (click)="addQuestion()"
+                      [disabled]="newQuestion.question === '' || newQuestion.typeQuestion === ''">
                 <span>+</span>
               </button>
             </div>
+          </div>
+          <br/>
+          <div class="alert alert-warning" *ngIf="messageAddQuestion">
+            <span>Morate dodati bar 3 pitanja.</span>
           </div>
           <div class="form-group">
             <button class="btn btn-primary button-big-jasta">Završi</button>
@@ -154,7 +173,7 @@
                 <label>{{item.question.question}}</label> &nbsp;&nbsp;
               </div>
               <div class="col-md-6">
-                <input type="checkbox" name="checkbox" class="form-control" [(ngModel)]="item.answer"/>
+                <input type="checkbox" required name="checkbox" class="form-control" [(ngModel)]="item.answer"/>
               </div>
             </div>
             <div class="row" *ngIf="item.question.typeQuestion === 'TEXT'">
@@ -162,7 +181,7 @@
                 <label>{{item.question.question}}</label> &nbsp;&nbsp;
               </div>
               <div class="col-md-6">
-                <input type="text" name="text" class="form-control" [(ngModel)]="item.answer"/>
+                <input type="text" required name="text" class="form-control" [(ngModel)]="item.answer"/>
               </div>
             </div>
             <div class="row" *ngIf="item.question.typeQuestion === 'GRADE'">
@@ -170,12 +189,12 @@
                 <label>{{item.question.question}}</label> &nbsp;&nbsp;
               </div>
               <div class="col-md-6">
-                <select class="selectpicker form-control" name="select" [(ngModel)]="item.answer">
+                <select class="selectpicker form-control" required name="select" [(ngModel)]="item.answer">
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
                   <option>4</option>
-                  <option>5</option>
+                  <option selected="selected">5</option>
                 </select>
               </div>
             </div>
