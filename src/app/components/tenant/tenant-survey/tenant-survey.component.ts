@@ -57,13 +57,12 @@ export class TenantSurveyComponent implements OnInit {
 
   ngOnInit() {
     localStorage.setItem('sidebar', 'tenant');
-    localStorage.setItem('navbarTitle', 'Početna');
+    localStorage.setItem('navbarTitle', 'Ankete');
 
     this.activeRoute.params.subscribe(params => {
       this.tenant.id = params['id'];
 
       this.tenantService.getUsersTenants().subscribe(res => {
-        console.log('TENANT ID: ' + this.tenant.id);
         const resTenant = res.filter(t => t.id === +this.tenant.id)[0];
 
         this.tenant.userId = resTenant.user.id;
@@ -228,7 +227,6 @@ export class TenantSurveyComponent implements OnInit {
     this.selectedSurvey.questionDTO.forEach(q => {
       this.userResponse.answers.push(new Answer(q));
     });
-    console.log(this.userResponse);
   }
 
   private fillAllowed(userResponses) {
