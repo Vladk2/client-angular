@@ -157,6 +157,12 @@
           <div class="alert alert-warning" *ngIf="messageAddQuestion">
             <span>Morate dodati bar 3 pitanja.</span>
           </div>
+          <div class="alert alert-warning" *ngIf="messageWrongDateFormat">
+            <span>Datum nije dobro kreiran.</span>
+          </div>
+          <div class="alert alert-warning" *ngIf="messageDatePassed">
+            <span>Datum koji ste uneli je prošao.</span>
+          </div>
           <div class="form-group">
             <button class="btn btn-primary button-big-jasta">Završi</button>
           </div>

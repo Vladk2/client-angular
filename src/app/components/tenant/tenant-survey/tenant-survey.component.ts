@@ -14,6 +14,8 @@ import {Answer} from '../../../models/survey/answer.model';
 import {Question} from '../../../models/survey/question.model';
 import {SurveyResponse} from '../../../models/survey/survey-response.model';
 
+import {default as isValidDate} from 'pretty-easy-date-check';
+
 @Component({
   selector: 'app-tenant-survey',
   templateUrl: './tenant-survey.component.html',
@@ -26,6 +28,8 @@ export class TenantSurveyComponent implements OnInit {
   private messageFilled: boolean = false;
   private messageCreated: boolean = false;
   private messageNoResposes: boolean = false;
+  private messageWrongDateFormat: boolean = false;
+  private messageDatePassed: boolean = false;
 
   private fillDialog: boolean = false;
   private reportDialog: boolean = false;
@@ -126,6 +130,17 @@ export class TenantSurveyComponent implements OnInit {
       this.messageAddQuestion = true;
       return;
     }
+
+    if (isValidDate(new Date(obj.dateExpires))) {
+      if (new Date(obj.dateExpires) < new Date()) {
+        this.messageDatePassed = true;
+        return;
+      }
+    } else {
+      this.messageWrongDateFormat = true;
+      return;
+    }
+
     this.surveyService.create(obj).subscribe(res => {
       this.resetMessageDivs();
 
@@ -195,6 +210,8 @@ export class TenantSurveyComponent implements OnInit {
     this.messageCreated = false;
     this.messageFilled = false;
     this.messageNoResposes = false;
+    this.messageDatePassed = false;
+    this.messageWrongDateFormat = false;
   }
 
   private fillResponseWithQuestions() {

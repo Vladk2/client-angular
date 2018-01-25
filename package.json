@@ -30,6 +30,7 @@
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
     "npm": "^5.5.1",
+    "pretty-easy-date-check": "^1.2.4",
     "primeng": "^5.0.2",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"

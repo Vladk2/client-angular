@@ -37,6 +37,48 @@ export class SurveyService {
 
   surveyStatistics(survey) {
     const surveyResponses = new Array<SurveyResponse>();
+    const responses = this.getAnswers(survey);
+
+    survey.questionDTO.forEach(q => {
+      const surveyResponse = new SurveyResponse();
+      const yesNo = {'yes': 0, 'no': 0};
+      const grades = {'a': 0, 'b': 0, 'c': 0, 'd': 0, 'f': 0};
+      const textAnswers = [];
+
+      responses.forEach(r => {
+        if (q.question === r.question.question) {
+          if (q.typeQuestion === 'BOOL') {
+            yesNo.yes += r.values.yes;
+            yesNo.no += r.values.no;
+          } else if (q.typeQuestion === 'GRADE') {
+            grades.a += r.values.a;
+            grades.b += r.values.b;
+            grades.c += r.values.c;
+            grades.d += r.values.d;
+            grades.f += r.values.f;
+          } else {
+            textAnswers.push(r.values);
+          }
+        }
+      });
+      surveyResponse.question = q;
+      if (surveyResponse.question.typeQuestion === 'BOOL') {
+        surveyResponse.values = yesNo;
+        surveyResponse.setData(surveyResponse.question.typeQuestion);
+      } else if (surveyResponse.question.typeQuestion === 'GRADE') {
+        surveyResponse.values = grades;
+        surveyResponse.setData(surveyResponse.question.typeQuestion);
+      } else {
+        surveyResponse.values = textAnswers;
+        surveyResponse.setData(surveyResponse.question.typeQuestion);
+      }
+      surveyResponses.push(surveyResponse);
+    });
+
+    return surveyResponses;
+  }
+
+  getAnswers(survey) {
     const responses = new Array<SurveyResponse>();
 
     survey.userResponses.forEach(r => {
@@ -82,55 +124,16 @@ export class SurveyService {
         }
         if (surveyResponse.question.typeQuestion === 'BOOL') {
           surveyResponse.values = yesNo;
-          //surveyResponse.setData(surveyResponse.question.typeQuestion, yesNo);
         } else if (surveyResponse.question.typeQuestion === 'GRADE') {
           surveyResponse.values = grades;
-          //surveyResponse.setData(surveyResponse.question.typeQuestion, grades);
         } else {
           surveyResponse.values = textAnswer;
-          //surveyResponse.setData(surveyResponse.question.typeQuestion, textAnswers);
         }
         responses.push(surveyResponse);
       });
     });
 
-    survey.questionDTO.forEach(q => {
-      const surveyResponse = new SurveyResponse();
-      const yesNo = {'yes': 0, 'no': 0};
-      const grades = {'a': 0, 'b': 0, 'c': 0, 'd': 0, 'f': 0};
-      const textAnswers = [];
-
-      responses.forEach(r => {
-        if (q.question === r.question.question) {
-          if (q.typeQuestion === 'BOOL') {
-            yesNo.yes += r.values.yes;
-            yesNo.no += r.values.no;
-          } else if (q.typeQuestion === 'GRADE') {
-            grades.a += r.values.a;
-            grades.b += r.values.b;
-            grades.c += r.values.c;
-            grades.d += r.values.d;
-            grades.f += r.values.f;
-          } else {
-            textAnswers.push(r.values);
-          }
-        }
-      });
-      surveyResponse.question = q;
-      if (surveyResponse.question.typeQuestion === 'BOOL') {
-        surveyResponse.values = yesNo;
-        surveyResponse.setData(surveyResponse.question.typeQuestion);
-      } else if (surveyResponse.question.typeQuestion === 'GRADE') {
-        surveyResponse.values = grades;
-        surveyResponse.setData(surveyResponse.question.typeQuestion);
-      } else {
-        surveyResponse.values = textAnswers;
-        surveyResponse.setData(surveyResponse.question.typeQuestion);
-      }
-      surveyResponses.push(surveyResponse);
-    });
-
-    return surveyResponses;
+    return responses;
   }
 
 }
