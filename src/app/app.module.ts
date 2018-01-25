@@ -1,3 +1,4 @@
+
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
@@ -51,6 +52,9 @@ import { UserComponent } from './components/user/user.component';
 import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
 import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
 
+import { TenantSurveyComponent } from './components/tenant/tenant-survey/tenant-survey.component';
+import { SurveyModule } from "./modules/survey/survey.module";
+
 
 
 
@@ -94,7 +98,9 @@ import { ProblemPostingComponent } from './components/problem/problem-posting/pr
     DialogModule,
     ConfirmDialogModule,
     FileUploadModule,
-    GalleriaModule
+    GalleriaModule, 
+    ProgressSpinnerModule,
+    SurveyModule
   ],
   providers: [
     AdminService,
@@ -119,3 +125,4 @@ import { ProblemPostingComponent } from './components/problem/problem-posting/pr
 })
 export class AppModule {
 }
+

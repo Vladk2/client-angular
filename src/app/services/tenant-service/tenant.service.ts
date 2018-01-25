@@ -28,3 +28,4 @@ export class TenantService {
     return this.http.post('http://localhost:8080/api/tenants/', abode);
   }
 }
+

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth-service/auth.service';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 declare const $: any;
 
@@ -12,12 +12,12 @@ declare interface RouteInfo {
 }
 
 export const ROUTES_ADMIN: RouteInfo[] = [
-    { path: '/admin', title: 'Početna',  icon: 'pe-7s-home', class: '' },
-    { path: '/admin/lists/users', title: 'Lista korisnika',  icon: 'pe-7s-id', class: '' },
-    { path: '/admin/lists/buildings', title: 'Lista Zgrada',  icon: 'pe-7s-culture', class: '' },
-    { path: '/admin/lists/firms', title: 'Lista Firmi',  icon: 'pe-7s-config', class: '' },
-    { path: '/admin/news/building', title: 'Dodavanje Zgradu',  icon: 'pe-7s-door-lock', class: '' },
-    { path: '/admin/news/firm', title: 'Dodavanje Firmu',  icon: 'pe-7s-plus', class: '' }
+  { path: '/admin', title: 'Početna', icon: 'pe-7s-home', class: '' },
+  { path: '/admin/lists/users', title: 'Lista korisnika', icon: 'pe-7s-id', class: '' },
+  { path: '/admin/lists/buildings', title: 'Lista Zgrada', icon: 'pe-7s-culture', class: '' },
+  { path: '/admin/lists/firms', title: 'Lista Firmi', icon: 'pe-7s-config', class: '' },
+  { path: '/admin/news/building', title: 'Dodavanje Zgradu', icon: 'pe-7s-door-lock', class: '' },
+  { path: '/admin/news/firm', title: 'Dodavanje Firmu', icon: 'pe-7s-plus', class: '' }
 ];
 
 @Component({
@@ -58,8 +58,10 @@ export class SidebarComponent implements OnInit {
       });
       this.title = 'ZAPOSLENI';
       this.ROUTES_EMPLOYEE = [
+
         {path: '/employee/' + this.employee_id, title: 'Početna', icon: 'pe-7s-graph', class: ''},
         {path: '/employee/' + this.employee_id + '/problems', title: 'Popravke', icon: 'pe-7s-note2', class: ''},
+
       ];
       this.menuItems = this.ROUTES_EMPLOYEE;
     } else if (sidebarType === 'tenant') {
@@ -70,6 +72,8 @@ export class SidebarComponent implements OnInit {
       this.ROUTES_TENANT = [
         { path: '/tenant/' + this.tenants_id, title: 'Početna', icon: 'pe-7s-home', class: '' },
         { path: '/tenant/' + this.tenants_id + '/problems', title: 'Kvarovi', icon: 'pe-7s-tools', class: '' },
+        { path: '/tenant/' + this.tenants_id + '/surveys', title: 'Ankete', icon: 'pe-7s-news-paper', class: ''}
+
       ];
       for (const tenant of token.tenants) {
         if (tenant.tenant === this.tenants_id) {
@@ -80,6 +84,7 @@ export class SidebarComponent implements OnInit {
             if (tenant.supervisor) {
               this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
                // { path: '/tenant/' + this.tenants_id, title: 'Predsedničko dugme', icon: 'pe-7s-piggy', class: '' },
+
               );
             }
           }
@@ -89,9 +94,6 @@ export class SidebarComponent implements OnInit {
       this.menuItems = this.ROUTES_TENANT;
     } else if (sidebarType === 'user') {
       this.title = 'Vaš nalog';
-      const ROUTES = [
-        {path: '', title: 'Obrišite nalog', icon: 'pe-7s-hammer', class: ''}
-      ];
     }
   }
 
