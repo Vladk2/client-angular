@@ -59,7 +59,7 @@ const routes: Routes = [
     children: [
       { path: ':id', canActivate: [TenantGuard], component: TenantHomeComponent },
       { path: ':id/problems', canActivate: [TenantGuard], component: ProblemHomeComponent },
-      { path: ':id/problems/new', canActivate: [TenantGuard], component: ProblemPostingComponent },
+      { path: ':id/problems/report', canActivate: [TenantGuard], component: ProblemPostingComponent },
       { path: ':id/parliament', canActivate: [TenantGuard], component: ParliamentHomeComponent }
     ]
   },
