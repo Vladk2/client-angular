@@ -14,23 +14,25 @@
   </div>
   <div style="text-align:center" *ngIf="problems.length == 0">
     <h4>Trenutno nema aktivnih kvarova.</h4>
-  </div> 
-  <div *ngFor="let problem of problems" class="card modal-dialog">
 
+  </div>
+  <div *ngFor="let problem of problems" class="card modal-dialog">
     <p class="problemHeader stats">KVAR</p>
     <p class="problemTitle"> {{problem.title}} </p>
     <p class="problemDesc"> {{problem.description}} </p>
-    <p-galleria [images]="images" panelHeight="350"></p-galleria>
+    <span *ngIf="problem.imgNo != 0">
+    <p-galleria [images]="images[problem.id]" panelHeight="350"></p-galleria>
+    </span>
     <p class="problemDesc stats"> Datum popravke: {{problem.repairDate}} </p>
     <div *ngIf='current_role === "tenant" && problem.tenant.id == role_id' style="text-align:center">
-      <button class="btn btn-default" (click)="resolveProblem(problem.id)" style="margin-bottom:5px;">Označi kvar kao otklonjen</button>
+      <button class="btn btn-default" style="margin-bottom:5px;" (click)="resolveProblemConfirm(problem.id)">Kvar je otklonjen</button>
     </div>
     <div style="text-align:center">
       <span *ngIf='current_role === "employee" || (problem.firm == null && is_supervisor)'>
-        <button class="btn btn-default btn-fill" (click)="forwardProblem(problem.id)">Prosledi kvar</button>
+        <button class="btn btn-default btn-fill" (click)="forwardProblemDialog(problem.id)">Prosledi kvar</button>
       </span>
       <span *ngIf='current_role === "employee"'>
-        <button class="btn btn-default btn-fill" (click)="setRepairDate(problem.id)">Zakaži datum popravke</button>
+        <button class="btn btn-default btn-fill" (click)="repairDateDialog(problem.id)">Zakaži datum popravke</button>
       </span>
     </div>
 
@@ -43,13 +45,14 @@
     <hr>
     <div *ngIf="visibleComments['problem' + problem.id] == false" class="showComments" style="text-align:center;">
       <p>
-        <i (click)="showComments(problem.id)" style="cursor:pointer">Komentari</i>
+        <i (click)="showComments(problem.id)" class="showCommentsText">Komentari</i>
       </p>
       <hr>
     </div>
     <div *ngIf="visibleComments['problem' + problem.id] == true" class="comments">
       <div *ngFor="let comm of comments" class="comment">
-        <div *ngIf="comm.problem.id === problem.id">
+
+        <div *ngIf=" comm.problem.id === problem.id">
           <div class="userComment">
             <i class="fa fa-user-o"></i> {{comm.creator.name}} {{comm.creator.last_name}}
             <span style="float:right" class="stats">{{comm.date}}</span>
@@ -59,16 +62,63 @@
           </div>
           <hr>
         </div>
-        
       </div>
       <div class="commentPosting" style="height:100px">
         <textarea [(ngModel)]="newComment.message" placeholder="Unesite komentar..." class="form-control commentTextArea" rows="2"></textarea>
         <button class="btn btn-default btn-fill postComment" (click)="postComment(problem.id)">Pošalji</button>
       </div>
-
     </div>
+  </div>
+</div>
+<!-- Modals are bellow -->
 
+<!-- ResolveProblem Modal -->
+<p-confirmDialog appendTo="body" [(visible)]="displayResolveDialog" width="425">
+  <p-footer>
+    <div class="row">
+      <div class="col-md-6" style="text-align: left;">
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button type="submit" class="btn btn-default btn-fill" (click)="resolveProblem()">Potvrdi</button>
+      </div>
+    </div>
+  </p-footer>
+</p-confirmDialog>
+
+<!-- ForwardProblem Modal -->
+<p-dialog appendTo="body" header="Prosleđivanje kvara" [(visible)]="displayForwardDialog" modal="modal" width="350" [responsive]="true">
+  <div style="text-align:center" *ngIf="allFirms.length == 0">
+    <p>Ne postoji više registrovanih firmi kojima možete proslediti kvar.</p>
+  </div>
+  <div *ngIf="allFirms.length != 0">
+    <div *ngFor="let firm of allFirms">
+      <div class="firmToForward" (click)="firmChosen(firm.id, firm.firm_name)"> {{firm.firm_name}}, {{firm.address.city}} </div>
+      <hr style="margin:0">
+    </div>
+    <div class="modal-footer row">
+      <div class="col-md-6" style="text-align: left;">
+        <b>{{ clickedFirm.name }}</b>
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button type="submit" class="btn btn-default btn-fill" (click)="forwardProblem()">Prosledi kvar</button>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+<!-- SetRepairDate Modal -->
+<p-dialog appendTo="body" header="Zakazivanje datuma popravke" [(visible)]="displayRepairDateDialog" modal="modal" width="350"
+  [responsive]="true">
+  <div class="calendar">
+  <p-calendar  (click)="showDate()"  showTime="true" [(ngModel)]="repairDate" [inline]="true"></p-calendar>
+  </div>
+  <div class="modal-footer row">
+    <div class="col-md-6" style="text-align: left;">
+      <b>{{ chosenRepairDate }}</b>
+    </div>
+    <div class="col-md-6" style="text-align: right;">
+      <button type="submit" class="btn btn-default btn-fill" (click)="setRepairDate()">Zakaži popravku</button>
+    </div>
   </div>
 
-
-</div>
+</p-dialog>

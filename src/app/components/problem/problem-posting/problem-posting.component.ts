@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProblemService } from '../../../services/problem-service/problem.service';
 import { AlertService } from '../../../services/alert-service/alert.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Problem } from '../../../models/problem/problem.model';
 @Component({
   selector: 'app-problem-posting',
   templateUrl: './problem-posting.component.html',
@@ -10,12 +11,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProblemPostingComponent implements OnInit {
 
-  private problem: any = {};
-  private images: File[];
-  private tenantId;
+  private problem: Problem;
+  private tenantId: any;
+  private postClicked = false;
+  private loading = false;
+  private image: any;
   constructor(private problemService: ProblemService,
-             private activeRoute: ActivatedRoute,
-             private alertService: AlertService) { }
+    private activeRoute: ActivatedRoute,
+    private alertService: AlertService,
+    private router: Router) {
+    this.problem = new Problem();
+  }
 
   ngOnInit() {
     localStorage.setItem('sidebar', 'tenant');
@@ -27,19 +33,15 @@ export class ProblemPostingComponent implements OnInit {
   }
 
   postProblem() {
-    console.log(this.images);
-    const problem = {
-      'title': this.problem.title,
-      'description': this.problem.desc,
-      'openForAll': this.problem.openForAll,
-      'images': this.images
-    };
-    this.problemService.postProblem(this.tenantId, problem).subscribe((res: any) => {
+    this.postClicked = true;
+    this.loading = true;
+    const that = this;
+    this.problemService.postProblem(this.tenantId, this.problem).subscribe((res: any) => {
+      setTimeout(function () {
+        that.alertService.success('Kvar uspešno postavljen!', true);
+        that.router.navigate(['tenant/' + that.tenantId + '/problems']);
+      }, 3000);
 
-      const responseMessage = res.message;
-
-      // ovo mozda otkomentarisati kada se doda iks za zatvaranje na alert divu
-      // this.alertService.success(responseMessage", true);
     },
       error => {
         this.alertService.error('GREŠKA: Greška prilikom postavljanja kvara.');
@@ -47,10 +49,32 @@ export class ProblemPostingComponent implements OnInit {
 
   }
 
+  getBase64(file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      return reader.result;
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
+
   // puts uploaded images into property images
   uploadImages(event) {
-    this.images = event.files;
-    console.log(event.files);
+    this.problem.images = [];
+    const that = this;
+    for (const img of event.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(img);
+      reader.onload = function () {
+        that.problem.images.push(reader.result);
+        // console.log(reader.result);
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+    }
 
   }
 

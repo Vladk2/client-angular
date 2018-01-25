@@ -7,24 +7,25 @@
 
   <br>
   <div class="card modal-dialog modal-lg" id="proposeDiv">
+    <div *ngIf="loading"><div class="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div></div>
     <div class="card-header ">
       <p class="postProblemHeader stats">PRIJAVA NOVOG KVARA</p>
     </div>
     <input class="form-control" id="postProblemTextArea" placeholder="Unesite naslov kvara" type="text" [(ngModel)]="problem.title"
     />
     <hr>
-    <textarea id="postProblemTextArea" [(ngModel)]="problem.desc" placeholder="Unesite opis kvara..." class="form-control" rows="3"></textarea>
+    <textarea id="postProblemTextArea" [(ngModel)]="problem.description" placeholder="Unesite opis kvara..." class="form-control" rows="3"></textarea>
     <hr>
     <p style="text-align:center;display:block" class="checkbox-inline">
       <input type="checkbox" style="width:1.1em;height:1.1em" value="" [(ngModel)]="problem.openForAll">Kvar/problem je vezan za celu zgradu</p>
     <hr>
     <div id="imageUpload">
-      <i id="uploadText">Dodajte slike kvara ili ih prevucite ispod</i>
-      <p-fileUpload customUpload="true" chooseLabel="Dodaj" maxFileSize="2000000" auto="auto" (uploadHandler)="uploadImages($event)"
+      <i id="uploadText">Dodajte slike kvara ili ih prevucite ispod (slike ce biti prikazane u 16:9 formatu)</i>
+      <p-fileUpload customUpload="true" chooseLabel="Dodaj" maxFileSize="1000000" auto="auto" (uploadHandler)="uploadImages($event)"
         styleClass="imageUpload" accept="image/*" multiple="multiple">
 
       </p-fileUpload>
-      <button (click)="postProblem()" [disabled]="problem.title == '' || problem.desc == ''" id="postProblem" class="btn btn-default btn-fill ">PRIJAVI KVAR</button>
+      <button (click)="postProblem()" [disabled]="problem.title === '' || problem.desc === '' || postClicked" id="postProblem" class="btn btn-default btn-fill ">PRIJAVI KVAR</button>
     </div>
   </div>
   <br>

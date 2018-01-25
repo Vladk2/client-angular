@@ -38,3 +38,21 @@
     float:right;
     margin-right: 5px;
 }
+
+.firmToForward { 
+    margin:10px;
+}
+.firmToForward:hover {
+    background-color: #e2e2e2;
+    cursor: pointer;
+    font-size: 1.3em;
+}
+.calendar {
+    margin:20px;
+    text-align: center;
+}
+
+.showCommentsText:hover {
+    cursor: pointer;
+    color: darkcyan;
+}

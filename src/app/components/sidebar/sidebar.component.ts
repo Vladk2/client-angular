@@ -79,7 +79,7 @@ export class SidebarComponent implements OnInit {
             );
             if (tenant.supervisor) {
               this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
-                { path: '/tenant/' + this.tenants_id, title: 'Predsedničko dugme', icon: 'pe-7s-piggy', class: '' },
+               // { path: '/tenant/' + this.tenants_id, title: 'Predsedničko dugme', icon: 'pe-7s-piggy', class: '' },
               );
             }
           }
