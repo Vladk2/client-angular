@@ -33,5 +33,4 @@ export class ProblemService {
     return this.http.patch('http://localhost:8080/api/problems/setRepairDate/' + probId, repairDate);
   }
 
-
 }
