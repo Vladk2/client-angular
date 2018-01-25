@@ -1,29 +1,29 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {AppRoutingModule} from './app-routing.module';
-import {SidebarModule} from './components/sidebar/sidebar.module';
-import {NavbarModule} from './components/navbar/navbar.module';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
-import {RouterModule, Routes} from '@angular/router';
-import {CalendarModule, DialogModule} from 'primeng/primeng';
-import {ConfirmDialogModule} from 'primeng/primeng';
-import {ConfirmationService} from 'primeng/primeng';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { SidebarModule } from './components/sidebar/sidebar.module';
+import { NavbarModule } from './components/navbar/navbar.module';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+import { CalendarModule, DialogModule } from 'primeng/primeng';
+import { ConfirmDialogModule } from 'primeng/primeng';
+import { ConfirmationService, ProgressSpinnerModule } from 'primeng/primeng';
 
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {TokenInterceptor} from './guards/token.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './guards/token.interceptor';
 
-import {AuthGuard} from './guards/auth.guard';
-import {AnonymusGuard} from './guards/anonymus.guard';
-import {TenantGuard} from './guards/tenant.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { AnonymusGuard } from './guards/anonymus.guard';
+import { TenantGuard } from './guards/tenant.guard';
 
-import {AuthService} from './services/auth-service/auth.service';
-import {AdminService} from './services/admin-service/admin.service';
-import {TenantService} from './services/tenant-service/tenant.service';
-import {AlertService} from './services/alert-service/alert.service';
-import {ParliamentService} from './services/parliament-service/parliament.service';
-import {TokenService} from './guards/token.service';
+import { AuthService } from './services/auth-service/auth.service';
+import { AdminService } from './services/admin-service/admin.service';
+import { TenantService } from './services/tenant-service/tenant.service';
+import { AlertService } from './services/alert-service/alert.service';
+import { ParliamentService } from './services/parliament-service/parliament.service';
+import { TokenService } from './guards/token.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -49,8 +49,11 @@ import { ParliamentProposalsComponent } from './components/parliament/parliament
 import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
 import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
 
-import {UserComponent} from './components/user/user.component';
-import {UserService} from './services/user-service/user.service';
+import { UserComponent } from './components/user/user.component';
+import { UserService } from './services/user-service/user.service';
+
+import { TenantSurveyComponent } from './components/tenant/tenant-survey/tenant-survey.component';
+import { SurveyModule } from "./modules/survey/survey.module";
 
 
 @NgModule({
@@ -89,7 +92,9 @@ import {UserService} from './services/user-service/user.service';
     NavbarModule,
     CalendarModule,
     DialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ProgressSpinnerModule,
+    SurveyModule
   ],
   providers: [
     AdminService,

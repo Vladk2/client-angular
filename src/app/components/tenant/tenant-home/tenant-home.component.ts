@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class TenantHomeComponent implements OnInit {
 
-  private announcements: any[];
+  private announcements: any [];
   private announcement: any = {};
   private loading: boolean;
   private tenants_id: any;
@@ -86,4 +86,3 @@ export class TenantHomeComponent implements OnInit {
       });
   }
 }
-

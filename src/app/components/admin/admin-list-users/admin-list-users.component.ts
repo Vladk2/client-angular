@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AdminService } from '../../../services/admin-service/admin.service';
 
 @Component({
@@ -14,17 +15,16 @@ export class AdminListUsersComponent implements OnInit {
   mesageRemove;
   progres;
   private currentTimeout;
-  constructor( private adminService: AdminService) { this.messageAdd = false; this.mesageRemove = false; this.progres = false; }
+  constructor(private adminService: AdminService) { this.messageAdd = false; this.mesageRemove = false; this.progres = false; }
 
   ngOnInit() {
-
     this.adminService.getAllUser().subscribe(res => {
       this.users = res;
     });
   }
 
   onAddAdmin(event) {
-    this.adminService.addAdmin(event).subscribe(resp =>  {
+    this.adminService.addAdmin(event).subscribe(resp => {
 
       this.progres = true;
 

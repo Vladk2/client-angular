@@ -20,16 +20,13 @@
     <form ngNativeValidate role="form" id="form-user" (ngSubmit)="update()">
       <fieldset>
         <div class="form-group">
-          <input class="form-control" required placeholder="Ime" name="name" type="text" value=""
-                 [(ngModel)]="user.name">
+          <input class="form-control" required placeholder="Ime" name="name" type="text" value="" [(ngModel)]="user.name">
         </div>
         <div class="form-group">
-          <input class="form-control" required placeholder="Prezime" name="last_name" type="text" value=""
-                 [(ngModel)]="user.last_name">
+          <input class="form-control" required placeholder="Prezime" name="last_name" type="text" value="" [(ngModel)]="user.last_name">
         </div>
         <div class="form-group">
-          <input class="form-control" required placeholder="Email" name="email" type="email" value=""
-                 [(ngModel)]="user.email">
+          <input class="form-control" required placeholder="Email" name="email" type="email" value="" [(ngModel)]="user.email">
         </div>
         <input type="submit" class="btn btn-info fill button-big-jasta" value="Ažuriraj">
         <br><br><br>
@@ -49,12 +46,10 @@
     <form role="form" ngNativeValidate (ngSubmit)="updatePassword()">
       <fieldset>
         <div class="form-group">
-          <input class="form-control" required placeholder="Nova lozinka" name="password" type="password" value=""
-                 [(ngModel)]="password.pw">
+          <input class="form-control" required placeholder="Nova lozinka" name="password" type="password" value="" [(ngModel)]="password.pw">
         </div>
         <div class="form-group">
-          <input class="form-control" required placeholder="Potvrdite lozinku" name="repassword" type="password"
-                 value="" [(ngModel)]="password.re_pw">
+          <input class="form-control" required placeholder="Potvrdite lozinku" name="repassword" type="password" value="" [(ngModel)]="password.re_pw">
         </div>
       </fieldset>
       <p-footer>
