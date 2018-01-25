@@ -1,0 +1,24 @@
+.postProblemHeader {
+    margin: 15px;
+    text-align: center;
+}
+
+#postProblem {
+    width:100%;
+    border-radius: 0;
+}
+#imageUpload {
+    height: 100px;
+
+    text-align: center;
+}
+#uploadText { 
+    position: relative; 
+    top: 35%;
+    color: darkgray;
+}
+
+#postProblemTextArea {
+    border: none;
+    resize: none;
+}

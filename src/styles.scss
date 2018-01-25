@@ -25,11 +25,7 @@ body {
 
     background: #fafafa;
     border: none;
-}
-
-.imageUpload .ui-fileupload {
-
-    
+    min-height: 80px;
 }
 
 .imageUpload .ui-fileupload-buttonbar {
@@ -51,20 +47,14 @@ body {
 }
 
 
-.imageUpload .ui-fileupload-choose.ui-button.ui-state-hover, .ui-fileupload-choose.ui-button.ui-state-focus, .ui-fileupload-choose.ui-button.ui-state-active {
-    background-color: grey;
-    border-color: grey;
-    
-}
-
-.completa { 
-    position: fixed;
+.imageUpload .ui-button-icon-only {
+  visibility: hidden;
 }
     
 .ui-panel-images{
-    position: fixed;
-    width: 500px;
-    height: 310px;
-    border: 1px solid #e2e2e2;
+    
+    position: static;
+    width: 600px;
+    height: 350px;
 }
 

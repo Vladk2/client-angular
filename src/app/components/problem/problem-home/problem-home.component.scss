@@ -1,0 +1,58 @@
+#postProblemBtn {
+    width:100%;
+    padding: 20px ;
+    font-size: 1.2em;
+}
+
+.pe-7s-tools {
+    font-size: 1.3em;
+}
+
+.problemHeader {
+    margin: 15px;
+    text-align: center;
+}
+.problemTitle {
+    text-align: center;
+    font-size: 1.5em;
+}
+.problemDesc {
+    margin:20px;
+}
+
+.userComment {
+    font-size: 1.2em;
+    margin:30px;
+}
+
+.contentComment {
+    margin:20px;
+}
+
+.commentTextArea {
+    resize: none;
+    border:none;
+}
+
+.postComment {
+    float:right;
+    margin-right: 5px;
+}
+
+.firmToForward { 
+    margin:10px;
+}
+.firmToForward:hover {
+    background-color: #e2e2e2;
+    cursor: pointer;
+    font-size: 1.3em;
+}
+.calendar {
+    margin:20px;
+    text-align: center;
+}
+
+.showCommentsText:hover {
+    cursor: pointer;
+    color: darkcyan;
+}

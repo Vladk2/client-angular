@@ -53,7 +53,6 @@ export class ParliamentVotingComponent implements OnInit {
       } else {
         this.tenantVoted = false;
       }
-      console.log(this.tenantVoted);
       this.loading = false;
     });
   }

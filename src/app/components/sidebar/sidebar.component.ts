@@ -58,8 +58,10 @@ export class SidebarComponent implements OnInit {
       });
       this.title = 'ZAPOSLENI';
       this.ROUTES_EMPLOYEE = [
-        { path: '/employee/' + this.employee_id, title: 'Početna', icon: 'pe-7s-graph', class: '' },
-        { path: '/employee/' + this.employee_id, title: 'Popravke', icon: 'pe-7s-note2', class: '' },
+
+        {path: '/employee/' + this.employee_id, title: 'Početna', icon: 'pe-7s-graph', class: ''},
+        {path: '/employee/' + this.employee_id + '/problems', title: 'Popravke', icon: 'pe-7s-note2', class: ''},
+
       ];
       this.menuItems = this.ROUTES_EMPLOYEE;
     } else if (sidebarType === 'tenant') {
@@ -69,18 +71,20 @@ export class SidebarComponent implements OnInit {
       });
       this.ROUTES_TENANT = [
         { path: '/tenant/' + this.tenants_id, title: 'Početna', icon: 'pe-7s-home', class: '' },
-        { path: '/tenant/' + this.tenants_id + '/kvarovi', title: 'Kvarovi', icon: 'pe-7s-tools', class: '' },
+        { path: '/tenant/' + this.tenants_id + '/problems', title: 'Kvarovi', icon: 'pe-7s-tools', class: '' },
         { path: '/tenant/' + this.tenants_id + '/surveys', title: 'Ankete', icon: 'pe-7s-news-paper', class: ''}
+
       ];
       for (const tenant of token.tenants) {
         if (tenant.tenant === this.tenants_id) {
           if (tenant.owner === 'true') {
             this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
-              { path: '/tenant/' + this.tenants_id + '/skupstina', title: 'Skupština stanara', icon: 'pe-7s-hammer', class: '' },
+              { path: '/tenant/' + this.tenants_id + '/parliament', title: 'Skupština stanara', icon: 'pe-7s-hammer', class: '' },
             );
             if (tenant.supervisor) {
               this.ROUTES_TENANT = this.ROUTES_TENANT.concat(
-                { path: '/tenant/' + this.tenants_id, title: 'Predsedničko dugme', icon: 'pe-7s-piggy', class: '' },
+               // { path: '/tenant/' + this.tenants_id, title: 'Predsedničko dugme', icon: 'pe-7s-piggy', class: '' },
+
               );
             }
           }

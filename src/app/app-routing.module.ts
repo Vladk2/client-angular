@@ -14,7 +14,7 @@ import { EmployeeHomeComponent } from './components/employee/employee-home/emplo
 
 import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
 import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home.component';
-import { TenantProblemComponent } from './components/tenant/tenant-problem/tenant-problem.component';
+
 import { TenantSurveyComponent } from "./components/tenant/tenant-survey/tenant-survey.component";
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -32,6 +32,8 @@ import { ParliamentVotingComponent } from './components/parliament/parliament-vo
 import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
 
 import { UserComponent } from './components/user/user.component';
+import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
+import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
 
 
 const routes: Routes = [
@@ -57,17 +59,20 @@ const routes: Routes = [
   {
     path: 'employee', canActivateChild: [AuthGuard], data: { expectedRole: 'EMPLOYEE' },
     children: [
-      { path: ':id', component: EmployeeHomeComponent }
+
+      { path: ':id', component: EmployeeHomeComponent },
+      { path: ':id/problems', component: ProblemHomeComponent }
     ]
   },
 
-  {
-    path: 'tenant', canActivateChild: [AuthGuard], data: { expectedRole: 'TENANT' },
+  { path: 'tenant', canActivateChild: [AuthGuard], data: { expectedRole: 'TENANT'},
     children: [
       { path: ':id', canActivate: [TenantGuard], component: TenantHomeComponent },
-      { path: ':id/kvarovi', canActivate: [TenantGuard], component: TenantProblemComponent },
-      { path: ':id/skupstina', canActivate: [TenantGuard], component: ParliamentHomeComponent },
+      { path: ':id/problems', canActivate: [TenantGuard], component: ProblemHomeComponent },
+      { path: ':id/problems/report', canActivate: [TenantGuard], component: ProblemPostingComponent },
+      { path: ':id/parliament', canActivate: [TenantGuard], component: ParliamentHomeComponent },
       { path: ':id/surveys', canActivate: [TenantGuard], component: TenantSurveyComponent }
+
     ]
   },
   { path: '?', component: NotFoundComponent },
@@ -82,3 +87,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
+
