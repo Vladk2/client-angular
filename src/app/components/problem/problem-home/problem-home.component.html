@@ -9,7 +9,7 @@
   <app-navbar-cmp></app-navbar-cmp>
 
   <div *ngIf='current_role === "tenant"' class="card modal-dialog">
-    <button id="postProblemBtn" [routerLink]="['/tenant/'+ role_id +'/problems/new']" class="btn btn-default btn-fill">
+    <button id="postProblemBtn" [routerLink]="['/tenant/'+ role_id +'/problems/report']" class="btn btn-default btn-fill">
       <span class="pe-7s-tools"> </span> &nbsp; PRIJAVI NOVI KVAR</button>
   </div>
   <div style="text-align:center" *ngIf="problems.length == 0">

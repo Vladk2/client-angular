@@ -15,7 +15,7 @@ import { EmployeeHomeComponent } from './components/employee/employee-home/emplo
 import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
 import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home.component';
 
-import { TenantSurveyComponent } from "./components/tenant/tenant-survey/tenant-survey.component";
+import { TenantSurveyComponent } from './components/tenant/tenant-survey/tenant-survey.component';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
 

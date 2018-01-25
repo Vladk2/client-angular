@@ -53,7 +53,7 @@ import { ProblemHomeComponent } from './components/problem/problem-home/problem-
 import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
 
 import { TenantSurveyComponent } from './components/tenant/tenant-survey/tenant-survey.component';
-import { SurveyModule } from "./modules/survey/survey.module";
+import { SurveyModule } from './modules/survey/survey.module';
 
 
 
@@ -98,8 +98,7 @@ import { SurveyModule } from "./modules/survey/survey.module";
     DialogModule,
     ConfirmDialogModule,
     FileUploadModule,
-    GalleriaModule, 
-    ProgressSpinnerModule,
+    GalleriaModule,
     SurveyModule
   ],
   providers: [
