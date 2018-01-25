@@ -78,16 +78,19 @@
     </div>
   </div>
 
-  <!-- <p-dialog appendTo="body" [(visible)]="reportDialog" header="Trenutni izveštaj ankete" modal="modal" [responsive]="true">
+  <p-dialog appendTo="body" [(visible)]="reportDialog" header="Trenutni izveštaj ankete" modal="modal" [responsive]="true">
     <div class="container">
       <div style="padding-left: 10%; padding-right: 10%;">
-        <div class="row" *ngFor="let res of RESPONSE;">
+        <div class="row" *ngFor="let res of surveyResponses;">
           <div class="col-md-12" style="text-align: center; width: 100%;">
             <br />
             <p>
               {{res.question.question}}
             </p>
             <br />
+            <p *ngIf="res.chartType === 'text'">
+              {{res.values}}
+            </p>
             <p-chart *ngIf="res.chartType !== 'text'" type="{{res.chartType}}" [data]="res.data" width="40" height="7"></p-chart>
           </div>
         </div>
@@ -104,7 +107,7 @@
         </div>
       </div>
     </p-footer>
-  </p-dialog> -->
+  </p-dialog>
 
   <p-dialog appendTo="body" header="Kreiranje ankete" [(visible)]="createSurveyDialog" modal="modal" width="800"
             [responsive]="true">
@@ -173,7 +176,7 @@
                 <label>{{item.question.question}}</label> &nbsp;&nbsp;
               </div>
               <div class="col-md-6">
-                <input type="checkbox" required name="checkbox" class="form-control" [(ngModel)]="item.answer"/>
+                <input type="checkbox" name="checkbox" class="form-control" [(ngModel)]="item.answer"/>
               </div>
             </div>
             <div class="row" *ngIf="item.question.typeQuestion === 'TEXT'">

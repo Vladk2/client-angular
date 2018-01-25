@@ -3,18 +3,20 @@ import {Question} from './question.model';
 export class SurveyResponse {
   public question: Question;
   public data: any;
+  public chartType;
   public values: any;
 
   constructor() {
   }
 
-  setData(qType, values) {
+  setData(qType) {
     if (qType === 'BOOL') {
+      this.chartType = 'pie';
       this.data = {
         labels: ['Da', 'Ne'],
         datasets: [
           {
-            data: [values['yes'], values['no']],
+            data: [this.values['yes'], this.values['no']],
             backgroundColor: [
               '#FF6384',
               '#36A2EB'
@@ -27,11 +29,12 @@ export class SurveyResponse {
         ]
       };
     } else if (qType === 'GRADE') {
+      this.chartType = 'doughnut';
       this.data = {
         labels: ['5', '4', '3', '2', '1'],
         datasets: [
           {
-            data: [values['a'], values['b'], values['c'], values['d'], values['f']],
+            data: [this.values['a'], this.values['b'], this.values['c'], this.values['d'], this.values['f']],
             backgroundColor: [
               '#FF6384',
               '#36A2EB',
@@ -49,7 +52,7 @@ export class SurveyResponse {
           }]
       };
     } else {
-      this.data = values;
+      this.data = this.values;
     }
   }
 

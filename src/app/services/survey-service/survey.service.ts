@@ -119,10 +119,13 @@ export class SurveyService {
       surveyResponse.question = q;
       if (surveyResponse.question.typeQuestion === 'BOOL') {
         surveyResponse.values = yesNo;
+        surveyResponse.setData(surveyResponse.question.typeQuestion);
       } else if (surveyResponse.question.typeQuestion === 'GRADE') {
         surveyResponse.values = grades;
+        surveyResponse.setData(surveyResponse.question.typeQuestion);
       } else {
         surveyResponse.values = textAnswers;
+        surveyResponse.setData(surveyResponse.question.typeQuestion);
       }
       surveyResponses.push(surveyResponse);
     });
