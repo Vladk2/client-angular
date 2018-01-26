@@ -1,52 +1,36 @@
 <div class="sidebar" data-color="black" data-image="">
-    <app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
 </div>
 
 <div class="main-panel">
-	<app-navbar-cmp></app-navbar-cmp>
-    
+  <app-navbar-cmp></app-navbar-cmp>
 
-
-
-<div class="main-content" >
+  <div class="main-content">
     <div class="container-fluid">
-        <div class="row">
-            
-            <div class="col-md-12" >
-                <div class="card card-user">
-                    <div class="image">
-                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
-                    </div>
-                    <div class="content">
-                        <div class="author">
-                            <a href="#">
-                                <img class="avatar border-gray" src="assets/img/face-3.jpg" alt="..."/>
+      <div class="row">
 
-                                <h4 class="title">{{user.name}} {{user.last_name}}<br />
-                                    <small>{{user.username}}</small>
-                                </h4>
-
-                                <h5 class="border-gray">
-                                    EMAIL: {{user.email}}
-                                </h5>
-                            </a>
-                            <p class="description text-center" *ngIf="user.activated" > "Profile je aktivan" </p>
-                            
-                        </div>
-
-                        
-                        
-                        
-                    </div>
-                    
-                </div>
+        <div class="col-md-12">
+          <div class="card card-user">
+            <div class="image">
+              <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
+                   alt="..."/>
             </div>
+            <div class="content">
+              <div class="author">
+                <a>
+                  <img class="avatar border-gray" src="assets/img/face-3.jpg" alt="..."/>
+
+                  <h4 class="title">{{user.name}} {{user.last_name}}<br/>
+                    <small>{{user.username}}</small>
+                  </h4>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
-
-
+  </div>
 
 
 </div>
