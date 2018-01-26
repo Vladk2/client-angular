@@ -5,13 +5,13 @@
 <div class="main-panel">
   <app-navbar-cmp></app-navbar-cmp>
 
-  <div *ngIf="progres" id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
+  <div *ngIf="progress" id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
 
   <div class="main-content">
     <div class="alert alert-success" *ngIf="messageAdd">
       <span><b> Dodato - </b> Uspesno ste dodali novg admina!</span>
     </div>
-    <div class="alert alert-warning" *ngIf="mesageRemove">
+    <div class="alert alert-warning" *ngIf="messageRemove">
       <span><b> Uklonjeno - </b> Uspesno ste uklonili admina!</span>
     </div>
     <div class="container-fluid">
@@ -19,8 +19,8 @@
         <div class="col-md-12">
           <div class="card">
             <div class="header">
-              <h4 class="title">Striped Table with Hover</h4>
-              <p class="category">Here is a subtitle for this table</p>
+              <h4 class="title">Prikaz svih korisnika</h4>
+              <p class="category"></p>
             </div>
             <div class="content table-responsive table-full-width">
               <table class="table table-hover table-striped">
@@ -32,6 +32,7 @@
                     <th>Korisnicko ime</th>
                     <th>Email</th>
                     <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -41,11 +42,11 @@
                     <td>{{item.last_name}}</td>
                     <td>{{item.username}}</td>
                     <td>{{item.email}}</td>
-                    <td *ngIf="item.roles[0] != null"><button *ngIf="item.roles[0].name === 'ADMIN'" type="submit" class="btn btn-info btn-fill pull-right" (click)="onRemoveAdmin(item.id)">Ukloni admina</button>
-                      <button *ngIf="item.roles[0].name === 'EMPLOYEE'" type="submit" class="btn btn-info btn-fill pull-right" (click)="onAddAdmin(item.id)">Dodaj admina</button>
+                    <td *ngIf="item.roles[0] != null"><button *ngIf="item.roles[0].name === 'ADMIN'" type="submit" class="btn btn-info btn-fill" (click)="onRemoveAdmin(item.id)">Ukloni admina</button>
+                      <button *ngIf="item.roles[0].name === 'EMPLOYEE'" type="submit" class="btn btn-info btn-fill" (click)="onAddAdmin(item.id)">Dodaj admina</button>
                     </td>
-                    <td *ngIf="item.roles[0] == null"><button type="submit" class="btn btn-info  pull-right" (click)="onAddAdmin(item.id)">Dodaj admina</button></td>
-
+                    <td *ngIf="item.roles[0] == null"><button type="submit" class="btn btn-info" (click)="onAddAdmin(item.id)">Dodaj admina</button></td>
+                    <td><button class="btn btn-danger" (click)="openDeleteDialog(item.username)">Obriši</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -57,6 +58,18 @@
       </div>
     </div>
   </div>
+
+  <p-confirmDialog appendTo="body" [(visible)]="deleteDialog" icon="fa fa-question-circle" width="425">
+    <p-footer>
+      <div class="row">
+        <div class="col-md-6" style="text-align: left;">
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <button type="submit" class="btn btn-danger" (click)="destroyUser()">Obriši</button>
+        </div>
+      </div>
+    </p-footer>
+  </p-confirmDialog>
 
 
 </div>

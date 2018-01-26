@@ -1,51 +1,95 @@
 <div class="sidebar" data-color="black" data-image="">
-    <app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
 </div>
 
 <div class="main-panel">
-	<app-navbar-cmp></app-navbar-cmp>
+  <app-navbar-cmp></app-navbar-cmp>
 
+  <div class="main-content">
+    <p-dialog appendTo="body" header="Dodeli/ukloni predsednika" [(visible)]="tenantsModal" modal="modal" width="800"
+              [responsive]="true">
+      <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Korisnicko ime</th>
+            <th>Email</th>
+            <th>Broj stana</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of tenants">
+            <td>{{item.user.id}}</td>
+            <td>{{item.user.name}}</td>
+            <td>{{item.user.last_name}}</td>
+            <td>{{item.user.username}}</td>
+            <td>{{item.user.email}}</td>
+            <td>{{item.apartmentNo}}</td>
+            <button *ngIf="item.supervisor === null" class="btn btn-info btn-fill" (click)="makeSupervisor(item.id, item.building.id)">
+              Dodaj
+            </button>
+            <button *ngIf="item.supervisor" class="btn btn-info btn-fill" (click)="removeSupervisor(item.supervisor, item.building.id)">
+              Ukloni
+            </button>
+          </tr>
+          </tbody>
+        </table>
 
-	<div class="main-content">
-	    <div class="container-fluid">
-	        <div class="row">
-	            <div class="col-md-12">
-	                <div class="card">
-	                    <div class="header">
-	                        <h4 class="title">Prikaz svih zgrada</h4>
-	                        <p class="category"></p>
-	                    </div>
-	                    <div class="content table-responsive table-full-width">
-	                          <table class="table table-hover table-striped">
-	                                <thead>
-	                                    <tr>
-	                                        <th>Id</th>
-	                                        <th>Ulica</th>
-	                                        <th>Broj</th>
-	                                        <th>Grad</th>
-	                                        <th>Zip</th>
-	                                    </tr>
-	                                </thead>
-	                                <tbody>
-	                                    <tr *ngFor="let item of buildings">
-	                                    	<td>{{item.id}} </td>
-	                                    	<td>{{item.addressDTO.street}}</td>
-	                                    	<td>{{item.addressDTO.number}}</td>
-	                                    	<td>{{item.addressDTO.city}}</td>
-	                                    	<td>{{item.addressDTO.zip}}</td>
-	                                    	
-	                                    	
-	                                    </tr>
-	                                </tbody>
-	                          </table>
+      </div>
+      <p-footer>
+        <div class="modal-footer row">
+          <div class="col-md-6" style="text-align: left;">
 
-	                    </div>
-	                </div>
-	            </div>
-	            
-	        </div>
-	    </div>
-	</div>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideModal()">Zatvori
+            </button>
+          </div>
+        </div>
+      </p-footer>
+    </p-dialog>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="header">
+              <h4 class="title">Prikaz svih zgrada</h4>
+              <p class="category"></p>
+            </div>
+            <div class="content table-responsive table-full-width">
+              <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Ulica</th>
+                  <th>Broj</th>
+                  <th>Grad</th>
+                  <th>Zip</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="cursor: pointer;" *ngFor="let item of buildings" (click)="openTenantsModal(item.id)">
+                  <td>{{item.id}}</td>
+                  <td>{{item.addressDTO.street}}</td>
+                  <td>{{item.addressDTO.number}}</td>
+                  <td>{{item.addressDTO.city}}</td>
+                  <td>{{item.addressDTO.zip}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 
 </div>

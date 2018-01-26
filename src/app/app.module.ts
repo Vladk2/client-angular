@@ -48,6 +48,7 @@ import { UserComponent } from './components/user/user.component';
 import { SurveyModule } from './modules/survey/survey.module';
 import { ParliamentModule } from './modules/parliament/parliament.module';
 import { ProblemModule } from './modules/problem/problem.module';
+import {SupervisorService} from './services/supervisor-service/supervisor.service';
 
 
 
@@ -69,7 +70,6 @@ import { ProblemModule } from './modules/problem/problem.module';
     AdminListFirmsComponent,
     TenantRegistrationComponent,
     UserComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -100,6 +100,7 @@ import { ProblemModule } from './modules/problem/problem.module';
     AuthService,
     AlertService,
     ConfirmationService,
+    SupervisorService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

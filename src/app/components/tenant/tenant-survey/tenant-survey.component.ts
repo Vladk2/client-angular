@@ -121,7 +121,6 @@ export class TenantSurveyComponent implements OnInit {
     this.newSurvey.questionDTO.forEach(q => {
       if (q.question === this.newQuestion.question) {
         found = true;
-        //this.resetMessageDivs();
         this.messageQuestionDuplicate = true;
         return;
       }

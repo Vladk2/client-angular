@@ -60,4 +60,17 @@ export class AdminService {
   removeFirm(id_firm): Observable<any> {
     return this.http.delete('http://localhost:8080/api/admins/firm/' + id_firm);
   }
+
+  getTenantsByBuilding(buildingId): Observable<any> {
+    return this.http.get('http://localhost:8080/api/admins/tenants/buildings/' + buildingId);
+  }
+
+  makeSupervisor(tenantId, buildingId): Observable<any> {
+    return this.http.post('http://localhost:8080/api/admins/supervisors/tenants/' + tenantId + '/buildings/' + buildingId, {});
+  }
+
+  deleteUser(userId): Observable<any> {
+    return this.http.delete('http://localhost:8080/api/admins/users/' + userId);
+  }
+
 }

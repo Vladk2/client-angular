@@ -16,10 +16,10 @@ export class UserComponent implements OnInit {
   private user: any = {};
   private password: any = {};
 
-  private messageSuccess: boolean = false;
-  private messageWarningEmail: boolean = false;
-  private messageWarningPassword: boolean = false;
-  private display: boolean = false;
+  private messageSuccess = false;
+  private messageWarningEmail = false;
+  private messageWarningPassword = false;
+  private display = false;
 
   constructor(private authService: AuthService,
     private userService: UserService,

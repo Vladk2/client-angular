@@ -41,18 +41,18 @@ const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [AnonymusGuard] },
   { path: 'registration', component: RegistrationComponent, canActivate: [AnonymusGuard] },
-  { path: 'profil', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'new_abode', component: TenantRegistrationComponent, canActivate: [AuthGuard] },
   {
     path: 'admin', canActivateChild: [AuthGuard], data: { expectedRole: 'ADMIN' },
     children: [
       { path: '', component: AdminHomeComponent },
       { path: 'lists', component: AdminHomeComponent },
-      { path: 'news/building', component: AdminNewBuildingComponent },
-      { path: 'news/firm', component: AdminNewFirmComponent },
-      { path: 'lists/users', component: AdminListUsersComponent },
-      { path: 'lists/buildings', component: AdminListBuildingsComponent },
-      { path: 'lists/firms', component: AdminListFirmsComponent }
+      { path: 'building/new', component: AdminNewBuildingComponent },
+      { path: 'firm/new', component: AdminNewFirmComponent },
+      { path: 'users', component: AdminListUsersComponent },
+      { path: 'buildings', component: AdminListBuildingsComponent },
+      { path: 'firms', component: AdminListFirmsComponent }
     ]
   },
 
