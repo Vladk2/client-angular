@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin-service/admin.service';
 import { AuthService } from '../../../services/auth-service/auth.service';
+import { User } from '../../../models/user/user.model';
 
 @Component({
   selector: 'app-admin-home',
@@ -9,12 +10,11 @@ import { AuthService } from '../../../services/auth-service/auth.service';
 })
 export class AdminHomeComponent implements OnInit {
 
-  private user: any = {};
-  message;
-  message1;
+  private user: User;
 
-  constructor(private adminService: AdminService, private authService: AuthService) {
-    this.message = false; this.message1 = false;
+  constructor(private adminService: AdminService, 
+              private authService: AuthService) {
+    this.user = new User();
   }
 
   ngOnInit() {

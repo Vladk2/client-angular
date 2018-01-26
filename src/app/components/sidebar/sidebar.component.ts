@@ -16,8 +16,8 @@ export const ROUTES_ADMIN: RouteInfo[] = [
   { path: '/admin/users', title: 'Lista korisnika', icon: 'pe-7s-id', class: '' },
   { path: '/admin/buildings', title: 'Lista Zgrada', icon: 'pe-7s-culture', class: '' },
   { path: '/admin/firms', title: 'Lista Firmi', icon: 'pe-7s-config', class: '' },
-  { path: '/admin/building/new', title: 'Dodavanje Zgrade', icon: 'pe-7s-door-lock', class: '' },
-  { path: '/admin/firm/new', title: 'Dodavanje Firme', icon: 'pe-7s-plus', class: '' }
+  { path: '/admin/building', title: 'Dodavanje Zgrade', icon: 'pe-7s-door-lock', class: '' },
+  { path: '/admin/firm', title: 'Dodavanje Firme', icon: 'pe-7s-plus', class: '' }
 ];
 
 @Component({

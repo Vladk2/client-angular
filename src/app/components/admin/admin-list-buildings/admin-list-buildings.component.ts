@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin-service/admin.service';
 import {SupervisorService} from '../../../services/supervisor-service/supervisor.service';
+import { Building } from '../../../models/building/building.model';
+import { Tenant } from '../../../models/user/tenant.model';
 
 @Component({
   selector: 'app-admin-list-buildings',
@@ -11,10 +13,11 @@ export class AdminListBuildingsComponent implements OnInit {
 
   private tenantsModal = false;
 
-  private buildings: any = [];
-  private tenants: any = [];
+  private buildings: Building[];
+  private tenants: Tenant[];
   constructor(private adminService: AdminService,
-              private supervisorService: SupervisorService) { }
+              private supervisorService: SupervisorService) {
+  }
 
   ngOnInit() {
     this.adminService.getAllBuildings().subscribe(res => {

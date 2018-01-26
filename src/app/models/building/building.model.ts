@@ -1,8 +1,7 @@
 import { Address } from '../address/address.model';
 
-export class Firm {
+export class Building {
 
 	id: any;
-	firm_name: string;
 	address: Address;
 }

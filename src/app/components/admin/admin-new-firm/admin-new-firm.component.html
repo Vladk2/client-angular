@@ -14,10 +14,14 @@
 	    <div class="container-fluid">
 	        <div class="row">
 	            <div class="col-md-12">
+
 	                <div class="card">
+
 	                    <div class="header">
+	                    	<!--<button type="submit" class="btn btn-info btn-fill pull-right" (click)="openDialogAddUser()">Dodati vlasnika firme</button>-->
 	                        <h4 class="title">Dodati novu firmu</h4>
 	                    </div>
+
 	                    <div class="content">
 	                        <form>
 
@@ -36,9 +40,9 @@
 	                            <div class="row">
 	                                <div class="col-md-12">
 	                                    <div class="form-group">
-	                                        <label>Izaberite vlasnika firme iz liste</label>
+	                                        <label>Izaberite vlasnika firme iz liste </label>
 	                                        
-	                                        <select class="form-control" name="user_id" [(ngModel)]="firm.user_id">
+	                                        <select class="form-control" name="user_id" [(ngModel)]="user_id">
 											  <option></option>
 											  <option *ngFor="let item of users" value="{{item.id}}">{{item.name}} {{item.last_name}} - {{item.email}}</option>
 											</select>
@@ -88,5 +92,11 @@
 	        </div>
 	    </div>
 	</div>
+
+	<p-dialog appendTo="body" header="Dodajte novog korisnika" [(visible)]="showModal" modal="modal" width="800"
+            [responsive]="true">
+			<app-admin-registration></app-admin-registration>
+  
+  	</p-dialog>
 
 </div>

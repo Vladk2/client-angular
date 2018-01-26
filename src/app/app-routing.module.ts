@@ -48,8 +48,8 @@ const routes: Routes = [
     children: [
       { path: '', component: AdminHomeComponent },
       { path: 'lists', component: AdminHomeComponent },
-      { path: 'building/new', component: AdminNewBuildingComponent },
-      { path: 'firm/new', component: AdminNewFirmComponent },
+      { path: 'building', component: AdminNewBuildingComponent },
+      { path: 'firm', component: AdminNewFirmComponent },
       { path: 'users', component: AdminListUsersComponent },
       { path: 'buildings', component: AdminListBuildingsComponent },
       { path: 'firms', component: AdminListFirmsComponent }

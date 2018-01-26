@@ -70,15 +70,17 @@
                   <th>Broj</th>
                   <th>Grad</th>
                   <th>Zip</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr style="cursor: pointer;" *ngFor="let item of buildings" (click)="openTenantsModal(item.id)">
+                <tr *ngFor="let item of buildings">
                   <td>{{item.id}}</td>
                   <td>{{item.addressDTO.street}}</td>
                   <td>{{item.addressDTO.number}}</td>
                   <td>{{item.addressDTO.city}}</td>
                   <td>{{item.addressDTO.zip}}</td>
+                  <td><button type="submit" class="btn btn-info btn-fill" (click)="openTenantsModal(item.id)">Informacije</button></td>
                 </tr>
                 </tbody>
               </table>

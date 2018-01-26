@@ -33,7 +33,7 @@ export class AuthService {
       .map((res: any) => {
         // Method for decod JWT Token
         const tokenPayload = decode(res.jwt);
-        console.log(res.jwt);
+        //console.log(res.jwt);
         this.admin = '';
         this.employee = '';
         this.tenant = '';
