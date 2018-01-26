@@ -45,7 +45,6 @@ import { AdminListFirmsComponent } from './components/admin/admin-list-firms/adm
 import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
 import { UserComponent } from './components/user/user.component';
 
-import { TenantSurveyComponent } from './components/tenant/tenant-survey/tenant-survey.component';
 import { SurveyModule } from './modules/survey/survey.module';
 import { ParliamentModule } from './modules/parliament/parliament.module';
 import { ProblemModule } from './modules/problem/problem.module';
