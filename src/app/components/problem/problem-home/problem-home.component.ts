@@ -110,6 +110,7 @@ export class ProblemHomeComponent implements OnInit {
           for (let i = 0; i < problem.imgNo; i++) {
             this.images[problem.id].push({ source: 'http://localhost:8080/kvar ' + problem.id + '/' + i + '.jpg' });
           }
+          console.log(problem);
           this.problems.push(problem);
           for (const prob of this.problems) {
             this.visibleComments['problem' + prob.id] = false;

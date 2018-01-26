@@ -21,8 +21,10 @@
     <p class="problemTitle"> {{problem.title}} </p>
     <p class="problemDesc"> {{problem.description}} </p>
     <span *ngIf="problem.imgNo != 0">
-    <p-galleria [images]="images[problem.id]" panelHeight="350"></p-galleria>
+      <p-galleria [images]="images[problem.id]" panelHeight="350"></p-galleria>
     </span>
+    <p class="problemDesc stats"> Lokacija: {{problem.tenant.building.addressDTO.street}} {{problem.tenant.building.addressDTO.number}}/{{problem.tenant.apartmentNo}},
+      {{problem.tenant.building.addressDTO.city}}</p>
     <p class="problemDesc stats"> Datum popravke: {{problem.repairDate}} </p>
     <div *ngIf='current_role === "tenant" && problem.tenant.id == role_id' style="text-align:center">
       <button class="btn btn-default" style="margin-bottom:5px;" (click)="resolveProblemConfirm(problem.id)">Kvar je otklonjen</button>
@@ -110,7 +112,7 @@
 <p-dialog appendTo="body" header="Zakazivanje datuma popravke" [(visible)]="displayRepairDateDialog" modal="modal" width="350"
   [responsive]="true">
   <div class="calendar">
-  <p-calendar  (click)="showDate()"  showTime="true" [(ngModel)]="repairDate" [inline]="true"></p-calendar>
+    <p-calendar (click)="showDate()" showTime="true" [(ngModel)]="repairDate" [inline]="true"></p-calendar>
   </div>
   <div class="modal-footer row">
     <div class="col-md-6" style="text-align: left;">
