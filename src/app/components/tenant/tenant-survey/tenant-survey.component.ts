@@ -23,18 +23,19 @@ import {default as isValidDate} from 'pretty-easy-date-check';
 })
 export class TenantSurveyComponent implements OnInit {
 
-  private messageDeleted: boolean = false;
-  private messageAddQuestion: boolean = false;
-  private messageFilled: boolean = false;
-  private messageCreated: boolean = false;
-  private messageNoResposes: boolean = false;
-  private messageWrongDateFormat: boolean = false;
-  private messageDatePassed: boolean = false;
+  private messageDeleted = false;
+  private messageAddQuestion = false;
+  private messageFilled = false;
+  private messageCreated = false;
+  private messageNoResposes = false;
+  private messageWrongDateFormat = false;
+  private messageDatePassed = false;
+  private messageQuestionDuplicate = false;
 
-  private fillDialog: boolean = false;
-  private reportDialog: boolean = false;
-  private deleteDialog: boolean = false;
-  private createSurveyDialog: boolean = false;
+  private fillDialog = false;
+  private reportDialog = false;
+  private deleteDialog = false;
+  private createSurveyDialog = false;
 
   private selectedSurvey: Survey = new Survey();
 
@@ -42,7 +43,7 @@ export class TenantSurveyComponent implements OnInit {
   private newQuestion: Question =
     new Question('', '', '');
 
-  private RESULTS: any = [];
+  private surveys: any = [];
   private tenant: Tenant = new Tenant();
 
   private userResponse: UserResponse = new UserResponse();
@@ -85,14 +86,14 @@ export class TenantSurveyComponent implements OnInit {
 
   getSurveys() {
     this.surveyService.getSurveys(this.tenant.buildingId).subscribe((res: Array<any>) => {
-      this.RESULTS = res;
+      this.surveys = res;
     });
   }
 
   destroy() {
     this.surveyService.delete(this.selectedSurvey.id).subscribe(res => {
-      const index = this.RESULTS.findIndex(s => s.id === this.selectedSurvey.id);
-      this.RESULTS.splice(index, 1);
+      const index = this.surveys.findIndex(s => s.id === this.selectedSurvey.id);
+      this.surveys.splice(index, 1);
       this.resetMessageDivs();
       this.messageDeleted = true;
       this.deleteDialog = false;
@@ -116,9 +117,24 @@ export class TenantSurveyComponent implements OnInit {
   }
 
   addQuestion() {
+    let found = false;
+    this.newSurvey.questionDTO.forEach(q => {
+      if (q.question === this.newQuestion.question) {
+        found = true;
+        //this.resetMessageDivs();
+        this.messageQuestionDuplicate = true;
+        return;
+      }
+    });
+
+    if (found) {
+      return;
+    }
+
     this.newSurvey.questionDTO.push(new Question(this.newQuestion.id,
       this.newQuestion.question,
       this.newQuestion.typeQuestion));
+
     this.newQuestion.id = '';
     this.newQuestion.question = '',
       this.newQuestion.typeQuestion = '';
@@ -173,9 +189,9 @@ export class TenantSurveyComponent implements OnInit {
 
   private openReportDialog(surveyId) {
     this.surveyService.getSurveys(this.tenant.buildingId).subscribe((res: Array<any>) => {
-      this.RESULTS = res;
+      this.surveys = res;
       let survey;
-      this.RESULTS.forEach(s => {
+      this.surveys.forEach(s => {
         if (s.id === surveyId) {
           survey = s;
         }
@@ -219,6 +235,7 @@ export class TenantSurveyComponent implements OnInit {
     this.messageNoResposes = false;
     this.messageDatePassed = false;
     this.messageWrongDateFormat = false;
+    this.messageQuestionDuplicate = false;
   }
 
   private fillResponseWithQuestions() {

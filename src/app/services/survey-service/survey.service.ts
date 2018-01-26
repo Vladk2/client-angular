@@ -2,12 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
 
-import {Survey} from '../../models/survey/survey.model';
-import {Question} from '../../models/survey/question.model';
 import {SurveyResponse} from '../../models/survey/survey-response.model';
-import {QuestionReport} from '../../models/survey/question-report.model';
 
 @Injectable()
 export class SurveyService {
@@ -56,6 +52,7 @@ export class SurveyService {
             grades.c += r.values.c;
             grades.d += r.values.d;
             grades.f += r.values.f;
+            return;
           } else {
             textAnswers.push(r.values);
           }
@@ -82,7 +79,7 @@ export class SurveyService {
     const responses = new Array<SurveyResponse>();
 
     survey.userResponses.forEach(r => {
-      console.log(r);
+      //console.log(r);
 
       r.answers.forEach((a, i) => {
         const surveyResponse = new SurveyResponse();

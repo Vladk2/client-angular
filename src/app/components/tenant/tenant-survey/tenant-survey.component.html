@@ -41,7 +41,7 @@
             <th style="text-align: center;">Obriši</th>
             </thead>
             <tbody>
-            <tr *ngFor="let item of RESULTS">
+            <tr *ngFor="let item of surveys">
               <td>{{item.name}}</td>
               <td>{{item.description}}</td>
               <td>{{item.dateCreated}}</td>
@@ -164,6 +164,9 @@
           </div>
           <div class="alert alert-warning" *ngIf="messageDatePassed">
             <span>Datum koji ste uneli je prošao.</span>
+          </div>
+          <div class="alert alert-warning" *ngIf="messageQuestionDuplicate">
+            <span>Ovo pitanje je već postavljeno.</span>
           </div>
           <div class="form-group">
             <button class="btn btn-primary button-big-jasta">Završi</button>
