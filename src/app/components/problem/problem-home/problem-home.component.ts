@@ -6,7 +6,7 @@ import { AlertService } from '../../../services/alert-service/alert.service';
 import { ConfirmationService } from 'primeng/primeng';
 import { Location } from '@angular/common';
 import { AdminService } from '../../../services/admin-service/admin.service';
-import { Date } from '../../../models/date/date.model';
+import { DateTime } from '../../../models/date/datetime.model';
 import { Comment } from '../../../models/problem/comment.model';
 import { Problem } from '../../../models/problem/problem.model';
 
@@ -208,12 +208,12 @@ export class ProblemHomeComponent implements OnInit {
   }
 
   showDate() {
-    const date = new Date(this.repairDate.toLocaleString('en-GB'));
+    const date = new DateTime(this.repairDate.toLocaleString('en-GB'));
     const dateSplit = date.date.split(',');
     this.chosenRepairDate = dateSplit[0] + dateSplit[1].slice(0, -3);
   }
   setRepairDate() {
-    const repairDate = new Date(this.chosenRepairDate);
+    const repairDate = new DateTime(this.chosenRepairDate);
     if (this.chosenRepairDate) {
       this.problemService.setRepairDate(this.clickedProblem, repairDate).subscribe((res: any) => {
         this.alertService.success(res.message);

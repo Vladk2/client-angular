@@ -1,32 +1,32 @@
 
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {AppRoutingModule} from './app-routing.module';
-import {SidebarModule} from './components/sidebar/sidebar.module';
-import {NavbarModule} from './components/navbar/navbar.module';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
-import {RouterModule, Routes} from '@angular/router';
-import {CalendarModule, DialogModule, FileUploadModule, GalleriaModule} from 'primeng/primeng';
-import {ConfirmDialogModule} from 'primeng/primeng';
-import {ConfirmationService} from 'primeng/primeng';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { SidebarModule } from './components/sidebar/sidebar.module';
+import { NavbarModule } from './components/navbar/navbar.module';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+import { CalendarModule, DialogModule, FileUploadModule, GalleriaModule } from 'primeng/primeng';
+import { ConfirmDialogModule } from 'primeng/primeng';
+import { ConfirmationService } from 'primeng/primeng';
 
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {TokenInterceptor} from './guards/token.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './guards/token.interceptor';
 
-import {AuthGuard} from './guards/auth.guard';
-import {AnonymusGuard} from './guards/anonymus.guard';
-import {TenantGuard} from './guards/tenant.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { AnonymusGuard } from './guards/anonymus.guard';
+import { TenantGuard } from './guards/tenant.guard';
 
-import {AuthService} from './services/auth-service/auth.service';
-import {AdminService} from './services/admin-service/admin.service';
-import {TenantService} from './services/tenant-service/tenant.service';
-import {AlertService} from './services/alert-service/alert.service';
-import {ParliamentService} from './services/parliament-service/parliament.service';
-import {TokenService} from './guards/token.service';
-import {ProblemService} from './services/problem-service/problem.service';
-import {UserService} from './services/user-service/user.service';
+import { AuthService } from './services/auth-service/auth.service';
+import { AdminService } from './services/admin-service/admin.service';
+import { TenantService } from './services/tenant-service/tenant.service';
+import { AlertService } from './services/alert-service/alert.service';
+
+import { TokenService } from './guards/token.service';
+
+import { UserService } from './services/user-service/user.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -43,19 +43,12 @@ import { AdminListUsersComponent } from './components/admin/admin-list-users/adm
 import { AdminListBuildingsComponent } from './components/admin/admin-list-buildings/admin-list-buildings.component';
 import { AdminListFirmsComponent } from './components/admin/admin-list-firms/admin-list-firms.component';
 import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
-import { ParliamentHomeComponent } from './components/parliament/parliament-home/parliament-home.component';
-import { ParliamentAnnounceComponent } from './components/parliament/parliament-announce/parliament-announce.component';
-import { ParliamentProposalsComponent } from './components/parliament/parliament-proposals/parliament-proposals.component';
-import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
-import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
 import { UserComponent } from './components/user/user.component';
-import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
-import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
 
 import { TenantSurveyComponent } from './components/tenant/tenant-survey/tenant-survey.component';
 import { SurveyModule } from './modules/survey/survey.module';
-
-
+import { ParliamentModule } from './modules/parliament/parliament.module';
+import { ProblemModule } from './modules/problem/problem.module';
 
 
 
@@ -76,14 +69,8 @@ import { SurveyModule } from './modules/survey/survey.module';
     AdminListBuildingsComponent,
     AdminListFirmsComponent,
     TenantRegistrationComponent,
-    ParliamentHomeComponent,
-    ParliamentAnnounceComponent,
-    ParliamentProposalsComponent,
-    ParliamentVotingComponent,
-    ParliamentRecordComponent,
     UserComponent,
-    ProblemHomeComponent,
-    ProblemPostingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -99,7 +86,9 @@ import { SurveyModule } from './modules/survey/survey.module';
     ConfirmDialogModule,
     FileUploadModule,
     GalleriaModule,
-    SurveyModule
+    SurveyModule,
+    ParliamentModule,
+    ProblemModule,
   ],
   providers: [
     AdminService,
@@ -110,10 +99,8 @@ import { SurveyModule } from './modules/survey/survey.module';
     TenantService,
     UserService,
     AuthService,
-    ParliamentService,
     AlertService,
     ConfirmationService,
-    ProblemService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

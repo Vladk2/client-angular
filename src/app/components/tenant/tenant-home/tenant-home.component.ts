@@ -3,6 +3,7 @@ import { TenantService } from '../../../services/tenant-service/tenant.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../../services/alert-service/alert.service';
 import { Router } from '@angular/router';
+import { Announcement } from '../../../models/announcement/announcement.model';
 
 @Component({
   selector: 'app-tenant-home',
@@ -11,16 +12,19 @@ import { Router } from '@angular/router';
 })
 export class TenantHomeComponent implements OnInit {
 
-  private announcements: any[];
-  private announcement: any = {};
+  private announcements: Announcement[];
+  private announcement: Announcement;
   private loading: boolean;
   private tenants_id: any;
   private parlRecord: any = [];
+  private parlRecords: any = [];
 
   constructor(private tenantService: TenantService,
-              private activeRoute: ActivatedRoute,
-              private router: Router,
-              private alertService: AlertService) { }
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private alertService: AlertService) {
+    this.announcement = new Announcement();
+  }
 
   ngOnInit() {
     localStorage.setItem('sidebar', 'tenant');
@@ -46,13 +50,14 @@ export class TenantHomeComponent implements OnInit {
             point.content = stringRecord[i + 1];
             this.parlRecord.push(point);
           }
+          ann.parlRecord = this.parlRecord;
+          this.parlRecord = [];
           ann.assembly = true;
         } else {
           ann.assembly = false;
         }
       }
       this.loading = false;
-      console.log(this.announcements);
     });
   }
 
@@ -64,19 +69,11 @@ export class TenantHomeComponent implements OnInit {
       this.announcement.title = 'Skupština stanara';
     }
     this.loading = true;
-    const announcement = {
-      'title': this.announcement.title,
-      'message': this.announcement.message,
-      'isAnonymous': false,
-    };
-
-    this.tenantService.postAnnouncement(this.tenants_id, announcement).subscribe((res: any) => {
+    this.announcement.isAnonymous = false;
+    this.tenantService.postAnnouncement(this.tenants_id, this.announcement).subscribe((res: any) => {
 
       this.announcement.title = '';
       this.announcement.message = '';
-      const responseMessage = res.message;
-      // ovo mozda otkomentarisati kada se doda iks za zatvaranje na alert divu
-      // this.alertService.success(responseMessage);
       this.getAnnouncements();
 
     },

@@ -3,6 +3,8 @@ import { ParliamentService } from '../../../services/parliament-service/parliame
 import { AlertService } from '../../../services/alert-service/alert.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AgendaPoint } from '../../../models/parliament/agendapoint.model';
+import { AgendaVote } from '../../../models/parliament/agendavote.model';
 
 @Component({
   selector: 'app-parliament-voting',
@@ -14,14 +16,15 @@ export class ParliamentVotingComponent implements OnInit {
   @Input() parlId: any;
   @Input() tenantId: any;
   private loading = true;
-  private agendaPoints: any;
-  private agendaVotes: any = [];
+  private agendaPoints: AgendaPoint[];
+  private agendaVotes: AgendaVote[] = [];
   private tenantVoted: boolean;
   private isSupervisor: boolean;
 
   constructor(private parliamentService: ParliamentService,
     private alertService: AlertService,
     private location: Location) {
+      this.agendaPoints = new Array<AgendaPoint>();
   }
 
   ngOnInit() {
@@ -35,6 +38,7 @@ export class ParliamentVotingComponent implements OnInit {
     this.loading = true;
     this.parliamentService.getProposedAgendaPoints(this.tenantId, this.parlId).subscribe((res: any) => {
       this.agendaPoints = res.slice().reverse();
+      console.log(this.agendaPoints);
       for (const point of this.agendaPoints) {
         point.upVotes = 0;
         point.downVotes = 0;
@@ -115,28 +119,31 @@ export class ParliamentVotingComponent implements OnInit {
     if (!this.isAlreadyVoted(pointId)) {
       const button = document.getElementById('upVote' + pointId);
       button.className += ' btn-fill';
-      const agendaPoint = { 'vote': 'YES', 'agendaPoint': { 'id': pointId } };
-      this.agendaVotes.push(agendaPoint);
+      const agendaVote = new AgendaVote();
+      agendaVote.vote = 'YES';
+      agendaVote.agendaPoint = new AgendaPoint();
+      agendaVote.agendaPoint.id = pointId;
+      this.agendaVotes.push(agendaVote);
     }
   }
   voteDown(pointId) {
     if (!this.isAlreadyVoted(pointId)) {
       const button = document.getElementById('downVote' + pointId);
       button.className += ' btn-fill';
-      const agendaPoint = { 'vote': 'NO', 'agendaPoint': { 'id': pointId } };
-      this.agendaVotes.push(agendaPoint);
+      const agendaVote = new AgendaVote();
+      agendaVote.vote = 'NO';
+      agendaVote.agendaPoint = new AgendaPoint();
+      agendaVote.agendaPoint.id = pointId;
+      this.agendaVotes.push(agendaVote);
     }
   }
 
   postVotes() {
     this.loading = true;
-    this.parliamentService.postVotes(this.tenantId, this.parlId, this.agendaVotes).subscribe(res => {
+    this.parliamentService.postVotes(this.tenantId, this.parlId, this.agendaVotes).subscribe((res: any) => {
       this.getAllVotes();
       this.getVotingStatus();
-      const responseMessage = JSON.parse(JSON.stringify(res)).message;
       this.loading = false;
-      // ovo mozda otkomentarisati kada se doda iks za zatvaranje na alert divu
-      // this.alertService.success(responseMessage", true);
     },
       error => {
         this.alertService.error('GREŠKA: Greška prilikom postavljanja glasova.');
@@ -148,7 +155,6 @@ export class ParliamentVotingComponent implements OnInit {
 
     this.loading = true;
     this.parliamentService.getVoteResults(this.tenantId, this.parlId).subscribe((res: any) => {
-      console.log(res);
       location.reload();
     });
 

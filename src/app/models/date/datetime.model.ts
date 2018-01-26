@@ -1,4 +1,4 @@
-export class Date {
+export class DateTime {
 
   date: string;
   constructor(date: string) {

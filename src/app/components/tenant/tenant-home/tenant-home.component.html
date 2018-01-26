@@ -22,7 +22,6 @@
                     <p class="announcementDesc"> {{ann.message}}</p>
                 </div>
                 <div class="card-footer">
-
                     <hr>
                     <div class="stats">
                         <i class="fa fa-user-o announcementAuthor"></i> {{ann.tenant.user.name}} {{ann.tenant.user.last_name}}
@@ -32,13 +31,15 @@
                 </div>
             </div>
             <div *ngIf="ann.assembly == true" class="card modal-dialog modal-lg">
+
                 <div class="card-header ">
                     <p class="announcementHeader stats">OBAVEŠTENJE</p>
                     <h4 class="announcementTitle">{{ann.title}}</h4>
                     <p class="announcementDesc"> Poštovane komšije, u nastavku se nalazi zapisnik sa skupštine stanara, po tačkama dnevnog reda:</p>
                 </div>
                 <div class="assemblyRecord">
-                    <div *ngFor="let point of parlRecord">
+
+                    <div *ngFor="let point of ann.parlRecord">
                         <p class="announcementDesc">
                             <b>{{point.title}}</b>
                         </p>
@@ -70,7 +71,8 @@
         </div>
         <div style="text-align:right;">
             <p>
-                <button (click)="postAnnouncement()" id="announceButton" [disabled]="announcement.message == ''" class="btn btn-secondary btn-fill" style="margin-top:-10px;">POSTAVI OBAVEŠTENJE</button>
+                <button (click)="postAnnouncement()" id="announceButton" [disabled]="announcement.message == ''" class="btn btn-secondary btn-fill"
+                    style="margin-top:-10px;">POSTAVI OBAVEŠTENJE</button>
             </p>
         </div>
     </div>

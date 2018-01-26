@@ -32,9 +32,9 @@ export class ParliamentHomeComponent implements OnInit {
 
   // statuses: NONE, ANNOUNCED, VOTING, VOTED
   getParliamentStatus() {
-    this.parliamentService.checkParliamentStatus(this.tenants_id).subscribe(res => {
-      this.parl_status = JSON.parse(JSON.stringify(res)).status;
-      this.parl_id = JSON.parse(JSON.stringify(res)).parlId;
+    this.parliamentService.checkParliamentStatus(this.tenants_id).subscribe((res: any) => {
+      this.parl_status = res.status;
+      this.parl_id = res.parlId;
       this.loading = false;
       const token = JSON.parse(localStorage.getItem('token'));
       for (const tenant of token.tenants) {

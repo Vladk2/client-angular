@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ParliamentService } from '../../../services/parliament-service/parliament.service';
 import { AlertService } from '../../../services/alert-service/alert.service';
 import { Router } from '@angular/router';
+import { Parliament } from '../../../models/parliament/parliament.model';
 
 @Component({
   selector: 'app-parliament-record',
@@ -44,12 +45,12 @@ export class ParliamentRecordComponent implements OnInit {
     }
      recordString += point.title + '<|>' + point.content + '<|>';
     }
-    const record = { 'record' : recordString };
+    const record = new Parliament();
+    record.record = recordString;
 
     this.parliamentService.postAgendaRecord(this.tenantId, this.parlId, record).subscribe((res: any) => {
 
       const responseMessage = (res).message;
-      console.log('PORUKA JE ' + responseMessage);
       this.alertService.success(responseMessage, true);
       this.router.navigate(['tenant/' + this.tenantId]);
 
