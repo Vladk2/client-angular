@@ -22,6 +22,10 @@
   <span>Već se vodite na unetoj adresi.</span>
 </div>
 
+<div class="alert alert-warning" *ngIf="messageWarningNoSupervisor">
+  <span>Trenutno ne možete aplicirati za izabranu zgradu jer nije izabran predsednik kućnog saveta.</span>
+</div>
+
 <div class="container" style="margin-top:30px"> <br>
   <div class="col-md-12" >
     <div class="modal-dialog" style="margin-bottom:0">

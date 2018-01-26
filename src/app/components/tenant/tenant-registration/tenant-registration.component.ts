@@ -16,12 +16,14 @@ export class TenantRegistrationComponent implements OnInit {
 
   private messageSuccess;
   private messageWarning;
+  private messageWarningNoSupervisor;
 
   constructor(private authService: AuthService,
               private router: Router,
               private tenantService: TenantService) {
     this.messageSuccess = false;
     this.messageWarning = false;
+    this.messageWarningNoSupervisor = false;
   }
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class TenantRegistrationComponent implements OnInit {
   }
 
   registerNewAbode() {
+    this.resetMessages();
     this.tenantService.createNewTenant(this.abode).subscribe(res => {
       this.messageSuccess = true;
       setTimeout(() => {
@@ -39,11 +42,19 @@ export class TenantRegistrationComponent implements OnInit {
       }, 7000);
     }, error => {
         if (error.status === 406) {
+          this.messageWarningNoSupervisor = true;
+        } else if (error.status === 400) {
           this.messageWarning = true;
         } else {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
         }
     });
+  }
+
+  resetMessages() {
+    this.messageWarningNoSupervisor = false;
+    this.messageWarning = false;
+    this.messageSuccess = false;
   }
 
 }
