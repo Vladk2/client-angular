@@ -27,4 +27,8 @@ export class UserService {
   destroy() {
     return this.http.delete('http://localhost:8080/api/users/');
   }
+
+  verifyAccount(token) {
+    return this.http.get('http://localhost:8080/api/users/verify?token=' + token);
+  }
 }

@@ -41,6 +41,8 @@ import { ParliamentModule } from './modules/parliament/parliament.module';
 import { ProblemModule } from './modules/problem/problem.module';
 import {SupervisorService} from './services/supervisor-service/supervisor.service';
 import { AdminModule } from './modules/admin/admin.module';
+import { VerificationComponent } from './components/profile-verification/verification/verification.component';
+import {UserModule} from './modules/user/user.module';
 
 
 @NgModule({
@@ -73,7 +75,8 @@ import { AdminModule } from './modules/admin/admin.module';
     SurveyModule,
     ParliamentModule,
     ProblemModule,
-    AdminModule
+    AdminModule,
+    UserModule
   ],
   providers: [
     AuthGuard,

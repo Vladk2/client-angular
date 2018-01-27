@@ -34,11 +34,13 @@ import { ParliamentRecordComponent } from './components/parliament/parliament-re
 import { UserComponent } from './components/user/user.component';
 import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
 import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
+import {VerificationComponent} from './components/profile-verification/verification/verification.component';
 
 
 const routes: Routes = [
 
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'verify/:token', component: VerificationComponent },
   { path: 'login', component: LoginComponent, canActivate: [AnonymusGuard] },
   { path: 'registration', component: RegistrationComponent, canActivate: [AnonymusGuard] },
   { path: 'profile', component: UserComponent, canActivate: [AuthGuard] },
