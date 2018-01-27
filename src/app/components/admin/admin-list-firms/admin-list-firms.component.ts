@@ -17,13 +17,15 @@ export class AdminListFirmsComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.adminService.getAllFirms().subscribe(res => {
+    localStorage.setItem('sidebar', 'admin');
+    localStorage.setItem('navbarTitle', 'Firme');
+    this.adminService.getAllFirms().subscribe(res => {
       this.firms = res;
     });
   }
 
   onRemoveFirm(event) {
-    this.adminService.removeFirm(event).subscribe(resp =>  {
+    this.adminService.removeFirm(event).subscribe(resp => {
 
       this.progres = true;
       this.currentTimeout = setTimeout(() => {

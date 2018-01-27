@@ -17,6 +17,8 @@ export class AdminNewBuildingComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('sidebar', 'admin');
+    localStorage.setItem('navbarTitle', 'Dodavanje zgrade');
   }
 
   onAddBuilding() {
