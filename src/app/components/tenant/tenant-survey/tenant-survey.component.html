@@ -154,10 +154,13 @@
               </select>
             </div>
             <div class="col-lg-2" style="text-align: right;">
-              <button class="btn btn-primary" (click)="addQuestion()"
-                      [disabled]="newQuestion.question === '' || newQuestion.typeQuestion === ''">
+              <div id="tempBtn" class="btn btn-info" *ngIf="(newQuestion.question === '' || newQuestion.typeQuestion === '')">
                 <span>+</span>
-              </button>
+              </div>
+              <div class="btn btn-primary" (click)="addQuestion()"
+                   *ngIf="!(newQuestion.question === '' || newQuestion.typeQuestion === '')">
+                <span>+</span>
+              </div>
             </div>
           </div>
           <br/>

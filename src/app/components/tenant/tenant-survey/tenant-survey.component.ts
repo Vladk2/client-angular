@@ -122,6 +122,9 @@ export class TenantSurveyComponent implements OnInit {
   }
 
   addQuestion() {
+    if (!this.newQuestion.question) {
+      return;
+    }
     let found = false;
     this.newSurvey.questionDTO.forEach(q => {
       if (q.question === this.newQuestion.question) {
