@@ -39,7 +39,7 @@ export class TenantRegistrationComponent implements OnInit {
       this.messageSuccess = true;
       setTimeout(() => {
         this.router.navigate(['/']);
-      }, 7000);
+      }, 4000);
     }, error => {
         if (error.status === 406) {
           this.messageWarningNoSupervisor = true;

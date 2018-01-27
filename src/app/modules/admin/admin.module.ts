@@ -24,10 +24,8 @@ import { AdminService } from '../../services/admin-service/admin.service';
     SidebarModule,
     NavbarModule,
     FormsModule,
-    
     DialogModule,
     ConfirmDialogModule
-
   ],
   declarations: [
     AdminHomeComponent,

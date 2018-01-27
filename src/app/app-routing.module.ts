@@ -26,20 +26,19 @@ import { AdminListBuildingsComponent } from './components/admin/admin-list-build
 import { AdminListFirmsComponent } from './components/admin/admin-list-firms/admin-list-firms.component';
 
 import { ParliamentHomeComponent } from './components/parliament/parliament-home/parliament-home.component';
-import { ParliamentAnnounceComponent } from './components/parliament/parliament-announce/parliament-announce.component';
-import { ParliamentProposalsComponent } from './components/parliament/parliament-proposals/parliament-proposals.component';
-import { ParliamentVotingComponent } from './components/parliament/parliament-voting/parliament-voting.component';
-import { ParliamentRecordComponent } from './components/parliament/parliament-record/parliament-record.component';
 
 import { UserComponent } from './components/user/user.component';
 import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
 import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
 import {VerificationComponent} from './components/profile-verification/verification/verification.component';
+import {TenantApprovalComponent} from './components/tenant/tenant-approval/tenant-approval/tenant-approval.component';
 
 
 const routes: Routes = [
 
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'supervisors/tenants/:username/buildings/:building/:apartmentNo',
+    component: TenantApprovalComponent, canActivate: [AuthGuard]},
   { path: 'verify/:token', component: VerificationComponent },
   { path: 'login', component: LoginComponent, canActivate: [AnonymusGuard] },
   { path: 'registration', component: RegistrationComponent, canActivate: [AnonymusGuard] },
