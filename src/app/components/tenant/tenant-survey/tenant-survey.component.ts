@@ -101,7 +101,8 @@ export class TenantSurveyComponent implements OnInit {
       this.messageDeleted = true;
       this.deleteDialog = false;
     }, error => {
-      alert('error');
+      this.getSurveys();
+      this.deleteDialog = false;
     });
   }
 
@@ -115,7 +116,8 @@ export class TenantSurveyComponent implements OnInit {
         this.messageFilled = true;
       }, 250);
     }, err => {
-      alert('nene');
+      this.hideFillDialog();
+      this.getSurveys();
     });
   }
 
@@ -168,7 +170,7 @@ export class TenantSurveyComponent implements OnInit {
         this.messageCreated = true;
       }, 500);
     }, err => {
-      alert('Error.');
+      this.getSurveys();
     });
   }
 
