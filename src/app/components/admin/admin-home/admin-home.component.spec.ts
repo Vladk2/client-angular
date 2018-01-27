@@ -15,8 +15,6 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 describe('AdminHomeComponent', () => {
   let component: AdminHomeComponent;
   let fixture: ComponentFixture<AdminHomeComponent>;
-  let authService: AuthService;
-  let adminService: AdminService;
 
   beforeEach(async(() => {
 
@@ -31,8 +29,6 @@ describe('AdminHomeComponent', () => {
         subscribe: jasmine.createSpy('subscribe')
       }
     }
-
-
     TestBed.configureTestingModule({
       declarations: [ AdminHomeComponent ],
       providers: [ {provide: AuthService, useValue: authServiceMock},
@@ -46,11 +42,10 @@ describe('AdminHomeComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminHomeComponent);
-    authService = TestBed.get(AuthService);
-    adminService = TestBed.get(AdminService);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

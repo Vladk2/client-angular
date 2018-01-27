@@ -10,6 +10,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+
 describe('AdminNewFirmComponent', () => {
   let component: AdminNewFirmComponent;
   let fixture: ComponentFixture<AdminNewFirmComponent>;
@@ -18,22 +20,24 @@ describe('AdminNewFirmComponent', () => {
   let adminService: AdminService;
 
   beforeEach(async(() => {
+
+    let adminServiceMock = {
+      RegenerateData$: {
+        subscribe: jasmine.createSpy('subscribe')
+      }
+    };
     TestBed.configureTestingModule({
-      declarations: [ AdminNewFirmComponent, SidebarComponent, NavbarComponent ],
+      declarations: [ AdminNewFirmComponent ],
       imports: [ FormsModule, RouterTestingModule, HttpClientModule, HttpModule ],
-      providers: [  ]
+      providers: [ {provide: AdminService, useValue: adminServiceMock} ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminNewFirmComponent);
-    sidebar = TestBed.createComponent(SidebarComponent);
-    navbar = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
-    adminService = TestBed.get(AdminService);
-    fixture.detectChanges();
-
   });
 
   it('should create', () => {

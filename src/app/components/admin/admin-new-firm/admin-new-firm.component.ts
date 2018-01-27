@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../../services/admin-service/admin.service';
 import {Router} from '@angular/router';
-import {ConfirmationService} from 'primeng/primeng';
+//import {ConfirmationService} from 'primeng/primeng';
 
 import { User } from '../../../models/user/user.model';
 import { Firm } from '../../../models/firm/firm.model';
@@ -23,8 +23,7 @@ export class AdminNewFirmComponent implements OnInit {
   private showModal;
   private currentTimeout;
   constructor(private adminService: AdminService,
-              private router: Router,
-              private confirmationService: ConfirmationService) {
+              private router: Router) {
     this.message = false;
     this.showModal = false;
     this.firm = new Firm();
