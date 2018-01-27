@@ -74,12 +74,9 @@ export class TenantSurveyComponent implements OnInit {
         tenantsFromToken.tenants.forEach(t => {
           if (t.tenant === this.tenant.id) {
             this.tenant.owner = t.owner;
-            if (this.tenant.buildingId + '' === t.building + '') {
-              if (t.supervisor !== null) {
+              if (t.supervisor) {
                 this.tenant.supervisor = true;
-                console.log(this.tenant);
               }
-            }
           }
         });
         this.getSurveys();
