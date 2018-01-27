@@ -49,6 +49,7 @@ import { SurveyModule } from './modules/survey/survey.module';
 import { ParliamentModule } from './modules/parliament/parliament.module';
 import { ProblemModule } from './modules/problem/problem.module';
 import {SupervisorService} from './services/supervisor-service/supervisor.service';
+import { EmployeeGuard } from './guards/employee.guard';
 
 
 
@@ -94,6 +95,7 @@ import {SupervisorService} from './services/supervisor-service/supervisor.servic
     AuthGuard,
     AnonymusGuard,
     TenantGuard,
+    EmployeeGuard,
     TokenService,
     TenantService,
     UserService,

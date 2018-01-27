@@ -34,6 +34,7 @@ import { ParliamentRecordComponent } from './components/parliament/parliament-re
 import { UserComponent } from './components/user/user.component';
 import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
 import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
+import { EmployeeGuard } from './guards/employee.guard';
 
 
 const routes: Routes = [
@@ -60,8 +61,8 @@ const routes: Routes = [
     path: 'employee', canActivateChild: [AuthGuard], data: { expectedRole: 'EMPLOYEE' },
     children: [
 
-      { path: ':id', component: EmployeeHomeComponent },
-      { path: ':id/problems', component: ProblemHomeComponent }
+      { path: ':id', canActivate: [EmployeeGuard], component: EmployeeHomeComponent },
+      { path: ':id/problems', canActivate: [EmployeeGuard], component: ProblemHomeComponent }
     ]
   },
 
