@@ -13,13 +13,13 @@ import { ConfirmationService } from 'primeng/primeng';
 })
 export class UserComponent implements OnInit {
 
-  private user: any = {};
-  private password: any = {};
+  user: any = {};
+  password: any = {};
 
-  private messageSuccess = false;
-  private messageWarningEmail = false;
-  private messageWarningPassword = false;
-  private display = false;
+  messageSuccess = false;
+  messageWarningEmail = false;
+  messageWarningPassword = false;
+  display = false;
 
   constructor(private authService: AuthService,
     private userService: UserService,
@@ -90,7 +90,7 @@ export class UserComponent implements OnInit {
     this.display = false;
   }
 
-  private resetMessageDivs() {
+  resetMessageDivs() {
     this.messageSuccess = false;
     this.messageWarningPassword = false;
     this.messageWarningEmail = false;
