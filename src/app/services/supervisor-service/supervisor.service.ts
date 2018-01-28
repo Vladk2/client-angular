@@ -13,6 +13,7 @@ export class SupervisorService {
   }
 
   approvateTenant(username, building, apartmentNo) {
-    return this.http.get('http://localhost:8080/api/supervisors/tenants/' + username + '/buildings/' + building + '/' + apartmentNo);
+    return this.http.get('http://localhost:8080/api/supervisors/tenants/'
+      + username + '/buildings/' + building + '/' + apartmentNo);
   }
 }
