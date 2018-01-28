@@ -13,6 +13,8 @@ import {HttpModule} from '@angular/http';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 import {User} from '../../../models/user/user.model';
+import 'rxjs/add/observable/from';
+import {Observable} from 'rxjs/Observable';
 
 describe('AdminHomeComponent', () => {
   let component: AdminHomeComponent;
@@ -30,7 +32,7 @@ describe('AdminHomeComponent', () => {
 
     const adminServiceMock = {
       getProfile: jasmine.createSpy('getProfile')
-        .and.returnValue(Promise.resolve(user)),
+        .and.returnValue(Observable.from([user])),
       RegenerateData$: {
         subscribe: jasmine.createSpy('subscribe')
       }
@@ -57,7 +59,7 @@ describe('AdminHomeComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should fetch user', async(() => {
+  it('should fetch user', fakeAsync(() => {
     //ovde puca dalje
     component.ngOnInit();
     tick();
