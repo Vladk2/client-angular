@@ -31,7 +31,7 @@ describe('SurveyService', () => {
     expect(true).toBe(true);
   });
 
-  it('getSurveys should return list of buildings', () => {
+  it('should return list of surveys by building id #getSurveys', () => {
     const surveys = [
       {'id': 1, 'name': 'anketa', 'description': 'opis', 'creator': 1, 'dateCreated': '2018-01-20'},
       {'id': 2, 'name': 'anketa2', 'description': 'opis2', 'creator': 2, 'dateCreated': '2017-12-19'}
@@ -50,7 +50,7 @@ describe('SurveyService', () => {
     request.flush(surveys);
   });
 
-  it('delete should not be null', () => {
+  it('should delete survey #delete', () => {
     const surveyId = 1;
 
     service.delete(surveyId).subscribe(res => {
@@ -64,7 +64,7 @@ describe('SurveyService', () => {
     request.flush(surveyId);
   });
 
-  it('fillOut should not be null', () => {
+  it('should fill out survey with answers #fillOut', () => {
     const userResponse = new UserResponse();
     userResponse.survey = 1;
     const answer = new Answer(new Question(1, 'Testiranje?', 'BOOL'));
@@ -82,7 +82,7 @@ describe('SurveyService', () => {
     request.flush(userResponse);
   });
 
-  it('create should not be null', () => {
+  it('should create new survey #create', () => {
     const survey = new Survey();
 
     survey.building = 1;
@@ -102,7 +102,7 @@ describe('SurveyService', () => {
     request.flush(survey);
     });
 
-  it('surveyStatistics and surveyAnswers should return list of userResponses', () => {
+  it('should return list of userResponses #surveyStatistics; #surveyAnswers', () => {
     const survey: any = {};
 
     survey.building = 1;
