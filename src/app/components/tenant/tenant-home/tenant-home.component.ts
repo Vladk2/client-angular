@@ -12,12 +12,12 @@ import { Announcement } from '../../../models/announcement/announcement.model';
 })
 export class TenantHomeComponent implements OnInit {
 
-  private announcements: Announcement[];
-  private announcement: Announcement;
-  private loading: boolean;
-  private tenants_id: any;
-  private parlRecord: any = [];
-  private parlRecords: any = [];
+  announcements: Announcement[];
+  announcement: Announcement;
+  loading: boolean;
+  tenants_id: any;
+  parlRecord: any = [];
+  parlRecords: any = [];
 
   constructor(private tenantService: TenantService,
     private activeRoute: ActivatedRoute,
