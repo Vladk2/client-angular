@@ -31,7 +31,7 @@ describe('AdminListUsersComponent', () => {
         ConfirmationService,
         {provide: AdminService, useValue: adminServiceMock},
         {provide: AuthService, useValue: authServiceMock}
-      ]
+      ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();

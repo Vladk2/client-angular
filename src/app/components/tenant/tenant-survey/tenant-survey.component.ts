@@ -87,6 +87,7 @@ export class TenantSurveyComponent implements OnInit {
   getSurveys() {
     this.surveyService.getSurveys(this.tenant.buildingId).subscribe((res: Array<any>) => {
       this.surveys = res;
+      console.log(this.surveys);
     });
   }
 
