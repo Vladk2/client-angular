@@ -96,8 +96,8 @@ describe('AdminListBuildingsComponent', () => {
 
   it('should makeSupervisor', () => {
     component.makeSupervisor(1, 1);
-
     expect(adminService.makeSupervisor).toHaveBeenCalledWith(1,1);
+    expect(adminService.getTenantsByBuilding);
   });
 
   it('should hideModal()', () => {

@@ -70,4 +70,13 @@ describe('AdminHomeComponent', () => {
     expect(component.user.last_name).not.toBe('Petar');
 
   }));
+
+  it('should render username in a small tag', async(() => {
+    const fixture = TestBed.createComponent(AdminHomeComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h4').textContent).toContain('nole');
+  }));
+
+
 });
