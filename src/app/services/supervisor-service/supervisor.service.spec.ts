@@ -26,7 +26,7 @@ describe('SupervisorService', () => {
     expect(true).toBe(true);
   });
 
-  it('removeSupervisor should not be okay', () => {
+  it('should remove supervisor #removeSupervisor', () => {
     const supervisorId = 1;
 
     service.removeSupervisor(supervisorId).subscribe(res => {
@@ -40,7 +40,7 @@ describe('SupervisorService', () => {
     request.flush({status: 200});
   });
 
-  it('approveTenant should not be null', () => {
+  it('should register new tenant #approveTenant', () => {
     const tenantUsername = 'misko';
     const buildingId = 1;
     const apartmentNo = 17;

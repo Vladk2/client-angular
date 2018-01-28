@@ -10,9 +10,9 @@ import { User } from '../../../models/user/user.model';
 })
 export class AdminHomeComponent implements OnInit {
 
-  private user: User;
+  user: User;
 
-  constructor(private adminService: AdminService, 
+  constructor(private adminService: AdminService,
               private authService: AuthService) {
     this.user = new User();
   }

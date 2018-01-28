@@ -27,17 +27,23 @@ describe('UserService', () => {
     expect(true).toBe(true);
   });
 
-  it('get', () => {
+  it('should get user #get', () => {
+    const user = new User();
+    user.username = 'misko';
+    user.name = 'misa';
+
     service.get().subscribe(res => {
-      expect(res).not.toBe(null);
+      expect(res).toEqual(user);
     });
 
     const request = httpMock.expectOne('http://localhost:8080/api/users/');
 
     expect(request.request.method).toBe('GET');
+
+    request.flush(user);
   });
 
-  it('update', () => {
+  it('should update user`s account #update', () => {
     const user = new User();
     user.email = 'misko@gmail.com';
     user.id = 1;
@@ -56,7 +62,7 @@ describe('UserService', () => {
     request.flush(user);
   });
 
-  it('updatePassword', () => {
+  it('should update password #updatePassword', () => {
     const password = {'password': '123'};
 
     service.updatePassword(password).subscribe(res => {
@@ -70,7 +76,7 @@ describe('UserService', () => {
     request.flush(password);
   });
 
-  it('destroy', () => {
+  it('should delete user #destroy', () => {
     service.destroy().subscribe(res => {
       expect(res).not.toBe(null);
     });
@@ -80,7 +86,7 @@ describe('UserService', () => {
     expect(request.request.method).toBe('DELETE');
   });
 
-  it('verifyAccount', () => {
+  it('should be okay #verifyAccount', () => {
     const token = 'wdaadww%wda%223ewdawad2';
 
     service.verifyAccount(token).subscribe(res => {

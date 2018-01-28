@@ -1,18 +1,18 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import { AdminHomeComponent } from './admin-home.component';
+import {AdminHomeComponent} from './admin-home.component';
 
-import { AuthService } from '../../../services/auth-service/auth.service';
-import { AdminService } from '../../../services/admin-service/admin.service';
+import {AuthService} from '../../../services/auth-service/auth.service';
+import {AdminService} from '../../../services/admin-service/admin.service';
 
-import { FormsModule }   from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
+import {FormsModule} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
-import { User } from '../../../models/user/user.model';
+import {User} from '../../../models/user/user.model';
 
 describe('AdminHomeComponent', () => {
   let component: AdminHomeComponent;
@@ -20,36 +20,35 @@ describe('AdminHomeComponent', () => {
   let adminService: any;
 
   beforeEach(async(() => {
+    const user = new User();
 
-    let adminServiceMock = {
+    user.username = 'nole';
+    user.password = '123';
+    user.name = 'Novica';
+    user.last_name = 'Nikolic';
+    user.email = 'nole@wdaadw.com';
+
+    const adminServiceMock = {
       getProfile: jasmine.createSpy('getProfile')
-        .and.returnValue(Promise.resolve(new User({
-          username: 'nole',
-          password: '123',
-          name: 'Novica',
-          last_name: 'Nikolic',
-          email: 'nole0223@gmail.com'
-        }))),
-      ReqenerateData$: {
+        .and.returnValue(Promise.resolve(user)),
+      RegenerateData$: {
         subscribe: jasmine.createSpy('subscribe')
       }
     };
 
-    let authServiceMock = {
-      
-      ReqenerateData$: {
+    const authServiceMock = {
+      RegenerateData$: {
         subscribe: jasmine.createSpy('subscribe')
       }
-    }
+    };
     TestBed.configureTestingModule({
-      declarations: [ AdminHomeComponent ],
-      providers: [ {provide: AuthService, useValue: authServiceMock},
-                   {provide: AdminService, useValue: adminServiceMock}],
-      imports: [ RouterTestingModule,FormsModule ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
-      
+      declarations: [AdminHomeComponent],
+      providers: [{provide: AuthService, useValue: authServiceMock},
+        {provide: AdminService, useValue: adminServiceMock}],
+      imports: [RouterTestingModule, FormsModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -58,11 +57,11 @@ describe('AdminHomeComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should fatch user', async(() => {
+  it('should fetch user', async(() => {
     //ovde puca dalje
     component.ngOnInit();
     tick();
-    expect(component.user.username).toBe('nole')
-    
-  }))
+    expect(component.user.username).toBe('nole');
+
+  }));
 });

@@ -23,7 +23,6 @@ describe('AdminService', () => {
   });
 
   it('getAllBuildings() should query current service url', () => {
-    
     const buildingPost = [
       {id: 1, addressDTO: {id: 1, street: 'Dr Svetislava Kasapinovica', number: 21, city: 'Novi Sad', zip: '21000'}},
       {id: 2, addressDTO: {id: 2, street: 'Dr Svetislava Kasapinovica', number: 25, city: 'Novi Sad', zip: '21000'}}
@@ -41,18 +40,16 @@ describe('AdminService', () => {
   });
 
   it('getProfile() should query current service url', () => {
-    
     const userPost = {
-      id: 1;
-      username: 'nole';
-      password: '123';
-      name: 'Novica';
-      last_name: 'Nikolic';
-      email: 'nole0223@gmail.com';
-    }
+      id: 1,
+      username: 'nole',
+      password: '123',
+      name: 'Novica',
+      last_name: 'Nikolic',
+      email: 'nole0223@gmail.com'
+    };
     service.getProfile().subscribe(res => {
       expect(res).not.toBe(null);
-      
     });
 
     const request = httpMock.expectOne('http://localhost:8080/api/users/');
@@ -61,6 +58,4 @@ describe('AdminService', () => {
 
     request.flush(userPost);
   });
-
-  
 });
