@@ -21,6 +21,7 @@ describe('UserComponent', () => {
   let confirmationService: ConfirmationService;
 
   beforeEach(async(() => {
+    const token = {};
     const user = new User();
 
     user.username = 'riggy';
@@ -28,6 +29,7 @@ describe('UserComponent', () => {
     user.name = 'riggy';
     user.last_name = 'ruter';
     user.email = 'riggy.ruter@gmail.com';
+
 
     const authServiceMock = {
       logout_service: jasmine.createSpy('logout_service').and.returnValue(Observable.from([{}])),
