@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { AdminHomeComponent } from './admin-home.component';
 
@@ -12,19 +12,31 @@ import { HttpModule } from '@angular/http';
 
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
+import { User } from '../../../models/user/user.model';
+
 describe('AdminHomeComponent', () => {
   let component: AdminHomeComponent;
   let fixture: ComponentFixture<AdminHomeComponent>;
+  let adminService: any;
 
   beforeEach(async(() => {
 
     let adminServiceMock = {
+      getProfile: jasmine.createSpy('getProfile')
+        .and.returnValue(Promise.resolve(new User({
+          username: 'nole',
+          password: '123',
+          name: 'Novica',
+          last_name: 'Nikolic',
+          email: 'nole0223@gmail.com'
+        }))),
       ReqenerateData$: {
         subscribe: jasmine.createSpy('subscribe')
       }
     };
 
     let authServiceMock = {
+      
       ReqenerateData$: {
         subscribe: jasmine.createSpy('subscribe')
       }
@@ -42,10 +54,15 @@ describe('AdminHomeComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminHomeComponent);
+    adminService = TestBed.get(AdminService);
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should fatch user', async(() => {
+    //ovde puca dalje
+    component.ngOnInit();
+    tick();
+    expect(component.user.username).toBe('nole')
+    
+  }))
 });
