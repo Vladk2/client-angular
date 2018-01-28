@@ -14,14 +14,14 @@ import { Address } from '../../../models/address/address.model';
 })
 export class AdminNewFirmComponent implements OnInit {
 
-  private address: Address;
-  private firm: Firm;
-  private users: User[];
-  private user_id;
+  address: Address;
+  firm: Firm;
+  users: User[];
+  user_id;
 
-  private message;
-  private showModal;
-  private currentTimeout;
+  message;
+  showModal;
+  currentTimeout;
   constructor(private adminService: AdminService,
               private router: Router) {
     this.message = false;

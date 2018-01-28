@@ -102,7 +102,7 @@ describe('TenantRegistrationComponent', () => {
     expect(component.messageWarningNoSupervisor).toEqual(false);
   }));
 
-  it('should register new tenant #registerNewAbode', fakeAsync(() => {
+  it('should register new tenant #registerNewAbode', async() => {
     const abode = {
       'building': 1,
       'apartmentNo': 55
@@ -113,10 +113,10 @@ describe('TenantRegistrationComponent', () => {
     expect(component.resetMessages).toHaveBeenCalled();
     expect(tenantService.createNewTenant).toHaveBeenCalled();
 
-    tick();
+    //tick();
 
     expect(component.messageSuccess).toEqual(true);
-  }));
+  });
 
   it('should reset messages boxes #resetMessages', () => {
     component.resetMessages();

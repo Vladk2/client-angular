@@ -12,16 +12,16 @@ import {AuthService} from '../../../services/auth-service/auth.service';
 })
 export class AdminListUsersComponent implements OnInit {
 
-  private users: any = [];
-  private messageAdd = false;
-  private messageRemove = false;
-  private progress = false;
-  private deleteDialog = false;
-  private currentTimeout;
+  users: any = [];
+  messageAdd = false;
+  messageRemove = false;
+  progress = false;
+  deleteDialog = false;
+  currentTimeout;
 
-  private user: any;
+  user: any;
 
-  private userToDelete;
+  userToDelete;
 
   constructor(private adminService: AdminService,
               private confirmationService: ConfirmationService,

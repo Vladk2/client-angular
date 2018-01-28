@@ -24,6 +24,7 @@ describe('AdminHomeComponent', () => {
   beforeEach(async(() => {
     const user = new User();
 
+    user.id = 1;
     user.username = 'nole';
     user.password = '123';
     user.name = 'Novica';
@@ -64,6 +65,9 @@ describe('AdminHomeComponent', () => {
     component.ngOnInit();
     tick();
     expect(component.user.username).toBe('nole');
+    expect(component.user.password).toBe('123');
+    expect(component.user.name).toBe('Novica');
+    expect(component.user.last_name).not.toBe('Petar');
 
   }));
 });

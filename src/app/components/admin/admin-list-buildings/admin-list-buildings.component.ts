@@ -11,10 +11,10 @@ import { Tenant } from '../../../models/user/tenant.model';
 })
 export class AdminListBuildingsComponent implements OnInit {
 
-  private tenantsModal = false;
+  tenantsModal = false;
 
-  private buildings: Building[];
-  private tenants: Tenant[];
+  buildings: Building[];
+  tenants: Tenant[];
   constructor(private adminService: AdminService,
               private supervisorService: SupervisorService) {
   }
@@ -44,7 +44,7 @@ export class AdminListBuildingsComponent implements OnInit {
     });
   }
 
-  removeSupervisor(supervisorId, buildingId) {
+  removeSupervisor1(supervisorId, buildingId) {
     this.supervisorService.removeSupervisor(supervisorId).subscribe(res => {
       this.adminService.getTenantsByBuilding(buildingId).subscribe(resp => {
         this.tenants = resp;

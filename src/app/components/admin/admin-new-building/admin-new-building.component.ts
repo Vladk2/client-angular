@@ -10,7 +10,7 @@ import { Address } from '../../../models/address/address.model';
 })
 export class AdminNewBuildingComponent implements OnInit {
 
-  private addressDTO: Address;
+  addressDTO: Address;
   message;
   private currentTimeout;
   constructor(private adminService: AdminService, private router: Router) {
@@ -28,7 +28,7 @@ export class AdminNewBuildingComponent implements OnInit {
     this.adminService.addBuilding(building).subscribe(res => {
       this.message = true;
 
-      this.currentTimeout = setTimeout(() => {
+      setTimeout(() => {
         this.router.navigate(['/admin/buildings']);
       }, 1000);
 

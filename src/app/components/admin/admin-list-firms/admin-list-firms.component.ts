@@ -10,7 +10,7 @@ import {ConfirmationService} from 'primeng/primeng';
 })
 export class AdminListFirmsComponent implements OnInit {
 
-  private firms: Firm[];
+  firms: Firm[];
   message;
   progres;
   deleteDialog;
