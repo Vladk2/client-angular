@@ -29,7 +29,6 @@ export class AdminListFirmsComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
   openDeleteDialog(id_user) {
     this.deleteDialog = true;
     this.id_user = id_user;
@@ -42,10 +41,6 @@ export class AdminListFirmsComponent implements OnInit {
 
   onRemoveFirm() {
     this.adminService.removeFirm(this.id_user).subscribe(resp =>  {
-=======
-  onRemoveFirm(event) {
-    this.adminService.removeFirm(event).subscribe(resp => {
->>>>>>> d1943860c5756d68eca5444f3b5f0c8439396a68
 
       this.progres = true;
       this.deleteDialog = false;
