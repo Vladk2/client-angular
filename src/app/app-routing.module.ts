@@ -11,6 +11,8 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { HomeComponent } from './components/home/home.component';
 import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
+import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
+import { EmployeeNewComponent } from './components/employee/employee-new/employee-new.component';
 
 import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
 import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home.component';
@@ -30,12 +32,11 @@ import { ParliamentHomeComponent } from './components/parliament/parliament-home
 import { UserComponent } from './components/user/user.component';
 import { ProblemHomeComponent } from './components/problem/problem-home/problem-home.component';
 import { ProblemPostingComponent } from './components/problem/problem-posting/problem-posting.component';
-<<<<<<< HEAD
+
 import {VerificationComponent} from './components/profile-verification/verification/verification.component';
 import {TenantApprovalComponent} from './components/tenant/tenant-approval/tenant-approval/tenant-approval.component';
-=======
 import { EmployeeGuard } from './guards/employee.guard';
->>>>>>> d1943860c5756d68eca5444f3b5f0c8439396a68
+
 
 
 const routes: Routes = [
@@ -66,7 +67,9 @@ const routes: Routes = [
     children: [
 
       { path: ':id', canActivate: [EmployeeGuard], component: EmployeeHomeComponent },
-      { path: ':id/problems', canActivate: [EmployeeGuard], component: ProblemHomeComponent }
+      { path: ':id/list', canActivate: [EmployeeGuard], component: EmployeeListComponent },
+      { path: ':id/problems', canActivate: [EmployeeGuard], component: ProblemHomeComponent },
+      { path: ':id/new', canActivate: [EmployeeGuard], component: EmployeeNewComponent }
     ]
   },
 

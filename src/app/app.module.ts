@@ -27,7 +27,6 @@ import { UserService } from './services/user-service/user.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AlertComponent } from './components/alert/alert.component';
@@ -40,19 +39,22 @@ import { ProblemModule } from './modules/problem/problem.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { UserModule } from './modules/user/user.module';
 import { TenantModule } from './modules/tenant/tenant.module';
+<<<<<<< HEAD
 =======
 import {SupervisorService} from './services/supervisor-service/supervisor.service';
 import { EmployeeGuard } from './guards/employee.guard';
 
 >>>>>>> d1943860c5756d68eca5444f3b5f0c8439396a68
 
+=======
+import { EmployeeModule } from './modules/employee/employee.module';
+>>>>>>> 1f5f9a01ef507ea27ce6773586ccd8c50cbef406
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    EmployeeHomeComponent,
     NotFoundComponent,
     RegistrationComponent,
     AlertComponent,
@@ -77,7 +79,8 @@ import { EmployeeGuard } from './guards/employee.guard';
     ProblemModule,
     AdminModule,
     UserModule,
-    TenantModule
+    TenantModule,
+    EmployeeModule
   ],
   providers: [
     AuthGuard,
