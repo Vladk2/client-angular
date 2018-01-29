@@ -54,11 +54,11 @@ describe('ProblemPostingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-/*
-  it('should post a problem ', fakeAsync(() => {
+
+  it('should post a problem ', async(() => {
     component.postProblem();
-    tick(3000);
-    expect(problemService.postProblem).toHaveBeenCalled();
+    expect(component.postClicked).toEqual(true);
     expect(component.loading).toEqual(true);
-  })); */
+    expect(problemService.postProblem).toHaveBeenCalled();
+  }));
 });
