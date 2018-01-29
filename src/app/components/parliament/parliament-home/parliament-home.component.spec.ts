@@ -74,7 +74,7 @@ describe('ParliamentHomeComponent', () => {
   });
 
 
-  it('should get parliament status', () => {
+  it('should get parliament status', fakeAsync(() => {
     component.tenants_id = 1;
     const token = {
       'username': 'riggy', tenants: [
@@ -86,5 +86,5 @@ describe('ParliamentHomeComponent', () => {
     component.getParliamentStatus();
     tick();
     expect(parliamentService.checkParliamentStatus).toHaveBeenCalled();
-  });
+  }));
 });
