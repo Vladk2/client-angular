@@ -31,6 +31,8 @@ export class AdminNewFirmComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('sidebar', 'admin');
+    localStorage.setItem('navbarTitle', 'Dodavanje firme');
     this.adminService.getAllUser().subscribe(res => {
       this.users = res;
     });

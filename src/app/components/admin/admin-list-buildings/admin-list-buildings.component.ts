@@ -20,6 +20,8 @@ export class AdminListBuildingsComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('sidebar', 'admin');
+    localStorage.setItem('navbarTitle', 'Zgrade');
     this.adminService.getAllBuildings().subscribe(res => {
       this.buildings = res;
     });
