@@ -67,7 +67,7 @@ describe('EmployeeHomeComponent', () => {
 
   it('should update profile', fakeAsync(() => {
     component.onUpdate();
-    
+
     const firm = new Firm();
     firm.address = new Address();
 

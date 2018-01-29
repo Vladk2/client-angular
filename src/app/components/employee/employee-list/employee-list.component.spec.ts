@@ -14,11 +14,20 @@ describe('EmployeeListComponent', () => {
   let employeeService: any;
 
   beforeEach(async(() => {
+    const firm = {
+      id: 1,
+      firm_name: 'moja firma',
+      address: {id: 1, street: 'Moja ulica'},
+      userDTO: [
+        {id: 1, username: 'nole', name: 'Novica'}
+      ]
+    }
 
     const employeeServiceMock = {
       removeEmployFirms: jasmine.createSpy('removeEmployFirms')
         .and.returnValue(Observable.from([{}])),
-
+      showFirm: jasmine.createSpy('showFirm')
+        .and.returnValue(Observable.from([firm])),
       RegenerateDate$: {
         subscribe: jasmine.createSpy('subscribe')
       }
