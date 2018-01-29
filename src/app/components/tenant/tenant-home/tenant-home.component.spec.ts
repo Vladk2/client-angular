@@ -77,7 +77,6 @@ describe('TenantHomeComponent', () => {
 
   it('should post announcement #postAnnouncement', fakeAsync(() => {
     component.postAnnouncement();
-    //expect(component.loading).toEqual(true);
     expect(component.announcement.isAnonymous).toEqual(false);
     tick();
     expect(tenantService.postAnnouncement).toHaveBeenCalled();
