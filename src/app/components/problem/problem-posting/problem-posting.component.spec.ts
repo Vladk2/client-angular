@@ -27,6 +27,7 @@ describe('ProblemPostingComponent', () => {
     };
 
     let alertServiceMock = {
+      success: jasmine.createSpy('success').and.returnValue(Observable.from([{}])),
       RegenerateData$: {
         subscribe: jasmine.createSpy('subscribe')
       }
@@ -56,9 +57,9 @@ describe('ProblemPostingComponent', () => {
   });
 
   it('should post a problem ', async(() => {
-    /*component.postProblem();
+    component.postProblem();
     expect(component.postClicked).toEqual(true);
     expect(component.loading).toEqual(true);
-    expect(problemService.postProblem).toHaveBeenCalled();*/
+    expect(problemService.postProblem).toHaveBeenCalled();
   }));
 });

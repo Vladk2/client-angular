@@ -74,7 +74,7 @@ describe('ParliamentHomeComponent', () => {
   });
 
   it('should get parliament status', () => {
-   /* component.tenants_id = 1;
+   /*component.tenants_id = 1;
     const token = {
       'username': 'riggy', tenans: [
         {'tenant': 1, 'supervisor': 1, 'owner': true},
