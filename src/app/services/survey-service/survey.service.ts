@@ -79,7 +79,6 @@ export class SurveyService {
     const responses = new Array<SurveyResponse>();
 
     survey.userResponses.forEach(r => {
-      //console.log(r);
 
       r.answers.forEach((a, i) => {
         const surveyResponse = new SurveyResponse();

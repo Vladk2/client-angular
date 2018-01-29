@@ -13,7 +13,7 @@ export class ParliamentRecordComponent implements OnInit {
 
   @Input() parlId: any;
   @Input() tenantId: any;
-  private record: any = [];
+  record: any = [];
 
   constructor(private parliamentService: ParliamentService,
               private alertService: AlertService,

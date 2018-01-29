@@ -1,11 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import 'rxjs/add/observable/from';
+import {Observable} from 'rxjs/Observable';
 
-import { LoginComponent } from './login.component';
-import { AuthService } from '../../services/auth-service/auth.service';
-import { FormsModule }   from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
+import {LoginComponent} from './login.component';
+import {AuthService} from '../../services/auth-service/auth.service';
+import {FormsModule} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -13,11 +14,17 @@ describe('LoginComponent', () => {
   let authService: AuthService;
 
   beforeEach(() => {
+    let store = {};
+    const authServiceMock = {
+      login_service: jasmine.createSpy('login_service')
+        .and.returnValue(Observable.from([{}]))
+    };
+
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      providers: [ AuthService ],
-      imports: [ FormsModule, RouterTestingModule, HttpClientModule, HttpModule ]
-    })
+      declarations: [LoginComponent],
+      providers: [{provide: AuthService, useValue: authServiceMock}],
+      imports: [FormsModule, RouterTestingModule, HttpClientModule]
+    });
   });
 
   beforeEach(() => {
@@ -29,6 +36,10 @@ describe('LoginComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    component.login();
+    
+    const credenciali = {
+    }
+    expect(authService.login_service).toHaveBeenCalledWith(credenciali);
   });
 });

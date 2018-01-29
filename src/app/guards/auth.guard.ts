@@ -20,8 +20,8 @@ export class AuthGuard implements CanActivate {
     const token = JSON.parse(localStorage.getItem('token'));
     if (token != null) {
       if (expectedRole === token.roles.admin) {
-        console.log('ADMIN je');
         return true;
+        
       }
       if (expectedRole === token.roles.employee) {
         console.log('EMPLOYEE je');

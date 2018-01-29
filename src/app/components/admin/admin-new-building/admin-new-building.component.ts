@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin-service/admin.service';
 import { Router } from '@angular/router';
+import { Address } from '../../../models/address/address.model';
 
 @Component({
   selector: 'app-admin-new-building',
@@ -9,11 +10,12 @@ import { Router } from '@angular/router';
 })
 export class AdminNewBuildingComponent implements OnInit {
 
-  private addressDTO: any = {};
+  addressDTO: Address;
   message;
   private currentTimeout;
   constructor(private adminService: AdminService, private router: Router) {
     this.message = false;
+    this.addressDTO = new Address();
   }
 
   ngOnInit() {
@@ -28,8 +30,8 @@ export class AdminNewBuildingComponent implements OnInit {
     this.adminService.addBuilding(building).subscribe(res => {
       this.message = true;
 
-      this.currentTimeout = setTimeout(() => {
-        this.router.navigate(['/admin/lists/buildings']);
+      setTimeout(() => {
+        this.router.navigate(['/admin/buildings']);
       }, 1000);
 
     });

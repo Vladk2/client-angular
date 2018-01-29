@@ -1,0 +1,59 @@
+<div class="sidebar sidebar-employee" data-color="" data-image="">
+    <app-sidebar></app-sidebar>
+</div>
+
+<div class="main-panel">
+  <app-navbar-cmp></app-navbar-cmp>
+
+  <div class="main-content">
+    <div class="alert alert-success" *ngIf="message">
+		    <span><b> Uspesno - </b> Uspesno ste dodali novog zaposlenog!</span>
+		</div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="header">
+              <h4 class="title">Prikaz svih korisnika</h4>
+              <form id="filter">
+                <input type="text" class="form-control" name="item" placeholder="Pretrazite..." [(ngModel)]="item">
+          	  </form>
+              <p class="category"></p>
+            </div>
+            <div class="content table-responsive table-full-width">
+              <table class="table table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Korisnicko ime</th>
+                    <th>Email</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of users">
+                    <td>{{item.id}} </td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.last_name}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.email}}</td>
+                    <td >
+                    	<button  type="submit" class="btn btn-info btn-fill" (click)="onAddEmployee(item.id)">dodati zaposlenog</button>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

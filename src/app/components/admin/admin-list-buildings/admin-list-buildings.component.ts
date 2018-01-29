@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin-service/admin.service';
 import {SupervisorService} from '../../../services/supervisor-service/supervisor.service';
+import { Building } from '../../../models/building/building.model';
+import { Tenant } from '../../../models/user/tenant.model';
 
 @Component({
   selector: 'app-admin-list-buildings',
@@ -9,12 +11,13 @@ import {SupervisorService} from '../../../services/supervisor-service/supervisor
 })
 export class AdminListBuildingsComponent implements OnInit {
 
-  private tenantsModal = false;
+  tenantsModal = false;
 
-  private buildings: any = [];
-  private tenants: any = [];
+  buildings: Building[];
+  tenants: Tenant[];
   constructor(private adminService: AdminService,
-              private supervisorService: SupervisorService) { }
+              private supervisorService: SupervisorService) {
+  }
 
   ngOnInit() {
     localStorage.setItem('sidebar', 'admin');
@@ -43,7 +46,7 @@ export class AdminListBuildingsComponent implements OnInit {
     });
   }
 
-  removeSupervisor(supervisorId, buildingId) {
+  removeSupervisor1(supervisorId, buildingId) {
     this.supervisorService.removeSupervisor(supervisorId).subscribe(res => {
       this.adminService.getTenantsByBuilding(buildingId).subscribe(resp => {
         this.tenants = resp;

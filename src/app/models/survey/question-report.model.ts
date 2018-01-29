@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { Question } from "./question.model";
+import { Question } from './question.model';
 
 @Injectable()
 export class QuestionReport {
@@ -17,6 +17,5 @@ export class QuestionReport {
     } else {
       this.chartType = 'text';
     }
-    //this.data = data;
   }
 }

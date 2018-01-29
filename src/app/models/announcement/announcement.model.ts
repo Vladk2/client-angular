@@ -1,8 +1,6 @@
 import { Tenant } from './../user/tenant.model';
 
 export class Announcement {
-
-
     title: string;
     message: string;
     tenant: Tenant;

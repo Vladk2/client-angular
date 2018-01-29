@@ -6,7 +6,6 @@
 	<app-navbar-cmp></app-navbar-cmp>
 
 	<div id="loader" *ngIf="progres" ><img src="assets/img/loader-preview.svg" alt="loading"></div>
-	
 
 	<div class="main-content">
 		<div class="alert alert-warning" *ngIf="message">
@@ -39,7 +38,7 @@
 	                                    	<td>{{item.address.street}}</td>
 	                                    	<td>{{item.address.number}}</td>
 	                                    	<td>{{item.address.city}}</td>
-	                                    	<td><button type="submit" class="btn btn-info btn-fill pull-right" (click)="onRemoveFirm(item.id)">Obrisati firmu</button></td>
+	                                    	<td><button type="submit" class="btn btn-danger" (click)="openDeleteDialog(item.id)">Obrisati firmu</button></td>
 	                                    	
 	                                    </tr>
 	                                </tbody>
@@ -53,5 +52,16 @@
 	    </div>
 	</div>
 
+	<p-confirmDialog appendTo="body" [(visible)]="deleteDialog" icon="fa fa-question-circle" width="425">
+	    <p-footer>
+	      <div class="row">
+	        <div class="col-md-6" style="text-align: left;">
+	        </div>
+	        <div class="col-md-6" style="text-align: right;">
+	          <button type="submit" class="btn btn-danger" (click)="onRemoveFirm()">Obriši</button>
+	        </div>
+	      </div>
+	    </p-footer>
+	  </p-confirmDialog>
 
 </div>

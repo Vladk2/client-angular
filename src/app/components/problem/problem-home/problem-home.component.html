@@ -31,7 +31,7 @@
     </div>
     <div style="text-align:center">
       <span *ngIf='current_role === "employee" || (problem.firm == null && is_supervisor)'>
-        <button class="btn btn-default btn-fill" (click)="forwardProblemDialog(problem.id)">Prosledi kvar</button>
+        <button class="btn btn-default btn-fill forward" (click)="forwardProblemDialog(problem.id)">Prosledi kvar</button>
       </span>
       <span *ngIf='current_role === "employee"'>
         <button class="btn btn-default btn-fill" (click)="repairDateDialog(problem.id)">Zakaži datum popravke</button>

@@ -1,0 +1,31 @@
+
+<div class="alert alert-success" *ngIf="message">
+        <span><b> Dodato - </b> Uspesno ste dodali novog korisnika <br>Da bi ste ga dodali kao vlasnika firme morate ga pronaci u liti!</span>
+    </div>
+<div class="panel-body" >
+  <form role="form">
+    <fieldset>
+      <div class="form-group">
+        <input class="form-control" placeholder="Korisničko ime" name="username" type="text" autofocus="" [(ngModel)]="user.username">
+      </div>
+      <div class="form-group">
+        <input class="form-control" placeholder="Šifra" name="password" type="password" value="123" [(ngModel)]="user.password">
+      </div>
+      <div class="form-group">
+        <input class="form-control" placeholder="Ime" name="name" type="text" value="" [(ngModel)]="user.name">
+      </div>
+      <div class="form-group">
+        <input class="form-control" placeholder="Prezime" name="last_name" type="text" value="" [(ngModel)]="user.last_name">
+      </div>
+      <div class="form-group">
+        <input class="form-control" required placeholder="Email" name="email" type="email" value="" [(ngModel)]="user.email">
+      </div>
+      
+      
+      <input type="submit" class="btn btn-info fill pull-right" value="Kreiraj korisnika" (click)="onCreate()"> <br><br><br>
+    </fieldset>
+  </form>
+</div>
+
+
+  

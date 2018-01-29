@@ -10,13 +10,13 @@ import {TenantService} from '../../../services/tenant-service/tenant.service';
 })
 export class TenantRegistrationComponent implements OnInit {
 
-  private username: String;
-  private abode: any = {};
-  private buildings: any = [];
+  username: String;
+  abode: any = {};
+  buildings: any = [];
 
-  private messageSuccess;
-  private messageWarning;
-  private messageWarningNoSupervisor;
+  messageSuccess;
+  messageWarning;
+  messageWarningNoSupervisor;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -39,7 +39,7 @@ export class TenantRegistrationComponent implements OnInit {
       this.messageSuccess = true;
       setTimeout(() => {
         this.router.navigate(['/']);
-      }, 7000);
+      }, 4000);
     }, error => {
         if (error.status === 406) {
           this.messageWarningNoSupervisor = true;

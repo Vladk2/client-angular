@@ -2,30 +2,30 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
 import { AlertService } from "../../services/alert-service/alert.service";
-import { Router, Routes, RouterModule } from '@angular/router';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;
-  let router: ComponentFixture<Router>;
   
   beforeEach(async(() => {
+
+    let alertServiceMock = {
+      RegenerateData$: {
+        subscribe: jasmine.createSpy('subscribe')
+      }
+    };
     TestBed.configureTestingModule({
       declarations: [ AlertComponent ],
-      providers: [ AlertService ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-      imports: [ RouterTestingModule ]
+      providers: [
+        {provide: AlertService, useValue: alertServiceMock}
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertComponent);
-    router = TestBed.createComponent(Router);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   

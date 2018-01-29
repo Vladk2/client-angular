@@ -8,7 +8,7 @@
   <div class="alert alert-info" *ngIf="messageNoResposes">
     <span>Trenutno nema odgovora za ovu anketu.</span>
   </div>
-  <div class="alert alert-info" *ngIf="messageDeleted">
+  <div id="survey-deleted" class="alert alert-info" *ngIf="messageDeleted">
     <span>Uspešno ste obrisali anketu.</span>
   </div>
   <div class="alert alert-success" *ngIf="messageCreated">
@@ -23,7 +23,7 @@
   <div class="form-container">
     <div class="row">
       <div class="col-md-12" style="text-align: right;">
-        <button type="button" class="btn btn-primary" (click)="openCreateDialog()">Nova anketa</button>
+        <button id="new-survey" type="button" class="btn btn-primary" (click)="openCreateDialog()">Nova anketa</button>
       </div>
     </div>
     <br/>
@@ -48,14 +48,16 @@
               <td>{{item.dateExpires}}</td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Popunite anketu">
-                  <button type="button" class="btn btn-primary btn-xs" [disabled]="fillAllowed(item.userResponses)" (click)="openFillDialog(item)">
+                  <button id="fill-button" type="button" class="btn btn-primary btn-xs" [disabled]="fillAllowed(item.userResponses)"
+                          (click)="openFillDialog(item)">
                     <span class="glyphicon glyphicon-pencil"></span>
                   </button>
                 </p>
               </td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Izveštaj">
-                  <button type="button" class="btn btn-info btn-xs" [disabled]="this.tenant.userId !== item.creator"
+                  <button id="report-button" type="button" class="btn btn-info btn-xs"
+                          [disabled]="(this.tenant.userId !== item.creator) && (!this.tenant.supervisor)"
                           (click)="openReportDialog(item.id)">
                     <span class="glyphicon glyphicon-print"></span>
                   </button>
@@ -63,8 +65,8 @@
               </td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Obriši">
-                  <button type="button" class="btn btn-danger btn-xs"
-                          [disabled]="this.tenant.userId !== item.creator || !this.tenant.supervisor"
+                  <button id="delete-button" type="button" class="btn btn-danger btn-xs"
+                          [disabled]="(this.tenant.userId !== item.creator) && (!this.tenant.supervisor)"
                           (click)="confirm(item)">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>
@@ -78,41 +80,45 @@
     </div>
   </div>
 
-  <p-dialog appendTo="body" [(visible)]="reportDialog" header="Trenutni izveštaj ankete" modal="modal" [responsive]="true">
+  <p-dialog id="report-survey-dialog" appendTo="body" [(visible)]="reportDialog" header="Trenutni izveštaj ankete" modal="modal"
+            [responsive]="true" [contentStyle]="{'overflow':'auto','max-height':'500px'}">
     <div class="container">
       <div style="padding-left: 10%; padding-right: 10%;">
         <div class="row" *ngFor="let res of surveyResponses;">
           <div class="col-md-12" style="text-align: center; width: 100%;">
-            <br />
+            <br/>
             <p>
               {{res.question.question}}
             </p>
-            <br />
+            <br/>
             <div *ngIf="res.chartType === 'text'">
               <p *ngFor="let r of res.values">
                 {{r}}
               </p>
             </div>
-            <p-chart *ngIf="res.chartType !== 'text'" type="{{res.chartType}}" [data]="res.data" width="40" height="7"></p-chart>
+            <p-chart *ngIf="res.chartType !== 'text'" type="{{res.chartType}}" [data]="res.data" width="40"
+                     height="7"></p-chart>
           </div>
         </div>
-        <br /> <br />
+        <br/> <br/>
       </div>
-      <br />
+      <br/>
     </div>
     <p-footer>
       <div class="modal-footer row">
         <div class="col-md-6" style="text-align: left;">
         </div>
         <div class="col-md-6" style="text-align: right;">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideReportDialog()">Zatvori</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideReportDialog()">Zatvori
+          </button>
         </div>
       </div>
     </p-footer>
   </p-dialog>
 
-  <p-dialog appendTo="body" header="Kreiranje ankete" [(visible)]="createSurveyDialog" modal="modal" width="800"
-            [responsive]="true">
+  <p-dialog id="new-survey-dialog" appendTo="body" header="Kreiranje ankete" [(visible)]="createSurveyDialog"
+            modal="modal" width="800"
+            [responsive]="true" [contentStyle]="{'overflow':'auto','max-height':'500px'}">
     <form role="form" ngNativeValidate (ngSubmit)="createSurvey(newSurvey)">
       <div class="padding-left: 10%; padding-right: 10%;">
         <fieldset>
@@ -149,10 +155,14 @@
               </select>
             </div>
             <div class="col-lg-2" style="text-align: right;">
-              <button class="btn btn-primary" (click)="addQuestion()"
-                      [disabled]="newQuestion.question === '' || newQuestion.typeQuestion === ''">
+              <div id="tempBtn" class="btn btn-info"
+                   *ngIf="(newQuestion.question === '' || newQuestion.typeQuestion === '')">
                 <span>+</span>
-              </button>
+              </div>
+              <div class="btn btn-primary" (click)="addQuestion()"
+                   *ngIf="!(newQuestion.question === '' || newQuestion.typeQuestion === '')">
+                <span>+</span>
+              </div>
             </div>
           </div>
           <br/>
@@ -176,8 +186,9 @@
     </form>
   </p-dialog>
 
-  <p-dialog appendTo="body" header="Popunite anketu" [(visible)]="fillDialog" modal="modal" width="800"
-            [responsive]="true">
+  <p-dialog id="fill-survey-dialog" appendTo="body" header="Popunite anketu" [(visible)]="fillDialog" modal="modal"
+            width="800"
+            [responsive]="true" [contentStyle]="{'overflow':'auto','max-height':'500px'}">
     <form role="form" ngNativeValidate (ngSubmit)="submit()">
       <div style="padding-left: 10%; padding-right: 10%;">
         <fieldset>
@@ -230,7 +241,8 @@
     </form>
   </p-dialog>
 
-  <p-confirmDialog appendTo="body" [(visible)]="deleteDialog" icon="fa fa-question-circle" width="425">
+  <p-confirmDialog id="delete-survey-dialog" appendTo="body" [(visible)]="deleteDialog" icon="fa fa-question-circle"
+                   width="425">
     <p-footer>
       <div class="row">
         <div class="col-md-6" style="text-align: left;">

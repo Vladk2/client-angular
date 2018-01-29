@@ -11,11 +11,11 @@ import { Problem } from '../../../models/problem/problem.model';
 })
 export class ProblemPostingComponent implements OnInit {
 
-  private problem: Problem;
-  private tenantId: any;
-  private postClicked = false;
-  private loading = false;
-  private image: any;
+  problem: Problem;
+  tenantId: any;
+  postClicked = false;
+  loading = false;
+  image: any;
   constructor(private problemService: ProblemService,
     private activeRoute: ActivatedRoute,
     private alertService: AlertService,
@@ -26,7 +26,6 @@ export class ProblemPostingComponent implements OnInit {
   ngOnInit() {
     localStorage.setItem('sidebar', 'tenant');
     localStorage.setItem('navbarTitle', 'Prijava kvara');
-
     this.activeRoute.params.subscribe(params => {
       this.tenantId = (params['id']);
     });
@@ -41,12 +40,10 @@ export class ProblemPostingComponent implements OnInit {
         that.alertService.success('Kvar uspešno postavljen!', true);
         that.router.navigate(['tenant/' + that.tenantId + '/problems']);
       }, 3000);
-
     },
       error => {
         this.alertService.error('GREŠKA: Greška prilikom postavljanja kvara.');
       });
-
   }
 
   getBase64(file) {
@@ -75,7 +72,5 @@ export class ProblemPostingComponent implements OnInit {
         console.log('Error: ', error);
       };
     }
-
   }
-
 }

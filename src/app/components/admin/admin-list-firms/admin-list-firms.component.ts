@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin-service/admin.service';
+import { Firm } from '../../../models/firm/firm.model';
+import {ConfirmationService} from 'primeng/primeng';
 
 @Component({
   selector: 'app-admin-list-firms',
@@ -8,12 +10,15 @@ import { AdminService } from '../../../services/admin-service/admin.service';
 })
 export class AdminListFirmsComponent implements OnInit {
 
-  private firms: any = [];
+  firms: Firm[];
   message;
   progres;
+  deleteDialog;
+  id_user: any;
   private currentTimeout;
-  constructor(private adminService: AdminService) {
-    this.message = false; this.progres = false;
+  constructor(private adminService: AdminService,
+              private confirmationService: ConfirmationService) {
+    this.message = false; this.progres = false; this.deleteDialog = false;
   }
 
   ngOnInit() {
@@ -24,10 +29,21 @@ export class AdminListFirmsComponent implements OnInit {
     });
   }
 
-  onRemoveFirm(event) {
-    this.adminService.removeFirm(event).subscribe(resp => {
+  openDeleteDialog(id_user) {
+    this.deleteDialog = true;
+    this.id_user = id_user;
+    this.confirmationService.confirm({
+      message: 'Da li ste sigurni da želite da obrišete firmu?',
+      header: 'Potvrda',
+      icon: 'fa fa-question-circle'
+    });
+  }
+
+  onRemoveFirm() {
+    this.adminService.removeFirm(this.id_user).subscribe(resp =>  {
 
       this.progres = true;
+      this.deleteDialog = false;
       this.currentTimeout = setTimeout(() => {
         this.adminService.getAllFirms().subscribe(res => {
           this.message = true;
@@ -38,5 +54,4 @@ export class AdminListFirmsComponent implements OnInit {
 
     });
   }
-
 }
