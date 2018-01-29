@@ -11,6 +11,8 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { HomeComponent } from './components/home/home.component';
 import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
+import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
+import { EmployeeNewComponent } from './components/employee/employee-new/employee-new.component';
 
 import { TenantRegistrationComponent } from './components/tenant/tenant-registration/tenant-registration.component';
 import { TenantHomeComponent } from './components/tenant/tenant-home/tenant-home.component';
@@ -62,7 +64,9 @@ const routes: Routes = [
     children: [
 
       { path: ':id', component: EmployeeHomeComponent },
-      { path: ':id/problems', component: ProblemHomeComponent }
+      { path: ':id/list', component: EmployeeListComponent },
+      { path: ':id/problems', component: ProblemHomeComponent },
+      { path: ':id/new', component: EmployeeNewComponent }
     ]
   },
 

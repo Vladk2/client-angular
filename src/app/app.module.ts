@@ -27,7 +27,6 @@ import { UserService } from './services/user-service/user.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AlertComponent } from './components/alert/alert.component';
@@ -39,14 +38,13 @@ import { ProblemModule } from './modules/problem/problem.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { UserModule } from './modules/user/user.module';
 import { TenantModule } from './modules/tenant/tenant.module';
-
+import { EmployeeModule } from './modules/employee/employee.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    EmployeeHomeComponent,
     NotFoundComponent,
     RegistrationComponent,
     AlertComponent,
@@ -71,7 +69,8 @@ import { TenantModule } from './modules/tenant/tenant.module';
     ProblemModule,
     AdminModule,
     UserModule,
-    TenantModule
+    TenantModule,
+    EmployeeModule
   ],
   providers: [
     AuthGuard,
