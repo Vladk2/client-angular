@@ -1,6 +1,6 @@
-import {LoginPage} from './login.po';
-import {browser, by, element} from 'protractor';
-import {fakeAsync, tick} from '@angular/core/testing';
+import { LoginPage } from './login.po';
+import { browser, by, element } from 'protractor';
+import { fakeAsync, tick } from '@angular/core/testing';
 
 describe('Login Page', () => {
   let page: LoginPage;

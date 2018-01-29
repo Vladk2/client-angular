@@ -11,10 +11,10 @@
     <div class="card-header ">
       <p class="postProblemHeader stats">PRIJAVA NOVOG KVARA</p>
     </div>
-    <input class="form-control" id="postProblemTextArea" placeholder="Unesite naslov kvara" type="text" [(ngModel)]="problem.title"
+    <input class="form-control probTit" id="postProblemTextArea" placeholder="Unesite naslov kvara" type="text" [(ngModel)]="problem.title"
     />
     <hr>
-    <textarea id="postProblemTextArea" [(ngModel)]="problem.description" placeholder="Unesite opis kvara..." class="form-control" rows="3"></textarea>
+    <textarea id="postProblemTextArea" [(ngModel)]="problem.description" placeholder="Unesite opis kvara..." class="form-control probDes" rows="3"></textarea>
     <hr>
     <p style="text-align:center;display:block" class="checkbox-inline">
       <input type="checkbox" style="width:1.1em;height:1.1em" value="" [(ngModel)]="problem.openForAll">Kvar/problem je vezan za celu zgradu</p>
@@ -25,7 +25,7 @@
         styleClass="imageUpload" accept="image/*" multiple="multiple">
 
       </p-fileUpload>
-      <button (click)="postProblem()" [disabled]="problem.title === '' || problem.desc === '' || postClicked" id="postProblem" class="btn btn-default btn-fill ">PRIJAVI KVAR</button>
+      <button (click)="postProblem()" [disabled]="problem.title === '' || problem.desc === '' || postClicked" id="postProblem" class="btn btn-default btn-fill probSub">PRIJAVI KVAR</button>
     </div>
   </div>
   <br>
