@@ -12,16 +12,16 @@
 					<h3 class="panel-title">Prijava</h3>
 				</div>
 				<div class="panel-body" >
-					<form role="form">
+					<form role="form" ngNativeValidate (ngSubmit)="login()">
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="Korisničko ime" name="username" type="text" autofocus="" [(ngModel)]="user.username">
+								<input class="form-control" required placeholder="Korisničko ime" name="username" type="text" autofocus="" [(ngModel)]="user.username">
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Šifra" name="password" type="password" value="" [(ngModel)]="user.password">
+								<input class="form-control" required placeholder="Šifra" name="password" type="password" value="" [(ngModel)]="user.password">
 							</div>
 							<!-- Change this to a button or input when using this as a form -->
-							<input type="submit" class="btn btn-info fill pull-right" value="Prijavite se" (click)="login()"> <br><br><br>
+							<input type="submit" class="btn btn-info fill pull-right" value="Prijavite se"> <br><br><br>
 							 <p>Nemate nalog? Napravite jedan <a [routerLink]="['/registration']">ovde</a>.</p>
 						</fieldset>
 					</form>

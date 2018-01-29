@@ -1,5 +1,5 @@
 import {LoginPage} from './login.po';
-import {browser} from 'protractor';
+import {browser, by, element} from 'protractor';
 import {fakeAsync, tick} from '@angular/core/testing';
 
 describe('Login Page', () => {
@@ -7,15 +7,14 @@ describe('Login Page', () => {
 
   beforeEach(() => {
     page = new LoginPage();
+    page.navigateTo();
   });
 
   it('should display message for signing in', () => {
-    page.navigateTo();
     expect(page.getPanelTitle()).toEqual('Prijava');
   });
 
   it('should result in bad login', () => {
-    page.navigateTo();
     const messageDiv = page.getMessageDiv();
     const usernameInput = page.getUsernameInput();
     const passwordInput = page.getPasswordInput();
@@ -28,7 +27,6 @@ describe('Login Page', () => {
   });
 
   it('should result in successful login', () => {
-    page.navigateTo();
     const messageDiv = page.getMessageDiv();
     const usernameInput = page.getUsernameInput();
     const passwordInput = page.getPasswordInput();
@@ -38,5 +36,6 @@ describe('Login Page', () => {
     passwordInput.sendKeys('123');
     submitButton.click();
     expect(browser.getCurrentUrl()).toEqual('http://localhost:49152/');
+    element(by.id('logout-button')).click();
   });
 });

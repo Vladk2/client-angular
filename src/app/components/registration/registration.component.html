@@ -9,33 +9,33 @@
             <div *ngIf="loading" style="margin:0 auto;align-content:center;width:50%;"><img style="height:50px;" src="assets/img/loader-preview.svg" alt="loading"></div>
           </div>
           <div class="panel-body" >
-            <form role="form">
+            <form role="form" ngNativeValidate (ngSubmit)="onRegistration()">
               <fieldset>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Korisničko ime" name="username" type="text" autofocus="" [(ngModel)]="user.username">
+                  <input class="form-control" required placeholder="Korisničko ime" name="username" type="text" autofocus="" [(ngModel)]="user.username">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Šifra" name="password" type="password" value="" [(ngModel)]="user.password">
+                  <input class="form-control" required placeholder="Šifra" name="password" type="password" value="" [(ngModel)]="user.password">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Ime" name="name" type="text" value="" [(ngModel)]="user.name">
+                  <input class="form-control" required placeholder="Ime" name="name" type="text" value="" [(ngModel)]="user.name">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Prezime" name="last_name" type="text" value="" [(ngModel)]="user.last_name">
+                  <input class="form-control" required placeholder="Prezime" name="last_name" type="text" value="" [(ngModel)]="user.last_name">
                 </div>
                 <div class="form-group">
                   <input class="form-control" required placeholder="Email" name="email" type="email" value="" [(ngModel)]="user.email">
                 </div>
                 Odaberite adresu:
                 <div class="form-group">
-                  <select class="form-control"  name="buildingId" [(ngModel)]="abode.buildingId">
+                  <select class="form-control" required name="buildingId" [(ngModel)]="abode.buildingId">
                     <option *ngFor="let item of buildings" value="{{item.id}}">{{item.addressDTO.street}} {{item.addressDTO.number}}</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Broj stana" name="apartmentNo" type="text" value="" [(ngModel)]="abode.apartmentNo">
+                  <input class="form-control" required placeholder="Broj stana" name="apartmentNo" type="text" value="" [(ngModel)]="abode.apartmentNo">
                 </div>
-                <input type="submit" class="btn btn-info fill pull-right" value="Registrujte se" (click)="onRegistration()"> <br><br><br>
+                <input type="submit" class="btn btn-info fill pull-right" value="Registrujte se"> <br><br><br>
                 <p>Već imate nalog? Prijavite se <a [routerLink]="['/login']">ovde</a>.</p>
               </fieldset>
             </form>

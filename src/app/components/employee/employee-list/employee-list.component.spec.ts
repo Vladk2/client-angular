@@ -21,7 +21,7 @@ describe('EmployeeListComponent', () => {
       userDTO: [
         {id: 1, username: 'nole', name: 'Novica'}
       ]
-    }
+    };
 
     const employeeServiceMock = {
       removeEmployFirms: jasmine.createSpy('removeEmployFirms')

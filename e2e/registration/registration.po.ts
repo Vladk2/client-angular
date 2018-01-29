@@ -5,8 +5,8 @@ export class RegistrationPage {
     return browser.get('/registration');
   }
 
-  getPanelTitle() {
-    return element(by.css('.panel-title')).getText();
+  getNameInput() {
+    return element(by.css('input[name=username]'));
   }
 
   getUsernameInput() {
@@ -17,11 +17,20 @@ export class RegistrationPage {
     return element(by.css('input[name=password]'));
   }
 
+  getLastNameInput() {
+    return element(by.css('input[name=last_name]'));
+  }
+
+  getEmailInput() {
+    return element(by.css('input[name=email]'));
+  }
+
+  getApartmentNoInput() {
+    return element(by.css('input[name=apartmentNo]'));
+  }
+
   getSubmitButton() {
     return element(by.css('input[type=submit]'));
   }
 
-  getMessageDiv() {
-    return element(by.css('span'));
-  }
 }
