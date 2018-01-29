@@ -23,31 +23,31 @@ import {default as isValidDate} from 'pretty-easy-date-check';
 })
 export class TenantSurveyComponent implements OnInit {
 
-  private messageDeleted = false;
-  private messageAddQuestion = false;
-  private messageFilled = false;
-  private messageCreated = false;
-  private messageNoResposes = false;
-  private messageWrongDateFormat = false;
-  private messageDatePassed = false;
-  private messageQuestionDuplicate = false;
+  messageDeleted = false;
+  messageAddQuestion = false;
+  messageFilled = false;
+  messageCreated = false;
+  messageNoResposes = false;
+  messageWrongDateFormat = false;
+  messageDatePassed = false;
+  messageQuestionDuplicate = false;
 
-  private fillDialog = false;
-  private reportDialog = false;
-  private deleteDialog = false;
-  private createSurveyDialog = false;
+  fillDialog = false;
+  reportDialog = false;
+  deleteDialog = false;
+  createSurveyDialog = false;
 
-  private selectedSurvey: Survey = new Survey();
+  selectedSurvey: Survey = new Survey();
 
-  private newSurvey: Survey = new Survey();
-  private newQuestion: Question =
+  newSurvey: Survey = new Survey();
+  newQuestion: Question =
     new Question('', '', '');
 
-  private surveys: any = [];
-  private tenant: Tenant = new Tenant();
+  surveys: any = [];
+  tenant: Tenant = new Tenant();
 
-  private userResponse: UserResponse = new UserResponse();
-  private surveyResponses: SurveyResponse[];
+  userResponse: UserResponse = new UserResponse();
+  surveyResponses: SurveyResponse[];
 
   constructor(private tenantService: TenantService,
               private surveyService: SurveyService,
@@ -186,13 +186,13 @@ export class TenantSurveyComponent implements OnInit {
     });
   }
 
-  private openFillDialog(survey: Survey) {
+  openFillDialog(survey: Survey) {
     this.selectedSurvey = survey;
     this.fillResponseWithQuestions();
     this.fillDialog = true;
   }
 
-  private openReportDialog(surveyId) {
+  openReportDialog(surveyId) {
     this.surveyService.getSurveys(this.tenant.buildingId).subscribe((res: Array<any>) => {
       this.surveys = res;
       let survey;
@@ -214,25 +214,25 @@ export class TenantSurveyComponent implements OnInit {
     });
   }
 
-  private openCreateDialog() {
+  openCreateDialog() {
     this.newSurvey.questionDTO = new Array<Question>();
     this.newSurvey.building = this.tenant.buildingId;
     this.createSurveyDialog = true;
   }
 
-  private hideFillDialog() {
+  hideFillDialog() {
     this.fillDialog = false;
   }
 
-  private hideReportDialog() {
+  hideReportDialog() {
     this.reportDialog = false;
   }
 
-  private hideCreateDialog() {
+  hideCreateDialog() {
     this.createSurveyDialog = false;
   }
 
-  private resetMessageDivs() {
+  resetMessageDivs() {
     this.messageDeleted = false;
     this.messageAddQuestion = false;
     this.messageCreated = false;
@@ -243,7 +243,7 @@ export class TenantSurveyComponent implements OnInit {
     this.messageQuestionDuplicate = false;
   }
 
-  private fillResponseWithQuestions() {
+  fillResponseWithQuestions() {
     this.userResponse.answers = [];
     this.userResponse.survey = this.selectedSurvey.id;
     this.selectedSurvey.questionDTO.forEach(q => {
@@ -251,7 +251,7 @@ export class TenantSurveyComponent implements OnInit {
     });
   }
 
-  private fillAllowed(userResponses) {
+  fillAllowed(userResponses) {
     let found = false;
     userResponses.forEach(ur => {
       if (ur.user === this.tenant.userId) {
