@@ -9,11 +9,11 @@ import { ParliamentService } from '../../../services/parliament-service/parliame
 })
 export class ParliamentHomeComponent implements OnInit {
 
-  private tenants_id: any;
-  private parl_status: String;
+  tenants_id: any;
+  parl_status: String;
   parl_id: any = 0;
-  private loading: boolean;
-  private is_supervisor = false;
+  loading: boolean;
+  is_supervisor = false;
 
   constructor(private activeRoute: ActivatedRoute,
     private parliamentService: ParliamentService, ) { }
@@ -27,7 +27,6 @@ export class ParliamentHomeComponent implements OnInit {
     });
 
     this.getParliamentStatus();
-
   }
 
   // statuses: NONE, ANNOUNCED, VOTING, VOTED
@@ -41,7 +40,7 @@ export class ParliamentHomeComponent implements OnInit {
         if (tenant.tenant === this.tenants_id) {
           if (tenant.supervisor) {
             this.is_supervisor = true;
-          }else {
+          } else {
             this.is_supervisor = false;
           }
         }
