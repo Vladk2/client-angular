@@ -12,9 +12,9 @@ export class ParliamentProposalsComponent implements OnInit {
 
   @Input() parlId: any;
   @Input() tenantId: any;
-  private loading = true;
-  private agendaPoints: AgendaPoint [];
-  private agendaProposal: any = '';
+  loading = true;
+  agendaPoints: AgendaPoint[];
+  agendaProposal: any = '';
 
   constructor(private parliamentService: ParliamentService,
     private alertService: AlertService) { }

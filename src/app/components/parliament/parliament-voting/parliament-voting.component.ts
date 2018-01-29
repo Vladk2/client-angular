@@ -15,16 +15,16 @@ export class ParliamentVotingComponent implements OnInit {
 
   @Input() parlId: any;
   @Input() tenantId: any;
-  private loading = true;
-  private agendaPoints: AgendaPoint[];
-  private agendaVotes: AgendaVote[] = [];
-  private tenantVoted: boolean;
-  private isSupervisor: boolean;
+  loading = true;
+  agendaPoints: AgendaPoint[];
+  agendaVotes: AgendaVote[] = [];
+  tenantVoted: boolean;
+  isSupervisor: boolean;
 
   constructor(private parliamentService: ParliamentService,
     private alertService: AlertService,
     private location: Location) {
-      this.agendaPoints = new Array<AgendaPoint>();
+    this.agendaPoints = new Array<AgendaPoint>();
   }
 
   ngOnInit() {
@@ -38,7 +38,6 @@ export class ParliamentVotingComponent implements OnInit {
     this.loading = true;
     this.parliamentService.getProposedAgendaPoints(this.tenantId, this.parlId).subscribe((res: any) => {
       this.agendaPoints = res.slice().reverse();
-      console.log(this.agendaPoints);
       for (const point of this.agendaPoints) {
         point.upVotes = 0;
         point.downVotes = 0;

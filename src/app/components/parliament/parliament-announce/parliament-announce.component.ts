@@ -12,10 +12,10 @@ import { DateTime } from '../../../models/date/datetime.model';
 export class ParliamentAnnounceComponent implements OnInit {
 
   @Input() tenantId: any;
-  private date: Date;
-  private announceDate: any;
-  private loading: boolean;
-  private parl_status: String;
+  date: Date;
+  announceDate: any;
+  loading: boolean;
+  parl_status: String;
 
   constructor(private parliamentService: ParliamentService,
     private alertService: AlertService,

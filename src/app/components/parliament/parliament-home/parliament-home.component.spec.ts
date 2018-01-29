@@ -73,10 +73,10 @@ describe('ParliamentHomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should get parliament status', () => {
-   /* component.tenants_id = 1;
+  it('should get parliament status', fakeAsync(() => {
+    component.tenants_id = 1;
     const token = {
-      'username': 'riggy', tenans: [
+      'username': 'riggy', tenants: [
         {'tenant': 1, 'supervisor': 1, 'owner': true},
         {'tenant': 5, 'owner': false}
       ]
@@ -84,6 +84,6 @@ describe('ParliamentHomeComponent', () => {
     localStorage.setItem('token', JSON.stringify(token));
     component.getParliamentStatus();
     tick();
-    expect(parliamentService.checkParliamentStatus).toHaveBeenCalled();*/
-  });
+    expect(parliamentService.checkParliamentStatus).toHaveBeenCalled();
+  })); 
 });
