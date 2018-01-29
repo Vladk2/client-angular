@@ -29,6 +29,8 @@ export class AdminListUsersComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('sidebar', 'admin');
+    localStorage.setItem('navbarTitle', 'Korisnici');
     this.user = JSON.parse(localStorage.getItem('token'));
 
     this.adminService.getAllUser().subscribe(res => {

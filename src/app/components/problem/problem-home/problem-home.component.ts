@@ -17,23 +17,24 @@ import { Problem } from '../../../models/problem/problem.model';
 })
 export class ProblemHomeComponent implements OnInit {
 
-  private role_id: any;
-  private current_role: String;
-  private images: any = {};
-  private comments: Comment[] = [];
-  private problems: Problem[] = [];
-  private newComment: Comment;
-  private firms;
-  private allFirms = [];
-  private is_supervisor: boolean;
-  private visibleComments = {};
-  private clickedProblem;
-  private clickedFirm;
-  private displayResolveDialog = false;
-  private displayForwardDialog = false;
-  private displayRepairDateDialog = false;
-  private repairDate;
-  private chosenRepairDate;
+  role_id: any;
+  current_role: String;
+  images: any = {};
+  comments: Comment[] = [];
+  problems: Problem[] = [];
+  newComment: Comment;
+  allProblems: Problem[] = [];
+  firms;
+  allFirms = [];
+  is_supervisor: boolean;
+  visibleComments = {};
+  clickedProblem;
+  clickedFirm;
+  displayResolveDialog = false;
+  displayForwardDialog = false;
+  displayRepairDateDialog = false;
+  repairDate;
+  chosenRepairDate;
 
 
   constructor(private activeRoute: ActivatedRoute,
@@ -102,15 +103,15 @@ export class ProblemHomeComponent implements OnInit {
 
   getProblems() {
     this.problemService.getProblems().subscribe((res: any) => {
-      const allProblems: Problem[] = res;
-      for (const problem of allProblems) {
+      this.allProblems = res;
+      for (const problem of this.allProblems) {
         // tslint:disable-next-line:triple-equals
         if (this.current_role === 'tenant' && (problem.tenant.id == this.role_id || (problem.firm == null && this.is_supervisor))) {
           this.images[problem.id] = [];
           for (let i = 0; i < problem.imgNo; i++) {
             this.images[problem.id].push({ source: 'http://localhost:8080/kvar ' + problem.id + '/' + i + '.jpg' });
           }
-          console.log(problem);
+
           this.problems.push(problem);
           for (const prob of this.problems) {
             this.visibleComments['problem' + prob.id] = false;

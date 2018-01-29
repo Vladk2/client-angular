@@ -60,7 +60,9 @@ export class SidebarComponent implements OnInit {
       this.ROUTES_EMPLOYEE = [
 
         {path: '/employee/' + this.employee_id, title: 'Početna', icon: 'pe-7s-graph', class: ''},
+        {path: '/employee/' + this.employee_id + '/list', title: 'Lista zaposlenih', icon: 'pe-7s-id', class: ''},
         {path: '/employee/' + this.employee_id + '/problems', title: 'Popravke', icon: 'pe-7s-note2', class: ''},
+        {path: '/employee/' + this.employee_id + '/new', title: 'Dodati novog zaposlenog', icon: 'pe-7s-plus', class: ''}
 
       ];
       this.menuItems = this.ROUTES_EMPLOYEE;

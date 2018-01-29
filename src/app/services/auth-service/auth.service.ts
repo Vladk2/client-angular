@@ -41,7 +41,7 @@ export class AuthService {
           if (tokenPayload.userRoles.roles[i] === 'ADMIN') {
             this.admin = 'ADMIN';
           }
-          if (tokenPayload.userRoles.roles[i] === 'EMPLOYEE') {
+          if (tokenPayload.userRoles.employees.length !== 0) {
             this.employee = 'EMPLOYEE';
           }
         }
@@ -56,6 +56,7 @@ export class AuthService {
             'tenant': this.tenant
           },
           'tenants': tokenPayload.userRoles.tenants,
+          'employees': tokenPayload.userRoles.employees,
           'jwt': res.jwt
         };
         localStorage.setItem('token', JSON.stringify(token));

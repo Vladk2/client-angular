@@ -1,22 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { ProblemPostingComponent } from './problem-posting.component';
 import { ProblemService } from '../../../services/problem-service/problem.service';
 import { AlertService } from '../../../services/alert-service/alert.service';
 
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 describe('ProblemPostingComponent', () => {
   let component: ProblemPostingComponent;
   let fixture: ComponentFixture<ProblemPostingComponent>;
+  let problemService: ProblemService;
+  let alertService: AlertService;
 
   beforeEach(async(() => {
 
-    let problemServiceMock = {
+    const problemServiceMock = {
+      postProblem: jasmine.createSpy('postProblem').and.returnValue(Observable.from([{}])),
       RegenerateData$: {
         subscribe: jasmine.createSpy('subscribe')
       }
@@ -28,24 +32,33 @@ describe('ProblemPostingComponent', () => {
       }
     };
     TestBed.configureTestingModule({
-      declarations: [ ProblemPostingComponent ],
+      declarations: [ProblemPostingComponent],
       providers: [
-        {provide: ProblemService, useValue: problemServiceMock},
-        {provide: AlertService, useValue: alertServiceMock},
-        {provide: ActivatedRoute}
+        { provide: ProblemService, useValue: problemServiceMock },
+        { provide: AlertService, useValue: alertServiceMock },
+        { provide: ActivatedRoute }
       ],
-      imports: [ FormsModule,RouterTestingModule ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      imports: [FormsModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProblemPostingComponent);
     component = fixture.componentInstance;
+    problemService = TestBed.get(ProblemService);
+    alertService = TestBed.get(AlertService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+/*
+  it('should post a problem ', fakeAsync(() => {
+    component.postProblem();
+    tick(3000);
+    expect(problemService.postProblem).toHaveBeenCalled();
+    expect(component.loading).toEqual(true);
+  })); */
 });
