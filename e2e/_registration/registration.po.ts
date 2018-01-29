@@ -6,7 +6,7 @@ export class RegistrationPage {
   }
 
   getNameInput() {
-    return element(by.css('input[name=username]'));
+    return element(by.css('input[name=name]'));
   }
 
   getUsernameInput() {

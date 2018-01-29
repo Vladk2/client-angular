@@ -1,6 +1,6 @@
-import { browser, by, element } from 'protractor';
-import { fakeAsync, tick } from '@angular/core/testing';
-import { RegistrationPage } from './registration.po';
+import {browser, by, element} from 'protractor';
+import {fakeAsync, tick} from '@angular/core/testing';
+import {RegistrationPage} from './registration.po';
 
 describe('Registration Page', () => {
   let page: RegistrationPage;
@@ -46,6 +46,7 @@ describe('Registration Page', () => {
     lastname.sendKeys('ruter');
     password.sendKeys('123');
     email.sendKeys('rrr@rr.com');
+    element(by.css('select')).sendKeys(1);
     apartmentNo.sendKeys(22);
 
     submit.click();
@@ -53,4 +54,5 @@ describe('Registration Page', () => {
     expect(browser.getCurrentUrl()).toEqual('http://localhost:49152/registration');
     expect(element(by.id('iks'))).toBeTruthy();
   });
+
 });
