@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
 
-  private user: any = {};
-  private abode: any = {};
-  private isSuccess: any;
-  private buildings: any = [];
-  private loading = false;
+  user: any = {};
+  abode: any = {};
+  isSuccess: any;
+  buildings: any = [];
+  loading = false;
 
   constructor(private auth: AuthService,
               private router: Router,

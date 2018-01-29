@@ -17,14 +17,14 @@ export class EmployeeHomeComponent implements OnInit {
   message;
   employeeId;
   constructor(private employeeService: EmployeeService, private activeRoute: ActivatedRoute) {
-  	this.firm = new Firm();
-  	this.addressDTO = new Address();
-  	this.message = false;
+    this.firm = new Firm();
+    this.addressDTO = new Address();
+    this.message = false;
   }
 
   ngOnInit() {
-    localStorage.setItem("sidebar", "employee");
-    localStorage.setItem("navbarTitle", "Početna");
+    localStorage.setItem('sidebar', 'employee');
+    localStorage.setItem('navbarTitle', 'Početna');
     this.activeRoute.params.subscribe(params => {
       this.employeeId = (params['id']);
     });
@@ -36,14 +36,14 @@ export class EmployeeHomeComponent implements OnInit {
     this.employeeService.showFirm(this.employeeId).subscribe((res: any) => {
       this.firm = res;
       this.addressDTO = res.address;
-    })
+    });
   }
 
   onUpdate() {
-  	this.firm.address = this.addressDTO;
-  	this.employeeService.updateFirm(this.firm).subscribe((res: any) => {
-  		this.message = true;
-  	});
+    this.firm.address = this.addressDTO;
+    this.employeeService.updateFirm(this.firm).subscribe((res: any) => {
+      this.message = true;
+    });
   }
 
 }

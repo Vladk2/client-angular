@@ -1,4 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import 'rxjs/add/observable/from';
+import {Observable} from 'rxjs/Observable';
 
 import {LoginComponent} from './login.component';
 import {AuthService} from '../../services/auth-service/auth.service';
@@ -13,32 +15,14 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     let store = {};
-    const mockLocalStorage = {
-      getItem: (key: string): string => {
-        return key in store ? store[key] : null;
-      },
-      setItem: (key: string, value: string) => {
-        store[key] = `${value}`;
-      },
-      removeItem: (key: string) => {
-        delete store[key];
-      },
-      clear: () => {
-        store = {};
-      }
+    const authServiceMock = {
+      login_service: jasmine.createSpy('login_service')
+        .and.returnValue(Observable.from([{}]))
     };
 
-    spyOn(localStorage, 'getItem')
-      .and.callFake(mockLocalStorage.getItem);
-    spyOn(localStorage, 'setItem')
-      .and.callFake(mockLocalStorage.setItem);
-    spyOn(localStorage, 'removeItem')
-      .and.callFake(mockLocalStorage.removeItem);
-    spyOn(localStorage, 'clear')
-      .and.callFake(mockLocalStorage.clear);
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      providers: [AuthService],
+      providers: [{provide: AuthService, useValue: authServiceMock}],
       imports: [FormsModule, RouterTestingModule, HttpClientModule]
     });
   });
@@ -52,6 +36,10 @@ describe('LoginComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    component.login();
+    
+    const credenciali = {
+    }
+    expect(authService.login_service).toHaveBeenCalledWith(credenciali);
   });
 });

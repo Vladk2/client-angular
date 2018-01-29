@@ -12,7 +12,7 @@ export class AdminRegistrationComponent implements OnInit {
   private message;
 
   constructor(private auth: AuthService) {
-  	this.user = new User();
+    this.user = new User();
     this.message = false;
   }
 
@@ -20,7 +20,7 @@ export class AdminRegistrationComponent implements OnInit {
   }
 
   onCreate() {
-  	this.auth.registration_service(this.user).subscribe(res => {
+    this.auth.registration_service(this.user).subscribe(res => {
       this.message = true;
     });
   }

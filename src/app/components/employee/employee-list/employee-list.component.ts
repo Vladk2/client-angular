@@ -19,18 +19,18 @@ export class EmployeeListComponent implements OnInit {
   progres;
   korisnicko;
   constructor(private employeeService: EmployeeService, private activeRoute: ActivatedRoute) {
-  	this.firm = new Firm();
+    this.firm = new Firm();
     this.progres = false;
   }
 
   ngOnInit() {
 
-  	this.activeRoute.params.subscribe(params => {
+    this.activeRoute.params.subscribe(params => {
       this.employeeId = (params['id']);
     });
-  	this.employeeService.showFirm(this.employeeId).subscribe((res: any) => {
-    	this.users = res.userDTO;
-    })
+    this.employeeService.showFirm(this.employeeId).subscribe((res: any) => {
+      this.users = res.userDTO;
+    });
 
     const token = JSON.parse(localStorage.getItem('token'));
     this.korisnicko = token.username;
@@ -41,12 +41,12 @@ export class EmployeeListComponent implements OnInit {
       this.progres = true;
       setTimeout(() => {
         this.progres = false;
-        this.employeeService.showFirm(this.employeeId).subscribe((res: any) => {
-          this.users = res.userDTO;
+        this.employeeService.showFirm(this.employeeId).subscribe((resp: any) => {
+          this.users = resp.userDTO;
           this.owner = this.users.length;
-        })
+        });
       }, 1000);
     });
-  };
+  }
 
 }

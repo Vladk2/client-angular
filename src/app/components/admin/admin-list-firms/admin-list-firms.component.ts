@@ -17,7 +17,7 @@ export class AdminListFirmsComponent implements OnInit {
   id_user: any;
   private currentTimeout;
   constructor(private adminService: AdminService,
-              private confirmationService: ConfirmationService,) {
+              private confirmationService: ConfirmationService) {
     this.message = false; this.progres = false; this.deleteDialog = false;
   }
 

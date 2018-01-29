@@ -18,18 +18,18 @@ export class EmployeeNewComponent implements OnInit {
   employeeId;
   message;
   username;
+  item;
   constructor(
-  	private employeeService: EmployeeService,
-  	private activeRoute: ActivatedRoute,
-  	private adminService: AdminService,
-  	private router: Router
-  ) {
-  	this.firm = new Firm();
-  	this.message = false;
+  private employeeService: EmployeeService,
+  private activeRoute: ActivatedRoute,
+  private adminService: AdminService,
+  private router: Router) {
+    this.firm = new Firm();
+    this.message = false;
   }
 
   ngOnInit() {
-  	this.activeRoute.params.subscribe(params => {
+    this.activeRoute.params.subscribe(params => {
       this.employeeId = (params['id']);
     });
 
@@ -40,15 +40,15 @@ export class EmployeeNewComponent implements OnInit {
   }
 
   onAddEmployee(id_user) {
-  	this.employeeService.addEmployFirms(this.employeeId, id_user).subscribe((res: any) => {
-  		this.message = true;
-  		setTimeout(() => {
-  			this.router.navigate(['/employee/' + this.employeeId +'/list']);
+    this.employeeService.addEmployFirms(this.employeeId, id_user).subscribe((res: any) => {
+      this.message = true;
+      setTimeout(() => {
+        this.router.navigate(['/employee/' + this.employeeId + '/list']);
 
-  		}, 1000);
+      }, 1000);
 
-  	});
-  };
+    });
+  }
 
 
 }
