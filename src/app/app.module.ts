@@ -35,20 +35,16 @@ import { UserComponent } from './components/user/user.component';
 import { SurveyModule } from './modules/survey/survey.module';
 import { ParliamentModule } from './modules/parliament/parliament.module';
 import { ProblemModule } from './modules/problem/problem.module';
-<<<<<<< HEAD
+
 import { AdminModule } from './modules/admin/admin.module';
 import { UserModule } from './modules/user/user.module';
 import { TenantModule } from './modules/tenant/tenant.module';
-<<<<<<< HEAD
-=======
-import {SupervisorService} from './services/supervisor-service/supervisor.service';
+import { SupervisorService } from './services/supervisor-service/supervisor.service';
 import { EmployeeGuard } from './guards/employee.guard';
+import { TenantGuard} from './guards/tenant.guard';
 
->>>>>>> d1943860c5756d68eca5444f3b5f0c8439396a68
-
-=======
 import { EmployeeModule } from './modules/employee/employee.module';
->>>>>>> 1f5f9a01ef507ea27ce6773586ccd8c50cbef406
+
 
 @NgModule({
   declarations: [
@@ -85,11 +81,8 @@ import { EmployeeModule } from './modules/employee/employee.module';
   providers: [
     AuthGuard,
     AnonymusGuard,
-<<<<<<< HEAD
-=======
     TenantGuard,
     EmployeeGuard,
->>>>>>> d1943860c5756d68eca5444f3b5f0c8439396a68
     TokenService,
     UserService,
     AuthService,
